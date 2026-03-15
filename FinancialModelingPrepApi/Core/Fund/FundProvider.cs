@@ -20,11 +20,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.Fund
 
         public Task<ApiResponse<List<ETFStockExposureResponse>>> GetETFStockExposureAsync(string symbol)
         {
-            const string url = "[version]/etf-stock-exposure/[symbol]";
+            const string url = "etf-stock-exposure/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 

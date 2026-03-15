@@ -40,12 +40,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.Calendars
 
         private Task<ApiResponse<List<EarningsCalendarResponse>>> GetEarningsCalendarInternalAsync(string from = null, string to = null)
         {
-            const string url = "[version]/earning_calendar";
-
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() }
-            };
+            const string url = "earnings-calendar";
 
             var queryString = new QueryStringBuilder();
 
@@ -55,21 +50,18 @@ namespace MatthiWare.FinancialModelingPrep.Core.Calendars
                 queryString.Add("to", to);
             }
 
-            return client.GetJsonAsync<List<EarningsCalendarResponse>>(url, pathParams, queryString);
+            return client.GetJsonAsync<List<EarningsCalendarResponse>>(url, new NameValueCollection(), queryString);
         }
 
         /// <inheritdoc/>
         public Task<ApiResponse<List<EarningsCalendarResponse>>> GetHistoricalEarningsCalendarAsync(string symbol, int? limit = null)
         {
-            const string url = "[version]/historical/earning_calendar/[symbol]";
+            const string url = "earnings";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() },
-                { "symbol", symbol }
-            };
+            var pathParams = new NameValueCollection();
 
             var queryString = new QueryStringBuilder();
+            queryString.Add("symbol", symbol);
 
             if (limit != null)
             {
@@ -81,19 +73,19 @@ namespace MatthiWare.FinancialModelingPrep.Core.Calendars
 
         /// <inheritdoc/>
         public Task<ApiResponse<List<IPOCalendarResponse>>> GetIPOCalendarAsync(string from, string to)
-            => GetGenericCalendarAsync<IPOCalendarResponse>("[version]/ipo_calendar", from, to);
+            => GetGenericCalendarAsync<IPOCalendarResponse>("/ipo_calendar", from, to);
 
         /// <inheritdoc/>
         public Task<ApiResponse<List<DividendCalendarResponse>>> GetDividendCalendarAsync(string from, string to)
-            => GetGenericCalendarAsync<DividendCalendarResponse>("[version]/stock_dividend_calendar", from, to);
+            => GetGenericCalendarAsync<DividendCalendarResponse>("/stock_dividend_calendar", from, to);
 
         /// <inheritdoc/>
         public Task<ApiResponse<List<EconomicCalendarResponse>>> GetEconomicCalendarAsync(string from, string to)
-            => GetGenericCalendarAsync<EconomicCalendarResponse>("[version]/economic_calendar", from, to);
+            => GetGenericCalendarAsync<EconomicCalendarResponse>("/economic_calendar", from, to);
 
         /// <inheritdoc/>
         public Task<ApiResponse<List<StockSplitCalendarResponse>>> GetStockSplitCalendarAsync(string from, string to)
-            => GetGenericCalendarAsync<StockSplitCalendarResponse>("[version]/stock_split_calendar", from, to);
+            => GetGenericCalendarAsync<StockSplitCalendarResponse>("/stock_split_calendar", from, to);
 
         private Task<ApiResponse<List<T>>> GetGenericCalendarAsync<T>(string urlTemplate, string from, string to)
         {
@@ -107,10 +99,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.Calendars
                 throw new ArgumentException($"'{nameof(to)}' cannot be null or empty.", nameof(to));
             }
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() }
-            };
+            var pathParams = new NameValueCollection();
 
             var queryString = new QueryStringBuilder();
 

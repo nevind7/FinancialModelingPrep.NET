@@ -21,11 +21,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockTimeSeries
         /// <inheritdoc/>
         public Task<ApiResponse<HistoricalPriceResponse>> GetHistoricalDailyPricesAsync(string symbol)
         {
-            const string url = "[version]/historical-price-full/[symbol]";
+            const string url = "historical-price-full/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -35,11 +34,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockTimeSeries
         /// <inheritdoc/>
         public Task<ApiResponse<HistoricalPriceResponse>> GetHistoricalDailyPricesAsync(string symbol, string from, string to)
         {
-            const string url = "[version]/historical-price-full/[symbol]";
+            const string url = "historical-price-full/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -53,11 +51,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockTimeSeries
         /// <inheritdoc/>
         public Task<ApiResponse<HistoricalPriceForLineChartResponse>> GetHistoricalDailyPricesForLineChartAsync(string symbol)
         {
-            const string url = "[version]/historical-price-full/[symbol]";
+            const string url = "historical-price-full/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -71,11 +68,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockTimeSeries
         /// <inheritdoc/>
         public Task<ApiResponse<HistoricalPriceForLineChartResponse>> GetHistoricalDailyPricesForLineChartAsync(string symbol, string from, string to)
         {
-            const string url = "[version]/historical-price-full/[symbol]";
+            const string url = "historical-price-full/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -91,11 +87,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockTimeSeries
         /// <inheritdoc/>
         public Task<ApiResponse<HistoricalDividendsResponse>> GetHistoricalDividendsAsync(string symbol)
         {
-            const string url = "[version]/historical-price-full/stock_dividend/[symbol]";
+            const string url = "historical-price-full/stock_dividend/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -105,11 +100,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockTimeSeries
         /// <inheritdoc/>
         public Task<ApiResponse<List<HistoricalPriceForChartWithVolumeResponse>>> GetHistoricalPricesForChartWithVolume(string symbol, HistoricalChartSeries series, string from, string to, bool extended)
         {
-            const string url = "[version]/historical-chart/[series]/[symbol]";
+            const string url = "historical-chart/[series]/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "series", HistoricalChartSeriesToString(series) },
                 { "symbol", symbol }
             };
@@ -123,17 +117,16 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockTimeSeries
         }
 
         /// <inheritdoc/>
-        public Task<ApiResponse<HistoricalStockSplitResponse>> GetHistoricalStockSplitsAsync(string symbol)
+        public Task<ApiResponse<HistoricalStockSplitResponse[]>> GetHistoricalStockSplitsAsync(string symbol)
         {
-            const string url = "[version]/historical-price-full/stock_split/[symbol]";
+            const string url = "splits";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() },
-                { "symbol", symbol }
-            };
+            var queryString = new QueryStringBuilder();
+            queryString.Add("symbol", symbol);
 
-            return client.GetJsonAsync<HistoricalStockSplitResponse>(url, pathParams, null);
+            var pathParams = new NameValueCollection();
+         
+            return client.GetJsonAsync<HistoricalStockSplitResponse[]>(url, pathParams, queryString);
         }
 
         private static string HistoricalChartSeriesToString(HistoricalChartSeries series)

@@ -21,11 +21,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public async Task<ApiResponse<CompanyProfileResponse>> GetCompanyProfileAsync(string symbol)
         {
-            const string url = "[version]/profile/[symbol]";
+            const string url = "profile/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -41,59 +40,44 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public Task<ApiResponse<List<SymbolResponse>>> GetETFListAsync()
         {
-            const string url = "[version]/etf/list";
+            const string url = "etf/list";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() }
-            };
-
-            return client.GetJsonAsync<List<SymbolResponse>>(url, pathParams, null);
+            return client.GetJsonAsync<List<SymbolResponse>>(url, new NameValueCollection(), null);
         }
 
         public Task<ApiResponse<List<SymbolResponse>>> GetSymbolsListAsync()
         {
-            const string url = "[version]/stock/list";
+            const string url = "stock/list";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() }
-            };
+            var pathParams = new NameValueCollection();
 
             return client.GetJsonAsync<List<SymbolResponse>>(url, pathParams, null);
         }
 
         public Task<ApiResponse<List<SymbolResponse>>> GetTradableSymbolsListAsync()
         {
-            const string url = "[version]/available-traded/list";
+            const string url = "available-traded/list";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() }
-            };
+            var pathParams = new NameValueCollection();
 
             return client.GetJsonAsync<List<SymbolResponse>>(url, pathParams, null);
         }
 
         public Task<ApiResponse<List<string>>> GetSymbolsWithFinancialStatementsAsync()
         {
-            const string url = "[version]/financial-statement-symbol-lists";
+            const string url = "financial-statement-symbol-lists";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() }
-            };
+            var pathParams = new NameValueCollection();
 
             return client.GetJsonAsync<List<string>>(url, pathParams, null);
         }
 
         public Task<ApiResponse<List<EnterpriseValueResponse>>> GetEnterpriseValueAsync(string symbol, Period period = Period.Quarter, int? limit = 40)
         {
-            const string url = "[version]/enterprise-values/[symbol]";
+            const string url = "enterprise-values/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -113,11 +97,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public Task<ApiResponse<List<BalanceSheetResponse>>> GetBalanceSheetStatementAsync(string symbol, Period period = Period.Quarter, int? limit = 40)
         {
-            const string url = "[version]/balance-sheet-statement/[symbol]";
+            const string url = "balance-sheet-statement/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -138,11 +121,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public Task<ApiResponse<List<CashFlowResponse>>> GetCashFlowStatementAsync(string symbol, Period period = Period.Quarter, int? limit = 40)
         {
-            const string url = "[version]/cash-flow-statement/[symbol]";
+            const string url = "cash-flow-statement/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -163,11 +145,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public Task<ApiResponse<List<IncomeStatementResponse>>> GetIncomeStatementAsync(string symbol, Period period = Period.Quarter, int? limit = 40)
         {
-            const string url = "[version]/income-statement/[symbol]";
+            const string url = "income-statement/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -188,12 +169,9 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public Task<ApiResponse<List<StockNewsResponse>>> GetStockNewsAsync(string symbol, int? limit = 50)
         {
-            const string url = "[version]/stock_news";
+            const string url = "stock_news";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() },
-            };
+            var pathParams = new NameValueCollection();
 
             var queryString = new QueryStringBuilder();
 
@@ -208,12 +186,9 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public Task<ApiResponse<List<StockNewsResponse>>> GetLatestStockNewsAsync(int? limit = 50)
         {
-            const string url = "[version]/stock_news";
+            const string url = "stock_news";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() },
-            };
+            var pathParams = new NameValueCollection();
 
             var queryString = new QueryStringBuilder();
 
@@ -227,13 +202,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public Task<ApiResponse<List<StockNewsResponse>>> GetStockNewsAsync(IEnumerable<string> symbols, int? limit = 50)
         {
-            const string url = "[version]/stock_news";
+            const string url = "stock_news";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() },
-            };
-
+            var pathParams = new NameValueCollection();
+        
             var queryString = new QueryStringBuilder();
 
             queryString.Add("tickers", string.Join(',', symbols));
@@ -248,11 +220,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public async Task<ApiResponse<CompanyRatingResponse>> GetCompanyRatingAsync(string symbol)
         {
-            const string url = "[version]/rating/[symbol]";
+            const string url = "rating/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -268,11 +239,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public Task<ApiResponse<List<CompanyRatingResponse>>> GetHistoricalCompanyRatingAsync(string symbol, int? limit = 140)
         {
-            const string url = "[version]/historical-rating/[symbol]";
+            const string url = "historical-rating/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -288,11 +258,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public async Task<ApiResponse<DCFResponse>> GetDiscountedCashFlowAsync(string symbol)
         {
-            const string url = "[version]/discounted-cash-flow/[symbol]";
+            const string url = "discounted-cash-flow/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -308,11 +277,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public async Task<ApiResponse<RatiosTTMResponse>> GetRatiosTTMAsync(string symbol)
         {
-            const string url = "[version]/ratios-ttm/[symbol]";
+            const string url = "ratios-ttm/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -328,11 +296,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public async Task<ApiResponse<KeyMetricsTTMResponse>> GetCompanyKeyMetricsTTMAsync(string symbol)
         {
-            const string url = "[version]/key-metrics-ttm/[symbol]";
+            const string url = "key-metrics-ttm/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -348,11 +315,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public Task<ApiResponse<List<KeyMetricsResponse>>> GetCompanyKeyMetricsAsync(string symbol, Period period = Period.Annual, int? limit = 130)
         {
-            const string url = "[version]/key-metrics/[symbol]";
+            const string url = "key-metrics/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -373,11 +339,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public async Task<ApiResponse<QuoteResponse>> GetQuoteAsync(string symbol)
         {
-            const string url = "[version]/quote/[symbol]";
+            const string url = "quote/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -393,11 +358,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public Task<ApiResponse<List<QuoteResponse>>> GetQuotesAsync(IEnumerable<string> symbols)
         {
-            const string url = "[version]/quote/[symbols]";
+            const string url = "quote/[symbols]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbols", string.Join(',', symbols) }
             };
 
@@ -413,11 +377,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public Task<ApiResponse<List<QuoteResponse>>> GetQuotesAsync(Exchange exchange)
         {
-            const string url = "[version]/quotes/[exchange]";
+            const string url = "quotes/[exchange]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "exchange", exchange.ToString() }
             };
 
@@ -426,11 +389,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public async Task<ApiResponse<MarketCapResponse>> GetMarketCapitalizationAsync(string symbol)
         {
-            const string url = "[version]/historical-market-capitalization/[symbol]";
+            const string url = "historical-market-capitalization/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -446,11 +408,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public Task<ApiResponse<List<MarketCapResponse>>> GetHistoricalMarketCapitalizationAsync(string symbol, int? limit = 100)
         {
-            const string url = "[version]/historical-market-capitalization/[symbol]";
+            const string url = "historical-market-capitalization/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -471,14 +432,11 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         private Task<ApiResponse<List<TickerSearchResponse>>> SearchInternalAsync(string query, Exchange? exchange, bool byTicker, int? limit)
         {
-            const string url = "[version]/search";
-            const string urlByTicker = "[version]/search-ticker";
+            const string url = "search";
+            const string urlByTicker = "/search-ticker";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() },
-            };
-
+            var pathParams = new NameValueCollection();
+          
             var queryString = new QueryStringBuilder();
 
             queryString.Add("query", query);
@@ -494,11 +452,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public Task<ApiResponse<List<PressReleasesResponse>>> GetPressReleasesAsync(string symbol, int? page = null)
         {
-            const string url = "[version]/press-releases/[symbol]";
+            const string url = "press-releases/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol},
             };
 
@@ -515,14 +472,9 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         /// <inheritdoc />
         public Task<ApiResponse<List<SymbolChangeResponse>>> GetSymbolChangesAsync()
         {
-            const string url = "[version]/symbol_change";
+            const string url = "symbol_change";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v4.ToString() }
-            };
-
-            return client.GetJsonAsync<List<SymbolChangeResponse>>(url, pathParams, null);
+            return client.GetJsonAsync<List<SymbolChangeResponse>>(url, new NameValueCollection(), null);
 
         }
     }

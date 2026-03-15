@@ -14,9 +14,9 @@ namespace MatthiWare.FinancialModelingPrep.Core.Http
 
         public RequestRateLimiter(FinancialModelingPrepOptions options)
         {
-            this.threadsLimiter = new SemaphoreSlim(options.MaxRequestPerSecond, options.MaxRequestPerSecond);
-            this.maxApiCallsPerMinuteThrottler = new RollingWindowThrottler(options.MaxAPICallsPerMinute, TimeSpan.FromMinutes(1));
-            this.maxRequestsPerSecondThrottler = new RollingWindowThrottler(options.MaxRequestPerSecond, TimeSpan.FromSeconds(1));
+            threadsLimiter = new SemaphoreSlim(options.MaxRequestPerSecond, options.MaxRequestPerSecond);
+            maxApiCallsPerMinuteThrottler = new RollingWindowThrottler(options.MaxAPICallsPerMinute, TimeSpan.FromMinutes(1));
+            maxRequestsPerSecondThrottler = new RollingWindowThrottler(options.MaxRequestPerSecond, TimeSpan.FromSeconds(1));
         }
 
         public async Task<(bool wasThrottled, TimeSpan totalDelay)> ThrottleAsync()

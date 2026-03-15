@@ -1,5 +1,4 @@
-﻿using MatthiWare.FinancialModelingPrep;
-using MatthiWare.FinancialModelingPrep.Abstractions.AdvancedData;
+﻿using MatthiWare.FinancialModelingPrep.Abstractions.AdvancedData;
 using MatthiWare.FinancialModelingPrep.Model;
 using MatthiWare.FinancialModelingPrep.Model.AdvancedData;
 using Microsoft.Extensions.DependencyInjection;
@@ -102,9 +101,9 @@ namespace Tests.AdvancedData
 
         [Theory]
         [InlineData("AAPL")]
-        [InlineData("AGS.BR")]
-        [InlineData("PPL.TO")]
-        [InlineData("AAP")]
+        [InlineData("META")]
+        [InlineData("NFLX")]
+        [InlineData("UBER")]
         public async Task GetCompanyProfileTests(string symbol)
         {
             var result = await api.GetFinancialScoreAsync(symbol);

@@ -32,19 +32,19 @@ namespace Tests
 
         public TestingBase(ITestOutputHelper testOutput)
         {
-            this.Services = new ServiceCollection();
+            Services = new ServiceCollection();
 
-            this.Services.AddSingleton(ConfigurationRoot);
+            Services.AddSingleton(ConfigurationRoot);
 
-            this.Services.AddLogging(builder =>
+            Services.AddLogging(builder =>
             {
                 builder.ClearProviders();
                 builder.AddXunit(testOutput, CreateLoggingConfig());
                 builder.SetMinimumLevel(LogLevel.Debug);
             });
 
-            this.Services.AddSingleton(sharedRateLimiter);
-            this.Services.AddFinancialModelingPrepApiClient(testingOptions);
+            Services.AddSingleton(sharedRateLimiter);
+            Services.AddFinancialModelingPrepApiClient(testingOptions);
 
             Build();
         }

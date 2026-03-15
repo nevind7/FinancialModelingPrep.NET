@@ -19,7 +19,7 @@ namespace MatthiWare.FinancialModelingPrep.Abstractions.StockTimeSeries
         /// </summary>
         /// <param name="symbol">Ticker symbol</param>
         /// <returns><see cref="HistoricalStockSplitResponse"/></returns>
-        Task<ApiResponse<HistoricalStockSplitResponse>> GetHistoricalStockSplitsAsync(string symbol);
+        Task<ApiResponse<HistoricalStockSplitResponse[]>> GetHistoricalStockSplitsAsync(string symbol);
 
         /// <summary>
         /// Get Daily Historical Prices

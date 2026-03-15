@@ -20,37 +20,28 @@ namespace MatthiWare.FinancialModelingPrep.Core.MarketIndexes
 
         public Task<ApiResponse<List<IndexConstituentResponse>>> GetDowJonesCompaniesAsync()
         {
-            const string url = "[version]/dowjones_constituent";
+            const string url = "dowjones_constituent";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() },
-            };
-
+            var pathParams = new NameValueCollection();
+          
             return client.GetJsonAsync<List<IndexConstituentResponse>>(url, pathParams, null);
         }
 
         public Task<ApiResponse<List<IndexConstituentResponse>>> GetNasdaqCompaniesAsync()
         {
-            const string url = "[version]/nasdaq_constituent";
+            const string url = "nasdaq_constituent";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() },
-            };
+            var pathParams = new NameValueCollection();
 
             return client.GetJsonAsync<List<IndexConstituentResponse>>(url, pathParams, null);
         }
 
         public Task<ApiResponse<List<IndexConstituentResponse>>> GetSP500CompaniesAsync()
         {
-            const string url = "[version]/sp500_constituent";
+            const string url = "sp500_constituent";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() },
-            };
-
+            var pathParams = new NameValueCollection();
+           
             return client.GetJsonAsync<List<IndexConstituentResponse>>(url, pathParams, null);
         }
     }

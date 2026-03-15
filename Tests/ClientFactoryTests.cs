@@ -9,7 +9,7 @@ namespace Tests
 
         public ClientFactoryTests()
         {
-            this.api = FinancialModelingPrepApiClientFactory.CreateClient(new());
+            api = FinancialModelingPrepApiClientFactory.CreateClient(new());
         }
 
         [Fact]

@@ -22,11 +22,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.Statistics
         /// <inheritdoc/>
         public Task<ApiResponse<List<AnalystEstimateItem>>> GetAnalystEstimatesAsync(string symbol, Period period = Period.Annual, int? limit = 30)
         {
-            const string url = "[version]/analyst-estimates/[symbol]";
+            const string url = "analyst-estimates/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol },
             };
 
@@ -44,18 +43,13 @@ namespace MatthiWare.FinancialModelingPrep.Core.Statistics
 
         public Task<ApiResponse<List<SocialSentimentItem>>> GetSocialSentimentAsync(string symbol, int page = 0)
         {
-            const string url = "[version]/historical/social-sentiment/";
-
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v4.ToString() }
-            };
+            const string url = "historical/social-sentiment/";
 
             var queryString = new QueryStringBuilder();
             queryString.Add("symbol", symbol);
             queryString.Add("page", page.ToString());
 
-            return client.GetJsonAsync<List<SocialSentimentItem>>(url, pathParams, queryString);
+            return client.GetJsonAsync<List<SocialSentimentItem>>(url, new NameValueCollection(), queryString);
         }
     }
 }

@@ -8,7 +8,13 @@ namespace MatthiWare.FinancialModelingPrep.Model.StockTimeSeries
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; }
 
-        [JsonPropertyName("historical")]
-        public List<HistoricalStockSplitItem> Historical { get; set; }
+        [JsonPropertyName("date")]
+        public string Date { get; set; }
+
+        [JsonPropertyName("numerator")]
+        public double Numerator { get; set; }
+
+        [JsonPropertyName("denominator")]
+        public double Denominator { get; set; }
     }
 }

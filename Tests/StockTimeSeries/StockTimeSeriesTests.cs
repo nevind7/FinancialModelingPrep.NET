@@ -40,7 +40,7 @@ namespace Tests.StockTimeSeries
 
             result.AssertNoErrors();
 
-            var split = result.Data.Historical.First(data => data.Date == "2020-08-31");
+            var split = result.Data.First(data => data.Date == "2020-08-31");
 
             Assert.Equal(4.0, split.Numerator);
             Assert.Equal(1.0, split.Denominator);

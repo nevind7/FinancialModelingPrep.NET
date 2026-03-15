@@ -21,11 +21,10 @@ public class StatementAnalysisProvider : IStatementAnalysisProvider
     /// <inheritdoc/>
     public Task<ApiResponse<List<FinancialGrowthResponse>>> GetFinancialGrowthAsync(string symbol, Period period = Period.Annual, int? limit = 30)
     {
-        const string url = "[version]/financial-growth/[symbol]";
+        const string url = "financial-growth/[symbol]";
 
         var pathParams = new NameValueCollection()
         {
-            { "version", ApiVersion.v3.ToString() },
             { "symbol", symbol },
         };
 

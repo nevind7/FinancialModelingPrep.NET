@@ -21,12 +21,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.Economics
         /// <inheritdoc/>
         public Task<ApiResponse<List<EconomicIndicatorResponse>>> GetEconomicIndicatorAsync(EconomicIndicator indicator, string from, string to)
         {
-            const string url = "[version]/economic";
-
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v4.ToString() },
-            };
+            const string url = "economic";
 
             var queryString = new QueryStringBuilder();
 
@@ -34,7 +29,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.Economics
             queryString.Add("from", from);
             queryString.Add("to", to);
 
-            return client.GetJsonAsync<List<EconomicIndicatorResponse>>(url, pathParams, queryString);
+            return client.GetJsonAsync<List<EconomicIndicatorResponse>>(url, new NameValueCollection(), queryString);
         }
     }
 }

@@ -46,7 +46,7 @@ namespace MatthiWare.FinancialModelingPrep
             services.AddLogging();
 
             services.AddHttpClient<FinancialModelingPrepHttpClient>(client 
-                => client.BaseAddress = new Uri("https://financialmodelingprep.com/api/"));
+                => client.BaseAddress = new Uri("https://financialmodelingprep.com/stable/"));
 
             services.TryAddSingleton<IFinancialModelingPrepApiClient, FinancialModelingPrepApiClient>();
             services.TryAddSingleton<IRequestRateLimiter, RequestRateLimiter>();

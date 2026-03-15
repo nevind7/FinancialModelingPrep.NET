@@ -20,23 +20,19 @@ namespace MatthiWare.FinancialModelingPrep.Core.Crypto
         public Task<ApiResponse<List<CryptoItem>>> GetAvilableCryptocurrencies()
         {
 
-            const string url = "[version]/symbol/available-cryptocurrencies";
+            const string url = "symbol/available-cryptocurrencies";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() }
-            };
-
+            var pathParams = new NameValueCollection();
+           
             return client.GetJsonAsync<List<CryptoItem>>(url, pathParams, null);
         }
 
         public Task<ApiResponse<CryptoHistoricalPriceDailyItem>> GetDailyPrices(string symbol)
         {
-            const string url = "[version]/historical-price-full/[symbol]";
+            const string url = "historical-price-full/[symbol]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol }
             };
 
@@ -45,13 +41,12 @@ namespace MatthiWare.FinancialModelingPrep.Core.Crypto
 
         public Task<ApiResponse<List<CryptoHistoricalPricePeriodListing>>> GetHistoricalPrices(string symbol, HistoricalPricingPeriod period)
         {
-            const string url = "[version]/historical-chart/[pricePeriod]/[symbol]";
+            const string url = "historical-chart/[pricePeriod]/[symbol]";
 
             string pricePeriod = EnumMappings.HistoricalPrices[period];
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "symbol", symbol },
                 { "pricePeriod", pricePeriod }
             };

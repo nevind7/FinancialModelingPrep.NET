@@ -26,12 +26,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.AdvancedData
 
         private Task<ApiResponse<string>> GetFinancialReportsJsonAsync(string symbol, int year, Period period, Quarter? quarter)
         {
-            const string url = "[version]/financial-reports-json";
-
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v4.ToString() }
-            };
+            const string url = "financial-reports-json";
 
             var queryString = new QueryStringBuilder();
             queryString.Add("symbol", symbol);
@@ -46,7 +41,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.AdvancedData
                 queryString.Add("period", "FY");
             }
 
-            return client.GetStringAsync(url, pathParams, queryString);
+            return client.GetStringAsync(url, new NameValueCollection(), queryString);
         }
 
         public Task<ApiResponse<StandardIndustrialClassificationResponse>> GetStandardIndustrialClassificationByCikAsync(string cik)
@@ -60,17 +55,12 @@ namespace MatthiWare.FinancialModelingPrep.Core.AdvancedData
 
         private async Task<ApiResponse<StandardIndustrialClassificationResponse>> GetStandardIndustrialClassificationInternalAsync(string queryParamName, string queryParamValue)
         {
-            const string url = "[version]/standard_industrial_classification";
-
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v4.ToString() }
-            };
+            const string url = "standard_industrial_classification";
 
             var queryString = new QueryStringBuilder();
             queryString.Add(queryParamName, queryParamValue);
 
-            var result = await client.GetJsonAsync<List<StandardIndustrialClassificationResponse>>(url, pathParams, queryString);
+            var result = await client.GetJsonAsync<List<StandardIndustrialClassificationResponse>>(url, new NameValueCollection(), queryString);
 
             if (result.HasError)
             {
@@ -82,17 +72,12 @@ namespace MatthiWare.FinancialModelingPrep.Core.AdvancedData
 
         public async Task<ApiResponse<CompanyPeersResponse>> GetStockPeersAsync(string symbol)
         {
-            const string url = "[version]/stock_peers";
-
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v4.ToString() }
-            };
+            const string url = "stock_peers";
 
             var queryString = new QueryStringBuilder();
             queryString.Add("symbol", symbol);
 
-            var result = await client.GetJsonAsync<List<CompanyPeersResponse>>(url, pathParams, queryString);
+            var result = await client.GetJsonAsync<List<CompanyPeersResponse>>(url, new NameValueCollection(), queryString);
 
             if (result.HasError)
             {
@@ -103,10 +88,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.AdvancedData
         }
 
         public Task<ApiResponse<List<SectorPEResponse>>> GetSectorsPriceEarningsRatioAsync(string date, string exchange)
-            => GetGenericPERationAsync<SectorPEResponse>("[version]/sector_price_earning_ratio", date, exchange);
+            => GetGenericPERationAsync<SectorPEResponse>("/sector_price_earning_ratio", date, exchange);
 
             public Task<ApiResponse<List<IndustryPEResponse>>> GetIndustriesPriceEarningsRatioAsync(string date, string exchange)
-            => GetGenericPERationAsync<IndustryPEResponse>("[version]/industry_price_earning_ratio", date, exchange);
+            => GetGenericPERationAsync<IndustryPEResponse>("/industry_price_earning_ratio", date, exchange);
 
         private Task<ApiResponse<List<T>>> GetGenericPERationAsync<T>(string url, string date, string exchange)
         {
@@ -125,31 +110,21 @@ namespace MatthiWare.FinancialModelingPrep.Core.AdvancedData
                 throw new System.ArgumentException($"'{nameof(exchange)}' cannot be null or empty.", nameof(exchange));
             }
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v4.ToString() }
-            };
-
             var queryString = new QueryStringBuilder();
             queryString.Add(nameof(date), date);
             queryString.Add(nameof(exchange), exchange);
 
-            return client.GetJsonAsync<List<T>>(url, pathParams, queryString);
+            return client.GetJsonAsync<List<T>>(url, new NameValueCollection(), queryString);
         }
 
         public async Task<ApiResponse<SharesFloatResponse>> GetSharesFloatAsync(string symbol)
         {
-            const string url = "[version]/shares_float";
-
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v4.ToString() }
-            };
+            const string url = "shares_float";
 
             var queryString = new QueryStringBuilder();
             queryString.Add("symbol", symbol);
 
-            var result = await client.GetJsonAsync<List<SharesFloatResponse>>(url, pathParams, queryString);
+            var result = await client.GetJsonAsync<List<SharesFloatResponse>>(url, new NameValueCollection(), queryString);
 
             if (result.HasError)
             {
@@ -161,32 +136,22 @@ namespace MatthiWare.FinancialModelingPrep.Core.AdvancedData
 
         public Task<ApiResponse<List<ESGScoreResponse>>> GetESGScoreAsync(string symbol)
         {
-            const string url = "[version]/esg-environmental-social-governance-data";
-
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v4.ToString() }
-            };
+            const string url = "esg-environmental-social-governance-data";
 
             var queryString = new QueryStringBuilder();
             queryString.Add("symbol", symbol);
 
-            return client.GetJsonAsync<List<ESGScoreResponse>>(url, pathParams, queryString);
+            return client.GetJsonAsync<List<ESGScoreResponse>>(url, new NameValueCollection(), queryString);
         }
 
         public async Task<ApiResponse<FinancialScoreResponse>> GetFinancialScoreAsync(string symbol)
         {
-            const string url = "[version]/score";
-
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v4.ToString() }
-            };
-
+            const string url = "financial-scores";
+        
             var queryString = new QueryStringBuilder();
             queryString.Add("symbol", symbol);
 
-            var result = await client.GetJsonAsync<List<FinancialScoreResponse>>(url, pathParams, queryString);
+            var result = await client.GetJsonAsync<List<FinancialScoreResponse>>(url, new NameValueCollection(), queryString);
 
             if (result.HasError)
             {

@@ -22,24 +22,20 @@ namespace MatthiWare.FinancialModelingPrep.Core.InstitutionalFund
         /// <inheritdoc/>
         public Task<ApiResponse<List<CikListResponse>>> Get13FListAsync()
         {
-            const string url = "[version]/cik_list";
+            const string url = "cik_list";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() }
-            };
-
+            var pathParams = new NameValueCollection();
+        
             return client.GetJsonAsync<List<CikListResponse>>(url, pathParams, null);
         }
 
         /// <inheritdoc/>
         public Task<ApiResponse<List<CikListResponse>>> GetCompanyNameByCik(string cik)
         {
-            const string url = "[version]/cik/[cik]";
+            const string url = "cik/[cik]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "cik", cik }
             };
 
@@ -49,11 +45,11 @@ namespace MatthiWare.FinancialModelingPrep.Core.InstitutionalFund
         /// <inheritdoc/>
         public Task<ApiResponse<List<Form13FResponse>>> GetForm13FAsync(string cik, string date)
         {
-            const string url = "[version]/form-thirteen/[cik]";
+            const string url = "form-thirteen/[cik]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
+
                 { "cik", cik }
             };
 
@@ -66,11 +62,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.InstitutionalFund
         /// <inheritdoc/>
         public async Task<ApiResponse<CusipMapperResponse>> MapCusipAsync(string cusip)
         {
-            const string url = "[version]/cusip/[cusip]";
+            const string url = "cusip/[cusip]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "cusip", cusip }
             };
 
@@ -87,11 +82,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.InstitutionalFund
         /// <inheritdoc/>
         public Task<ApiResponse<List<CikListResponse>>> SearchCikByName(string name)
         {
-            const string url = "[version]/cik-search/[name]";
+            const string url = "cik-search/[name]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "name", name }
             };
 

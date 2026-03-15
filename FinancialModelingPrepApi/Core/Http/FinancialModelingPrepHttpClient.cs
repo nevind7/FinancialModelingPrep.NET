@@ -29,7 +29,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.Http
             this.options = options ?? throw new ArgumentNullException(nameof(options));
             this.rateLimiter = rateLimiter ?? throw new ArgumentNullException(nameof(rateLimiter));
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.jsonSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
+            jsonSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
             {
                 PropertyNameCaseInsensitive = true,
             };
@@ -149,11 +149,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.Http
                 {
                     throw new ArgumentException($"Provided path parameter value for {key} was null or empty");
                 }
-                else if (url.IndexOf($"[{key}]") < 0)
-                {
-                    throw new ArgumentException($"Url pattern doesn't contain [{key}]");
-                }
-
+             
                 url = url.Replace($"[{key}]", pathParams[key]);
             }
         }

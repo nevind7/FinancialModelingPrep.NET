@@ -26,12 +26,9 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockMarket
             Sector? sector = null, Industry? industry = null, Country? country = null, Exchange? exchange = null, int? limit = 30)
         {
 
-            const string url = "[version]/stock-screener";
+            const string url = "stock-screener";
 
-            var pathParams = new NameValueCollection()
-            {
-                { "version", ApiVersion.v3.ToString() }
-            };
+            var pathParams = new NameValueCollection();
 
             var queryString = new QueryStringBuilder();
 
@@ -112,11 +109,10 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockMarket
 
         private Task<ApiResponse<List<StockMarketSymbolResponse>>> GetStockMarketData(string endpoint)
         {
-            const string url = "[version]/[endpoint]";
+            const string url = "[endpoint]";
 
             var pathParams = new NameValueCollection()
             {
-                { "version", ApiVersion.v3.ToString() },
                 { "endpoint", endpoint },
             };
 
