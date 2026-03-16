@@ -1,13 +1,13 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.MarketIndexes;
-using MatthiWare.FinancialModelingPrep.Core.Http;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.CompanyValuation;
-using MatthiWare.FinancialModelingPrep.Model.MarketIndexes;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.MarketIndexes;
+using FinancialModelingPrep.Core.Http;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.MarketIndexes;
 
-namespace MatthiWare.FinancialModelingPrep.Core.MarketIndexes
+namespace FinancialModelingPrep.Core.MarketIndexes
 {
     public class MarketIndexesProvider : IMarketIndexesProvider
     {
@@ -15,7 +15,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.MarketIndexes
 
         public MarketIndexesProvider(FinancialModelingPrepHttpClient client)
         {
-            this.client = client ?? throw new System.ArgumentNullException(nameof(client));
+            this.client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         public Task<ApiResponse<List<IndexConstituentResponse>>> GetDowJonesCompaniesAsync()

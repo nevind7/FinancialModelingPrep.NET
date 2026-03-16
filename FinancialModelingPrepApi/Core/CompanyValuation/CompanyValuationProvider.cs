@@ -1,14 +1,14 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.CompanyValuation;
-using MatthiWare.FinancialModelingPrep.Core.Http;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.CompanyValuation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.CompanyValuation;
+using FinancialModelingPrep.Core.Http;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.CompanyValuation;
 
-namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
+namespace FinancialModelingPrep.Core.CompanyValuation
 {
     public class CompanyValuationProvider : ICompanyValuationProvider
     {
@@ -16,19 +16,17 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public CompanyValuationProvider(FinancialModelingPrepHttpClient client)
         {
-            this.client = client ?? throw new System.ArgumentNullException(nameof(client));
+            this.client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         public async Task<ApiResponse<CompanyProfileResponse>> GetCompanyProfileAsync(string symbol)
         {
-            const string url = "profile/[symbol]";
+            const string url = Endpoint.CompanyProfile;
 
-            var pathParams = new NameValueCollection()
-            {
-                { "symbol", symbol }
-            };
+            var queryString = new QueryStringBuilder();
+            queryString.Add("symbol", symbol);
 
-            var result = await client.GetJsonAsync<List<CompanyProfileResponse>>(url, pathParams, null);
+            var result = await client.GetJsonAsync<List<CompanyProfileResponse>>(url, new NameValueCollection(), queryString);
 
             if (result.HasError)
             {
@@ -76,7 +74,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         {
             const string url = "enterprise-values/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -99,7 +97,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         {
             const string url = "balance-sheet-statement/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -121,15 +119,11 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
 
         public Task<ApiResponse<List<CashFlowResponse>>> GetCashFlowStatementAsync(string symbol, Period period = Period.Quarter, int? limit = 40)
         {
-            const string url = "cash-flow-statement/[symbol]";
-
-            var pathParams = new NameValueCollection()
-            {
-                { "symbol", symbol }
-            };
-
+            const string url = Endpoint.CashFlowStatement;
+            
             var queryString = new QueryStringBuilder();
-
+            queryString.Add("symbol", symbol);
+            
             if (limit != null)
             {
                 queryString.Add("limit", limit);
@@ -140,20 +134,16 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
                 queryString.Add("period", period.ToString().ToLower());
             }
 
-            return client.GetJsonAsync<List<CashFlowResponse>>(url, pathParams, queryString);
+            return client.GetJsonAsync<List<CashFlowResponse>>(url, new NameValueCollection(), queryString);
         }
 
         public Task<ApiResponse<List<IncomeStatementResponse>>> GetIncomeStatementAsync(string symbol, Period period = Period.Quarter, int? limit = 40)
         {
-            const string url = "income-statement/[symbol]";
-
-            var pathParams = new NameValueCollection()
-            {
-                { "symbol", symbol }
-            };
-
+            const string url = Endpoint.IncomeStatement;
+            
             var queryString = new QueryStringBuilder();
-
+            queryString.Add("symbol", symbol);
+            
             if (limit != null)
             {
                 queryString.Add("limit", limit);
@@ -164,7 +154,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
                 queryString.Add("period", period.ToString().ToLower());
             }
 
-            return client.GetJsonAsync<List<IncomeStatementResponse>>(url, pathParams, queryString);
+            return client.GetJsonAsync<List<IncomeStatementResponse>>(url, new NameValueCollection(), queryString);
         }
 
         public Task<ApiResponse<List<StockNewsResponse>>> GetStockNewsAsync(string symbol, int? limit = 50)
@@ -222,7 +212,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         {
             const string url = "rating/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -241,7 +231,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         {
             const string url = "historical-rating/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -260,7 +250,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         {
             const string url = "discounted-cash-flow/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -279,7 +269,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         {
             const string url = "ratios-ttm/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -298,7 +288,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         {
             const string url = "key-metrics-ttm/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -317,7 +307,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         {
             const string url = "key-metrics/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -341,7 +331,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         {
             const string url = "quote/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -360,7 +350,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         {
             const string url = "quote/[symbols]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbols", string.Join(',', symbols) }
             };
@@ -379,7 +369,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         {
             const string url = "quotes/[exchange]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "exchange", exchange.ToString() }
             };
@@ -391,7 +381,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         {
             const string url = "historical-market-capitalization/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -410,7 +400,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         {
             const string url = "historical-market-capitalization/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -454,7 +444,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.CompanyValuation
         {
             const string url = "press-releases/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol},
             };

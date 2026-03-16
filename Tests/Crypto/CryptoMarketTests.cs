@@ -1,7 +1,7 @@
-﻿
-using MatthiWare.FinancialModelingPrep.Abstractions.Crypto;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.Crypto;
+using FinancialModelingPrep.Model;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -37,7 +37,7 @@ namespace Tests.Crypto
         [Fact]
         public async Task GetPeriodPriceData()
         {
-            var result = await api.GetHistoricalPrices("BTCUSD", MatthiWare.FinancialModelingPrep.Model.HistoricalPricingPeriod.OneHour);
+            var result = await api.GetHistoricalPrices("BTCUSD", HistoricalPricingPeriod.OneHour);
 
             result.AssertNoErrors();
             Assert.NotEmpty(result.Data);

@@ -1,10 +1,9 @@
-﻿using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.Crypto;
-using MatthiWare.FinancialModelingPrep.Model.StockMarket;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.Crypto;
 
-namespace MatthiWare.FinancialModelingPrep.Abstractions.Crypto
+namespace FinancialModelingPrep.Abstractions.Crypto
 {
     public interface ICryptoMarketProvider
     {

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.StockMarket
+namespace FinancialModelingPrep.Model.StockMarket
 { 
     public class StockScreenerItem
     {

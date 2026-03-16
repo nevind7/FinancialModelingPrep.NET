@@ -1,13 +1,13 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.Fund;
-using MatthiWare.FinancialModelingPrep.Core.Http;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.Fund;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.Fund;
+using FinancialModelingPrep.Core.Http;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.Fund;
 
-namespace MatthiWare.FinancialModelingPrep.Core.Fund
+namespace FinancialModelingPrep.Core.Fund
 {
     public class FundProvider : IFundProvider
     {
@@ -15,14 +15,14 @@ namespace MatthiWare.FinancialModelingPrep.Core.Fund
 
         public FundProvider(FinancialModelingPrepHttpClient client)
         {
-            this.client = client ?? throw new System.ArgumentNullException(nameof(client));
+            this.client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         public Task<ApiResponse<List<ETFStockExposureResponse>>> GetETFStockExposureAsync(string symbol)
         {
             const string url = "etf-stock-exposure/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };

@@ -1,7 +1,6 @@
-﻿using MatthiWare.FinancialModelingPrep;
-using MatthiWare.FinancialModelingPrep.Abstractions.MarketIndexes;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.MarketIndexes;
 using Xunit;
 using Xunit.Abstractions;
 

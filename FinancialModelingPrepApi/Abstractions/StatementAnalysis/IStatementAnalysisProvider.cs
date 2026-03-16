@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.StatementAnalysis;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.StatementAnalysis;
 
-namespace MatthiWare.FinancialModelingPrep.Abstractions.StatementAnalysis;
+namespace FinancialModelingPrep.Abstractions.StatementAnalysis;
 
 public interface IStatementAnalysisProvider
 {

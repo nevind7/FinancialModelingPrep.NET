@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace MatthiWare.FinancialModelingPrep.Model
+namespace FinancialModelingPrep.Model
 {
-    public static partial class EnumMappings
+    public static class EnumMappings
     {
-        public readonly static Dictionary<Industry, string> Industries = new Dictionary<Industry, string>()
+        public readonly static Dictionary<Industry, string> Industries = new Dictionary<Industry, string>
         {
             { Industry.Autos, "Autos" },
             { Industry.Banks, "Banks" },
@@ -20,7 +16,7 @@ namespace MatthiWare.FinancialModelingPrep.Model
             { Industry.BeveragesNonAlcoholic, "Beverages Non-Alcoholic" },
         };
 
-        public readonly static Dictionary<Sector, string> Sectors = new Dictionary<Sector, string>()
+        public readonly static Dictionary<Sector, string> Sectors = new Dictionary<Sector, string>
         {
             { Sector.ConsumerCyclical, "Consumer Cyclical" },
             { Sector.Energy, "Energy" },
@@ -35,7 +31,7 @@ namespace MatthiWare.FinancialModelingPrep.Model
             { Sector.Utilities, "Utilities" },
         };
 
-        public readonly static Dictionary<HistoricalPricingPeriod, string> HistoricalPrices = new Dictionary<HistoricalPricingPeriod, string>()
+        public readonly static Dictionary<HistoricalPricingPeriod, string> HistoricalPrices = new Dictionary<HistoricalPricingPeriod, string>
         {
             { HistoricalPricingPeriod.OneMinute, "1min" },
             { HistoricalPricingPeriod.FiveMinute, "5min" },

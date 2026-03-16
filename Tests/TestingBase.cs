@@ -1,12 +1,12 @@
 ﻿using Neovolve.Logging.Xunit;
-using MatthiWare.FinancialModelingPrep;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using System;
+using FinancialModelingPrep;
+using FinancialModelingPrep.Abstractions.Http;
+using FinancialModelingPrep.Core.Http;
 using Xunit.Abstractions;
-using MatthiWare.FinancialModelingPrep.Abstractions.Http;
-using MatthiWare.FinancialModelingPrep.Core.Http;
 
 namespace Tests
 {
@@ -74,7 +74,7 @@ namespace Tests
 
         protected void Build()
         {
-            this.ServiceProvider = this.Services.BuildServiceProvider();
+            ServiceProvider = Services.BuildServiceProvider();
         }
     }
 }

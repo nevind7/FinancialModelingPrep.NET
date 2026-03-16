@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.Statistics
+namespace FinancialModelingPrep.Model.Statistics
 {
     /*
      * "date" : "2022-06-30 23:00:00",

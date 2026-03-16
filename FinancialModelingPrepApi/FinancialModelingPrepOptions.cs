@@ -1,4 +1,4 @@
-﻿namespace MatthiWare.FinancialModelingPrep
+﻿namespace FinancialModelingPrep
 {
     /// <summary>
     /// FMP Options

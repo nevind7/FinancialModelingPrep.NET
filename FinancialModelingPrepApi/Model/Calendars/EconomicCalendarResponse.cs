@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.Calendars
+namespace FinancialModelingPrep.Model.Calendars
 {
     public class EconomicCalendarResponse
     {
@@ -27,5 +27,8 @@ namespace MatthiWare.FinancialModelingPrep.Model.Calendars
 
         [JsonPropertyName("estimate")]
         public double? Estimate { get; set; }
+
+        [JsonPropertyName("impact")]
+        public string Impact { get; set; }
     }
 }

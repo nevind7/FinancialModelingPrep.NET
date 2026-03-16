@@ -1,9 +1,9 @@
-﻿using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.StockTimeSeries;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.StockTimeSeries;
 
-namespace MatthiWare.FinancialModelingPrep.Abstractions.StockTimeSeries
+namespace FinancialModelingPrep.Abstractions.StockTimeSeries
 {
     public interface IStockTimeSeriesProvider
     {

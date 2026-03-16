@@ -1,8 +1,8 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.AdvancedData;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.AdvancedData;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.AdvancedData;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.AdvancedData;
 using Xunit;
 using Xunit.Abstractions;
 

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.CompanyValuation
+namespace FinancialModelingPrep.Model.CompanyValuation
 {
     public class QuoteResponse
     {

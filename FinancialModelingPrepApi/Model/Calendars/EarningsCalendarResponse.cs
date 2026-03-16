@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.Calendars
+namespace FinancialModelingPrep.Model.Calendars
 {
     public class EarningsCalendarResponse
     {

@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
-using MatthiWare.FinancialModelingPrep.Abstractions.StatementAnalysis;
-using MatthiWare.FinancialModelingPrep.Core.Http;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.StatementAnalysis;
+using FinancialModelingPrep.Abstractions.StatementAnalysis;
+using FinancialModelingPrep.Core.Http;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.StatementAnalysis;
 
-namespace MatthiWare.FinancialModelingPrep.Core.StatementAnalysis;
+namespace FinancialModelingPrep.Core.StatementAnalysis;
 
 public class StatementAnalysisProvider : IStatementAnalysisProvider
 {
@@ -23,7 +23,7 @@ public class StatementAnalysisProvider : IStatementAnalysisProvider
     {
         const string url = "financial-growth/[symbol]";
 
-        var pathParams = new NameValueCollection()
+        var pathParams = new NameValueCollection
         {
             { "symbol", symbol },
         };

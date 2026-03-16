@@ -1,17 +1,18 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.AdvancedData;
-using MatthiWare.FinancialModelingPrep.Abstractions.Calendars;
-using MatthiWare.FinancialModelingPrep.Abstractions.CompanyValuation;
-using MatthiWare.FinancialModelingPrep.Abstractions.Crypto;
-using MatthiWare.FinancialModelingPrep.Abstractions.Economics;
-using MatthiWare.FinancialModelingPrep.Abstractions.Fund;
-using MatthiWare.FinancialModelingPrep.Abstractions.InstitutionalFund;
-using MatthiWare.FinancialModelingPrep.Abstractions.MarketIndexes;
-using MatthiWare.FinancialModelingPrep.Abstractions.StatementAnalysis;
-using MatthiWare.FinancialModelingPrep.Abstractions.Statistics;
-using MatthiWare.FinancialModelingPrep.Abstractions.StockMarket;
-using MatthiWare.FinancialModelingPrep.Abstractions.StockTimeSeries;
+﻿using FinancialModelingPrep.Abstractions;
+using FinancialModelingPrep.Abstractions.AdvancedData;
+using FinancialModelingPrep.Abstractions.Calendars;
+using FinancialModelingPrep.Abstractions.CompanyValuation;
+using FinancialModelingPrep.Abstractions.Crypto;
+using FinancialModelingPrep.Abstractions.Economics;
+using FinancialModelingPrep.Abstractions.Fund;
+using FinancialModelingPrep.Abstractions.InstitutionalFund;
+using FinancialModelingPrep.Abstractions.MarketIndexes;
+using FinancialModelingPrep.Abstractions.StatementAnalysis;
+using FinancialModelingPrep.Abstractions.Statistics;
+using FinancialModelingPrep.Abstractions.StockMarket;
+using FinancialModelingPrep.Abstractions.StockTimeSeries;
 
-namespace MatthiWare.FinancialModelingPrep.Core
+namespace FinancialModelingPrep.Core
 {
     /// <inheritdoc/>
     public class FinancialModelingPrepApiClient : IFinancialModelingPrepApiClient

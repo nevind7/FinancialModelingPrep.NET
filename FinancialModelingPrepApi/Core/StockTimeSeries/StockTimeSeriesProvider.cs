@@ -1,13 +1,13 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.StockTimeSeries;
-using MatthiWare.FinancialModelingPrep.Core.Http;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.StockTimeSeries;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.StockTimeSeries;
+using FinancialModelingPrep.Core.Http;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.StockTimeSeries;
 
-namespace MatthiWare.FinancialModelingPrep.Core.StockTimeSeries
+namespace FinancialModelingPrep.Core.StockTimeSeries
 {
     public class StockTimeSeriesProvider : IStockTimeSeriesProvider
     {
@@ -23,7 +23,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockTimeSeries
         {
             const string url = "historical-price-full/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -36,7 +36,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockTimeSeries
         {
             const string url = "historical-price-full/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -53,7 +53,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockTimeSeries
         {
             const string url = "historical-price-full/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -70,7 +70,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockTimeSeries
         {
             const string url = "historical-price-full/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -89,7 +89,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockTimeSeries
         {
             const string url = "historical-price-full/stock_dividend/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -102,7 +102,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockTimeSeries
         {
             const string url = "historical-chart/[series]/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "series", HistoricalChartSeriesToString(series) },
                 { "symbol", symbol }

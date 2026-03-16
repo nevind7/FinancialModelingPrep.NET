@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.Economics;
+using FinancialModelingPrep.Model.Economics;
 using Xunit.Abstractions;
 using Xunit;
-using MatthiWare.FinancialModelingPrep.Abstractions.Economics;
-using MatthiWare.FinancialModelingPrep.Model.Economics;
 
 namespace Tests.Economics
 {

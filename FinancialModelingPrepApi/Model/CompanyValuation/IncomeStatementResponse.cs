@@ -1,121 +1,124 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.CompanyValuation
+namespace FinancialModelingPrep.Model.CompanyValuation;
+
+public sealed record IncomeStatementResponse
 {
-    public class IncomeStatementResponse
-    {
-        [JsonPropertyName("date")]
-        public string Date { get; set; }
+    [JsonPropertyName("date")]
+    public DateOnly Date { get; init; }
 
-        [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; init; } = string.Empty;
 
-        [JsonPropertyName("reportedCurrency")]
-        public string ReportedCurrency { get; set; }
+    [JsonPropertyName("reportedCurrency")]
+    public string ReportedCurrency { get; init; } = string.Empty;
 
-        [JsonPropertyName("cik")]
-        public string Cik { get; set; }
+    [JsonPropertyName("cik")]
+    public string Cik { get; init; } = string.Empty;
 
-        [JsonPropertyName("fillingDate")]
-        public string FillingDate { get; set; }
+    [JsonPropertyName("filingDate")]
+    public DateOnly FilingDate { get; init; }
 
-        [JsonPropertyName("acceptedDate")]
-        public string AcceptedDate { get; set; }
+    [JsonPropertyName("acceptedDate")]
+    public DateTime AcceptedDate { get; init; }
 
-        [JsonPropertyName("calendarYear")]
-        public string CalendarYear { get; set; }
+    [JsonPropertyName("fiscalYear")]
+    public string FiscalYear { get; init; } = string.Empty;
 
-        [JsonPropertyName("period")]
-        public string Period { get; set; }
+    [JsonPropertyName("period")]
+    public string Period { get; init; } = string.Empty;
 
-        [JsonPropertyName("revenue")]
-        public double Revenue { get; set; }
+    [JsonPropertyName("revenue")]
+    public long Revenue { get; init; }
 
-        [JsonPropertyName("costOfRevenue")]
-        public double CostOfRevenue { get; set; }
+    [JsonPropertyName("costOfRevenue")]
+    public long CostOfRevenue { get; init; }
 
-        [JsonPropertyName("grossProfit")]
-        public double GrossProfit { get; set; }
+    [JsonPropertyName("grossProfit")]
+    public long GrossProfit { get; init; }
 
-        [JsonPropertyName("grossProfitRatio")]
-        public double? GrossProfitRatio { get; set; }
+    [JsonPropertyName("researchAndDevelopmentExpenses")]
+    public long ResearchAndDevelopmentExpenses { get; init; }
 
-        [JsonPropertyName("researchAndDevelopmentExpenses")]
-        public double ResearchAndDevelopmentExpenses { get; set; }
+    [JsonPropertyName("generalAndAdministrativeExpenses")]
+    public long GeneralAndAdministrativeExpenses { get; init; }
 
-        [JsonPropertyName("generalAndAdministrativeExpenses")]
-        public double GeneralAndAdministrativeExpenses { get; set; }
+    [JsonPropertyName("sellingAndMarketingExpenses")]
+    public long SellingAndMarketingExpenses { get; init; }
 
-        [JsonPropertyName("sellingAndMarketingExpenses")]
-        public double SellingAndMarketingExpenses { get; set; }
+    [JsonPropertyName("sellingGeneralAndAdministrativeExpenses")]
+    public long SellingGeneralAndAdministrativeExpenses { get; init; }
 
-        [JsonPropertyName("sellingGeneralAndAdministrativeExpenses")]
-        public double SellingGeneralAndAdministrativeExpenses { get; set; }
+    [JsonPropertyName("otherExpenses")]
+    public long OtherExpenses { get; init; }
 
-        [JsonPropertyName("otherExpenses")]
-        public double OtherExpenses { get; set; }
+    [JsonPropertyName("operatingExpenses")]
+    public long OperatingExpenses { get; init; }
 
-        [JsonPropertyName("operatingExpenses")]
-        public double OperatingExpenses { get; set; }
+    [JsonPropertyName("costAndExpenses")]
+    public long CostAndExpenses { get; init; }
 
-        [JsonPropertyName("costAndExpenses")]
-        public double CostAndExpenses { get; set; }
+    [JsonPropertyName("netInterestIncome")]
+    public long NetInterestIncome { get; init; }
 
-        [JsonPropertyName("interestIncome")]
-        public double? InterestIncome { get; set; }
+    [JsonPropertyName("interestIncome")]
+    public long InterestIncome { get; init; }
 
-        [JsonPropertyName("interestExpense")]
-        public double? InterestExpense { get; set; }
+    [JsonPropertyName("interestExpense")]
+    public long InterestExpense { get; init; }
 
-        [JsonPropertyName("depreciationAndAmortization")]
-        public double DepreciationAndAmortization { get; set; }
+    [JsonPropertyName("depreciationAndAmortization")]
+    public long DepreciationAndAmortization { get; init; }
 
-        [JsonPropertyName("ebitda")]
-        public double Ebitda { get; set; }
+    [JsonPropertyName("ebitda")]
+    public long Ebitda { get; init; }
 
-        [JsonPropertyName("ebitdaratio")]
-        public double? Ebitdaratio { get; set; }
+    [JsonPropertyName("ebit")]
+    public long Ebit { get; init; }
 
-        [JsonPropertyName("operatingIncome")]
-        public double OperatingIncome { get; set; }
+    [JsonPropertyName("nonOperatingIncomeExcludingInterest")]
+    public long NonOperatingIncomeExcludingInterest { get; init; }
 
-        [JsonPropertyName("operatingIncomeRatio")]
-        public double? OperatingIncomeRatio { get; set; }
+    [JsonPropertyName("operatingIncome")]
+    public long OperatingIncome { get; init; }
 
-        [JsonPropertyName("totalOtherIncomeExpensesNet")]
-        public double TotalOtherIncomeExpensesNet { get; set; }
+    [JsonPropertyName("totalOtherIncomeExpensesNet")]
+    public long TotalOtherIncomeExpensesNet { get; init; }
 
-        [JsonPropertyName("incomeBeforeTax")]
-        public double IncomeBeforeTax { get; set; }
+    [JsonPropertyName("incomeBeforeTax")]
+    public long IncomeBeforeTax { get; init; }
 
-        [JsonPropertyName("incomeBeforeTaxRatio")]
-        public double? IncomeBeforeTaxRatio { get; set; }
+    [JsonPropertyName("incomeTaxExpense")]
+    public long IncomeTaxExpense { get; init; }
 
-        [JsonPropertyName("incomeTaxExpense")]
-        public double IncomeTaxExpense { get; set; }
+    [JsonPropertyName("netIncomeFromContinuingOperations")]
+    public long NetIncomeFromContinuingOperations { get; init; }
 
-        [JsonPropertyName("netIncome")]
-        public double NetIncome { get; set; }
+    [JsonPropertyName("netIncomeFromDiscontinuedOperations")]
+    public long NetIncomeFromDiscontinuedOperations { get; init; }
 
-        [JsonPropertyName("netIncomeRatio")]
-        public double? NetIncomeRatio { get; set; }
+    [JsonPropertyName("otherAdjustmentsToNetIncome")]
+    public long OtherAdjustmentsToNetIncome { get; init; }
 
-        [JsonPropertyName("eps")]
-        public double Eps { get; set; }
+    [JsonPropertyName("netIncome")]
+    public long NetIncome { get; init; }
 
-        [JsonPropertyName("epsdiluted")]
-        public double Epsdiluted { get; set; }
+    [JsonPropertyName("netIncomeDeductions")]
+    public long NetIncomeDeductions { get; init; }
 
-        [JsonPropertyName("weightedAverageShsOut")]
-        public double WeightedAverageShsOut { get; set; }
+    [JsonPropertyName("bottomLineNetIncome")]
+    public long BottomLineNetIncome { get; init; }
 
-        [JsonPropertyName("weightedAverageShsOutDil")]
-        public double WeightedAverageShsOutDil { get; set; }
+    [JsonPropertyName("eps")]
+    public decimal Eps { get; init; }
 
-        [JsonPropertyName("link")]
-        public string Link { get; set; }
+    [JsonPropertyName("epsDiluted")]
+    public decimal EpsDiluted { get; init; }
 
-        [JsonPropertyName("finalLink")]
-        public string FinalLink { get; set; }
-    }
+    [JsonPropertyName("weightedAverageShsOut")]
+    public long WeightedAverageShsOut { get; init; }
+
+    [JsonPropertyName("weightedAverageShsOutDil")]
+    public long WeightedAverageShsOutDil { get; init; }
 }

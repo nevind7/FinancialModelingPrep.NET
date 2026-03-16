@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.StatementAnalysis;
+namespace FinancialModelingPrep.Model.StatementAnalysis;
 
 public class FinancialGrowthResponse
 {

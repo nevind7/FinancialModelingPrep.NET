@@ -1,9 +1,9 @@
-﻿using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.CompanyValuation;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.CompanyValuation;
 
-namespace MatthiWare.FinancialModelingPrep.Abstractions.CompanyValuation
+namespace FinancialModelingPrep.Abstractions.CompanyValuation
 {
     public interface ICompanyValuationProvider
     {

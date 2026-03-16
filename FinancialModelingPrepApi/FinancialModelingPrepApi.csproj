@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
-		<RootNamespace>MatthiWare.FinancialModelingPrep</RootNamespace>
+		<RootNamespace>FinancialModelingPrep</RootNamespace>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Company>MatthiWare</Company>

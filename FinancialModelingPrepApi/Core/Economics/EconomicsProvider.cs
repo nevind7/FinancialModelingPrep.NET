@@ -1,13 +1,13 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.Economics;
-using MatthiWare.FinancialModelingPrep.Core.Http;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.Economics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.Economics;
+using FinancialModelingPrep.Core.Http;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.Economics;
 
-namespace MatthiWare.FinancialModelingPrep.Core.Economics
+namespace FinancialModelingPrep.Core.Economics
 {
     public class EconomicsProvider : IEconomicsProvider
     {
@@ -15,7 +15,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.Economics
 
         public EconomicsProvider(FinancialModelingPrepHttpClient client)
         {
-            this.client = client ?? throw new System.ArgumentNullException(nameof(client));
+            this.client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         /// <inheritdoc/>

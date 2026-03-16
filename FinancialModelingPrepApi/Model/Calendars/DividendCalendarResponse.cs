@@ -1,23 +1,20 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.Calendars
+namespace FinancialModelingPrep.Model.Calendars
 {
     public class DividendCalendarResponse
     {
+        [JsonPropertyName("symbol")]
+        public string Symbol { get; set; }
+        
         [JsonPropertyName("date")]
         public string Date { get; set; }
 
-        [JsonPropertyName("label")]
-        public string Label { get; set; }
-
         [JsonPropertyName("adjDividend")]
-        public double AdjDividend { get; set; }
-
-        [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
-
+        public decimal AdjDividend { get; set; }
+        
         [JsonPropertyName("dividend")]
-        public double? Dividend { get; set; }
+        public decimal? Dividend { get; set; }
 
         [JsonPropertyName("recordDate")]
         public string RecordDate { get; set; }
@@ -27,5 +24,11 @@ namespace MatthiWare.FinancialModelingPrep.Model.Calendars
 
         [JsonPropertyName("declarationDate")]
         public string DeclarationDate { get; set; }
+        
+        [JsonPropertyName("frequency")]
+        public string Frequency { get; set; }
+        
+        [JsonPropertyName("yield")]
+        public decimal Yield { get; set; }
     }
 }

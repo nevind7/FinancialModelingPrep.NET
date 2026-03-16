@@ -1,10 +1,10 @@
-﻿using Bert.RateLimiters;
-using MatthiWare.FinancialModelingPrep.Abstractions.Http;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Bert.RateLimiters;
+using FinancialModelingPrep.Abstractions.Http;
 
-namespace MatthiWare.FinancialModelingPrep.Core.Http
+namespace FinancialModelingPrep.Core.Http
 {
     public class RequestRateLimiter : IRequestRateLimiter
     {

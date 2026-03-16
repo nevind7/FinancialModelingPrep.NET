@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.AdvancedData
+namespace FinancialModelingPrep.Model.AdvancedData
 {
     public class CompanyPeersResponse
     {

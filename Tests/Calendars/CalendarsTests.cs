@@ -1,9 +1,8 @@
-﻿using MatthiWare.FinancialModelingPrep;
-using MatthiWare.FinancialModelingPrep.Abstractions.Calendars;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.Calendars;
 using Xunit;
 using Xunit.Abstractions;
 

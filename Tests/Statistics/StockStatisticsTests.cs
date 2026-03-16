@@ -1,7 +1,7 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.Statistics;
-using MatthiWare.FinancialModelingPrep.Model;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.Statistics;
+using FinancialModelingPrep.Model;
 using Xunit;
 using Xunit.Abstractions;
 

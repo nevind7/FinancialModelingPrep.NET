@@ -1,9 +1,9 @@
-﻿using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.InstitutionalFund;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.InstitutionalFund;
 
-namespace MatthiWare.FinancialModelingPrep.Abstractions.InstitutionalFund
+namespace FinancialModelingPrep.Abstractions.InstitutionalFund
 {
     public interface IInstitutionalFundProvider
     {

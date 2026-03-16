@@ -1,12 +1,13 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.Crypto;
-using MatthiWare.FinancialModelingPrep.Core.Http;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.Crypto;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.Crypto;
+using FinancialModelingPrep.Core.Http;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.Crypto;
 
-namespace MatthiWare.FinancialModelingPrep.Core.Crypto
+namespace FinancialModelingPrep.Core.Crypto
 {
     public sealed class CryptoMarketProvider : ICryptoMarketProvider
     {
@@ -14,7 +15,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.Crypto
 
         public CryptoMarketProvider(FinancialModelingPrepHttpClient client)
         {
-            this.client = client ?? throw new System.ArgumentNullException(nameof(client));
+            this.client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         public Task<ApiResponse<List<CryptoItem>>> GetAvilableCryptocurrencies()
@@ -31,7 +32,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.Crypto
         {
             const string url = "historical-price-full/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol }
             };
@@ -45,7 +46,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.Crypto
 
             string pricePeriod = EnumMappings.HistoricalPrices[period];
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol },
                 { "pricePeriod", pricePeriod }

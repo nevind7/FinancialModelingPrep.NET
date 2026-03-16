@@ -1,127 +1,148 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.CompanyValuation
+namespace FinancialModelingPrep.Model.CompanyValuation;
+
+public record CashFlowResponse
 {
-    public class CashFlowResponse
-    {
-        [JsonPropertyName("date")]
-        public string Date { get; set; }
+    [JsonPropertyName("date")]
+    public DateOnly Date { get; init; }
 
-        [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; init; } = string.Empty;
 
-        [JsonPropertyName("reportedCurrency")]
-        public string ReportedCurrency { get; set; }
+    [JsonPropertyName("reportedCurrency")]
+    public string ReportedCurrency { get; init; } = string.Empty;
 
-        [JsonPropertyName("cik")]
-        public string Cik { get; set; }
+    [JsonPropertyName("cik")]
+    public string Cik { get; init; } = string.Empty;
 
-        [JsonPropertyName("fillingDate")]
-        public string FillingDate { get; set; }
+    [JsonPropertyName("filingDate")]
+    public DateOnly FilingDate { get; init; }
 
-        [JsonPropertyName("acceptedDate")]
-        public string AcceptedDate { get; set; }
+    [JsonPropertyName("acceptedDate")]
+    public DateTime AcceptedDate { get; init; }
 
-        [JsonPropertyName("calendarYear")]
-        public string CalendarYear { get; set; }
+    [JsonPropertyName("fiscalYear")]
+    public string FiscalYear { get; init; } = string.Empty;
 
-        [JsonPropertyName("period")]
-        public string Period { get; set; }
+    [JsonPropertyName("period")]
+    public string Period { get; init; } = string.Empty;
 
-        [JsonPropertyName("netIncome")]
-        public double NetIncome { get; set; }
+    [JsonPropertyName("netIncome")]
+    public long NetIncome { get; init; }
 
-        [JsonPropertyName("depreciationAndAmortization")]
-        public double DepreciationAndAmortization { get; set; }
+    [JsonPropertyName("depreciationAndAmortization")]
+    public long DepreciationAndAmortization { get; init; }
 
-        [JsonPropertyName("deferredIncomeTax")]
-        public double DeferredIncomeTax { get; set; }
+    [JsonPropertyName("deferredIncomeTax")]
+    public long DeferredIncomeTax { get; init; }
 
-        [JsonPropertyName("stockBasedCompensation")]
-        public double StockBasedCompensation { get; set; }
+    [JsonPropertyName("stockBasedCompensation")]
+    public long StockBasedCompensation { get; init; }
 
-        [JsonPropertyName("changeInWorkingCapital")]
-        public double ChangeInWorkingCapital { get; set; }
+    [JsonPropertyName("changeInWorkingCapital")]
+    public long ChangeInWorkingCapital { get; init; }
 
-        [JsonPropertyName("accountsReceivables")]
-        public double? AccountsReceivables { get; set; }
+    [JsonPropertyName("accountsReceivables")]
+    public long AccountsReceivables { get; init; }
 
-        [JsonPropertyName("inventory")]
-        public double? Inventory { get; set; }
+    [JsonPropertyName("inventory")]
+    public long Inventory { get; init; }
 
-        [JsonPropertyName("accountsPayables")]
-        public double? AccountsPayables { get; set; }
+    [JsonPropertyName("accountsPayables")]
+    public long AccountsPayables { get; init; }
 
-        [JsonPropertyName("otherWorkingCapital")]
-        public double? OtherWorkingCapital { get; set; }
+    [JsonPropertyName("otherWorkingCapital")]
+    public long OtherWorkingCapital { get; init; }
 
-        [JsonPropertyName("otherNonCashItems")]
-        public double OtherNonCashItems { get; set; }
+    [JsonPropertyName("otherNonCashItems")]
+    public long OtherNonCashItems { get; init; }
 
-        [JsonPropertyName("netCashProvidedByOperatingActivities")]
-        public double NetCashProvidedByOperatingActivities { get; set; }
+    [JsonPropertyName("netCashProvidedByOperatingActivities")]
+    public long NetCashProvidedByOperatingActivities { get; init; }
 
-        [JsonPropertyName("investmentsInPropertyPlantAndEquipment")]
-        public double InvestmentsInPropertyPlantAndEquipment { get; set; }
+    [JsonPropertyName("investmentsInPropertyPlantAndEquipment")]
+    public long InvestmentsInPropertyPlantAndEquipment { get; init; }
 
-        [JsonPropertyName("acquisitionsNet")]
-        public double? AcquisitionsNet { get; set; }
+    [JsonPropertyName("acquisitionsNet")]
+    public long AcquisitionsNet { get; init; }
 
-        [JsonPropertyName("purchasesOfInvestments")]
-        public double PurchasesOfInvestments { get; set; }
+    [JsonPropertyName("purchasesOfInvestments")]
+    public long PurchasesOfInvestments { get; init; }
 
-        [JsonPropertyName("salesMaturitiesOfInvestments")]
-        public double SalesMaturitiesOfInvestments { get; set; }
+    [JsonPropertyName("salesMaturitiesOfInvestments")]
+    public long SalesMaturitiesOfInvestments { get; init; }
 
-        [JsonPropertyName("otherInvestingActivites")]
-        public double OtherInvestingActivites { get; set; }
+    [JsonPropertyName("otherInvestingActivities")]
+    public long OtherInvestingActivities { get; init; }
 
-        [JsonPropertyName("netCashUsedForInvestingActivites")]
-        public double NetCashUsedForInvestingActivites { get; set; }
+    [JsonPropertyName("netCashProvidedByInvestingActivities")]
+    public long NetCashProvidedByInvestingActivities { get; init; }
 
-        [JsonPropertyName("debtRepayment")]
-        public double DebtRepayment { get; set; }
+    [JsonPropertyName("netDebtIssuance")]
+    public long NetDebtIssuance { get; init; }
 
-        [JsonPropertyName("commonStockIssued")]
-        public double CommonStockIssued { get; set; }
+    [JsonPropertyName("longTermNetDebtIssuance")]
+    public long LongTermNetDebtIssuance { get; init; }
 
-        [JsonPropertyName("commonStockRepurchased")]
-        public double? CommonStockRepurchased { get; set; }
+    [JsonPropertyName("shortTermNetDebtIssuance")]
+    public long ShortTermNetDebtIssuance { get; init; }
 
-        [JsonPropertyName("dividendsPaid")]
-        public double? DividendsPaid { get; set; }
+    [JsonPropertyName("netStockIssuance")]
+    public long NetStockIssuance { get; init; }
 
-        [JsonPropertyName("otherFinancingActivites")]
-        public double? OtherFinancingActivites { get; set; }
+    [JsonPropertyName("netCommonStockIssuance")]
+    public long NetCommonStockIssuance { get; init; }
 
-        [JsonPropertyName("netCashUsedProvidedByFinancingActivities")]
-        public double NetCashUsedProvidedByFinancingActivities { get; set; }
+    [JsonPropertyName("commonStockIssuance")]
+    public long CommonStockIssuance { get; init; }
 
-        [JsonPropertyName("effectOfForexChangesOnCash")]
-        public double EffectOfForexChangesOnCash { get; set; }
+    [JsonPropertyName("commonStockRepurchased")]
+    public long CommonStockRepurchased { get; init; }
 
-        [JsonPropertyName("netChangeInCash")]
-        public double NetChangeInCash { get; set; }
+    [JsonPropertyName("netPreferredStockIssuance")]
+    public long NetPreferredStockIssuance { get; init; }
 
-        [JsonPropertyName("cashAtEndOfPeriod")]
-        public double CashAtEndOfPeriod { get; set; }
+    [JsonPropertyName("netDividendsPaid")]
+    public long NetDividendsPaid { get; init; }
 
-        [JsonPropertyName("cashAtBeginningOfPeriod")]
-        public double CashAtBeginningOfPeriod { get; set; }
+    [JsonPropertyName("commonDividendsPaid")]
+    public long CommonDividendsPaid { get; init; }
 
-        [JsonPropertyName("operatingCashFlow")]
-        public double OperatingCashFlow { get; set; }
+    [JsonPropertyName("preferredDividendsPaid")]
+    public long PreferredDividendsPaid { get; init; }
 
-        [JsonPropertyName("capitalExpenditure")]
-        public double CapitalExpenditure { get; set; }
+    [JsonPropertyName("otherFinancingActivities")]
+    public long OtherFinancingActivities { get; init; }
 
-        [JsonPropertyName("freeCashFlow")]
-        public double FreeCashFlow { get; set; }
+    [JsonPropertyName("netCashProvidedByFinancingActivities")]
+    public long NetCashProvidedByFinancingActivities { get; init; }
 
-        [JsonPropertyName("link")]
-        public string Link { get; set; }
+    [JsonPropertyName("effectOfForexChangesOnCash")]
+    public long EffectOfForexChangesOnCash { get; init; }
 
-        [JsonPropertyName("finalLink")]
-        public string FinalLink { get; set; }
-    }
+    [JsonPropertyName("netChangeInCash")]
+    public long NetChangeInCash { get; init; }
+
+    [JsonPropertyName("cashAtEndOfPeriod")]
+    public long CashAtEndOfPeriod { get; init; }
+
+    [JsonPropertyName("cashAtBeginningOfPeriod")]
+    public long CashAtBeginningOfPeriod { get; init; }
+
+    [JsonPropertyName("operatingCashFlow")]
+    public long OperatingCashFlow { get; init; }
+
+    [JsonPropertyName("capitalExpenditure")]
+    public long CapitalExpenditure { get; init; }
+
+    [JsonPropertyName("freeCashFlow")]
+    public long FreeCashFlow { get; init; }
+
+    [JsonPropertyName("incomeTaxesPaid")]
+    public long IncomeTaxesPaid { get; init; }
+
+    [JsonPropertyName("interestPaid")]
+    public long InterestPaid { get; init; }
 }

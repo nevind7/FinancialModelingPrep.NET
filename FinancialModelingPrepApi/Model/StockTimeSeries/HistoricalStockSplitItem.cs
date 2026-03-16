@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.StockTimeSeries
+namespace FinancialModelingPrep.Model.StockTimeSeries
 {
     public class HistoricalStockSplitItem
     {

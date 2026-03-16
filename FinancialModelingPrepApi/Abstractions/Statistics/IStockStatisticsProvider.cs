@@ -1,9 +1,9 @@
-﻿using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.Statistics;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.Statistics;
 
-namespace MatthiWare.FinancialModelingPrep.Abstractions.Statistics
+namespace FinancialModelingPrep.Abstractions.Statistics
 {
     /// <summary>
     /// Stock related statistics

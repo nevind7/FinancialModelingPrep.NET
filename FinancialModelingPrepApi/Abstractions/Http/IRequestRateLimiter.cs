@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace MatthiWare.FinancialModelingPrep.Abstractions.Http
+namespace FinancialModelingPrep.Abstractions.Http
 {
     public interface IRequestRateLimiter
     {

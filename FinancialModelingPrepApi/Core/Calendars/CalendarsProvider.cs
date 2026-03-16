@@ -1,13 +1,13 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.Calendars;
-using MatthiWare.FinancialModelingPrep.Core.Http;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.Calendars;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.Calendars;
+using FinancialModelingPrep.Core.Http;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.Calendars;
 
-namespace MatthiWare.FinancialModelingPrep.Core.Calendars
+namespace FinancialModelingPrep.Core.Calendars
 {
     public class CalendarsProvider : ICalendarsProvider
     {
@@ -40,7 +40,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.Calendars
 
         private Task<ApiResponse<List<EarningsCalendarResponse>>> GetEarningsCalendarInternalAsync(string from = null, string to = null)
         {
-            const string url = "earnings-calendar";
+            const string url = Endpoint.EarningsCalendar;
 
             var queryString = new QueryStringBuilder();
 
@@ -56,7 +56,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.Calendars
         /// <inheritdoc/>
         public Task<ApiResponse<List<EarningsCalendarResponse>>> GetHistoricalEarningsCalendarAsync(string symbol, int? limit = null)
         {
-            const string url = "earnings";
+            const string url = Endpoint.Earnings;
 
             var pathParams = new NameValueCollection();
 
@@ -73,19 +73,19 @@ namespace MatthiWare.FinancialModelingPrep.Core.Calendars
 
         /// <inheritdoc/>
         public Task<ApiResponse<List<IPOCalendarResponse>>> GetIPOCalendarAsync(string from, string to)
-            => GetGenericCalendarAsync<IPOCalendarResponse>("/ipo_calendar", from, to);
+            => GetGenericCalendarAsync<IPOCalendarResponse>(Endpoint.IPOCalendar, from, to);
 
         /// <inheritdoc/>
         public Task<ApiResponse<List<DividendCalendarResponse>>> GetDividendCalendarAsync(string from, string to)
-            => GetGenericCalendarAsync<DividendCalendarResponse>("/stock_dividend_calendar", from, to);
+            => GetGenericCalendarAsync<DividendCalendarResponse>(Endpoint.StockDividendCalendar, from, to);
 
         /// <inheritdoc/>
         public Task<ApiResponse<List<EconomicCalendarResponse>>> GetEconomicCalendarAsync(string from, string to)
-            => GetGenericCalendarAsync<EconomicCalendarResponse>("/economic_calendar", from, to);
+            => GetGenericCalendarAsync<EconomicCalendarResponse>(Endpoint.EconomicCalendar, from, to);
 
         /// <inheritdoc/>
         public Task<ApiResponse<List<StockSplitCalendarResponse>>> GetStockSplitCalendarAsync(string from, string to)
-            => GetGenericCalendarAsync<StockSplitCalendarResponse>("/stock_split_calendar", from, to);
+            => GetGenericCalendarAsync<StockSplitCalendarResponse>(Endpoint.StockSplitCalendar, from, to);
 
         private Task<ApiResponse<List<T>>> GetGenericCalendarAsync<T>(string urlTemplate, string from, string to)
         {

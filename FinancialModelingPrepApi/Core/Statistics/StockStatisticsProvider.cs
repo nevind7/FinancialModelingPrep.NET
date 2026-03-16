@@ -1,13 +1,13 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.Statistics;
-using MatthiWare.FinancialModelingPrep.Core.Http;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.Statistics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.Statistics;
+using FinancialModelingPrep.Core.Http;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.Statistics;
 
-namespace MatthiWare.FinancialModelingPrep.Core.Statistics
+namespace FinancialModelingPrep.Core.Statistics
 {
     /// <inheritdoc/>
     public class StockStatisticsProvider : IStockStatisticsProvider
@@ -24,7 +24,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.Statistics
         {
             const string url = "analyst-estimates/[symbol]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "symbol", symbol },
             };

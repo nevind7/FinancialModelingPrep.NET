@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.InstitutionalFund
+namespace FinancialModelingPrep.Model.InstitutionalFund
 {
     public class CikListResponse
     {

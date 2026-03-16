@@ -1,18 +1,18 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.Calendars
+namespace FinancialModelingPrep.Model.Calendars
 {
     public class IPOCalendarResponse
     {
+        [JsonPropertyName("symbol")]
+        public string Symbol { get; set; }
+        
         [JsonPropertyName("date")]
         public string Date { get; set; }
 
         [JsonPropertyName("company")]
         public string Company { get; set; }
-
-        [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
-
+        
         [JsonPropertyName("exchange")]
         public string Exchange { get; set; }
 

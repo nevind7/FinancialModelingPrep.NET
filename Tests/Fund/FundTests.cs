@@ -1,10 +1,10 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.Fund;
+﻿using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.Fund;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.CompanyValuation
+namespace Tests.Fund
 {
     public class FundTests : TestingBase
     {

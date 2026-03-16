@@ -1,14 +1,14 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.Http;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.Error;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Specialized;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.Http;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.Error;
+using Microsoft.Extensions.Logging;
 
-namespace MatthiWare.FinancialModelingPrep.Core.Http
+namespace FinancialModelingPrep.Core.Http
 {
     public class FinancialModelingPrepHttpClient
     {
@@ -145,11 +145,12 @@ namespace MatthiWare.FinancialModelingPrep.Core.Http
                 {
                     throw new ArgumentException("Provided path parameter was null or empty");
                 }
-                else if (string.IsNullOrWhiteSpace(pathParams[key]))
+
+                if (string.IsNullOrWhiteSpace(pathParams[key]))
                 {
                     throw new ArgumentException($"Provided path parameter value for {key} was null or empty");
                 }
-             
+
                 url = url.Replace($"[{key}]", pathParams[key]);
             }
         }

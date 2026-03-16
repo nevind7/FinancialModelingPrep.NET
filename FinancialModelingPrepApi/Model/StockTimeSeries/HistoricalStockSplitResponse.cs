@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.StockTimeSeries
+namespace FinancialModelingPrep.Model.StockTimeSeries
 {
     public class HistoricalStockSplitResponse
     {

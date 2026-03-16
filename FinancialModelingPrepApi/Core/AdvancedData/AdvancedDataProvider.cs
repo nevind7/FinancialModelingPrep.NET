@@ -1,13 +1,14 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.AdvancedData;
-using MatthiWare.FinancialModelingPrep.Core.Http;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.AdvancedData;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.AdvancedData;
+using FinancialModelingPrep.Core.Http;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.AdvancedData;
 
-namespace MatthiWare.FinancialModelingPrep.Core.AdvancedData
+namespace FinancialModelingPrep.Core.AdvancedData
 {
     public class AdvancedDataProvider : IAdvancedDataProvider
     {
@@ -15,7 +16,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.AdvancedData
 
         public AdvancedDataProvider(FinancialModelingPrepHttpClient client)
         {
-            this.client = client ?? throw new System.ArgumentNullException(nameof(client));
+            this.client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         public Task<ApiResponse<string>> GetAnnualReportsForm10KJsonAsync(string symbol, int year)
@@ -97,17 +98,17 @@ namespace MatthiWare.FinancialModelingPrep.Core.AdvancedData
         {
             if (string.IsNullOrEmpty(url))
             {
-                throw new System.ArgumentException($"'{nameof(url)}' cannot be null or empty.", nameof(url));
+                throw new ArgumentException($"'{nameof(url)}' cannot be null or empty.", nameof(url));
             }
 
             if (string.IsNullOrEmpty(date))
             {
-                throw new System.ArgumentException($"'{nameof(date)}' cannot be null or empty.", nameof(date));
+                throw new ArgumentException($"'{nameof(date)}' cannot be null or empty.", nameof(date));
             }
 
             if (string.IsNullOrEmpty(exchange))
             {
-                throw new System.ArgumentException($"'{nameof(exchange)}' cannot be null or empty.", nameof(exchange));
+                throw new ArgumentException($"'{nameof(exchange)}' cannot be null or empty.", nameof(exchange));
             }
 
             var queryString = new QueryStringBuilder();

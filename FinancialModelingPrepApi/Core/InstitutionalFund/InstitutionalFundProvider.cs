@@ -1,14 +1,14 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.InstitutionalFund;
-using MatthiWare.FinancialModelingPrep.Core.Http;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.InstitutionalFund;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.InstitutionalFund;
+using FinancialModelingPrep.Core.Http;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.InstitutionalFund;
 
-namespace MatthiWare.FinancialModelingPrep.Core.InstitutionalFund
+namespace FinancialModelingPrep.Core.InstitutionalFund
 {
     public class InstitutionalFundProvider : IInstitutionalFundProvider
     {
@@ -16,7 +16,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.InstitutionalFund
 
         public InstitutionalFundProvider(FinancialModelingPrepHttpClient client)
         {
-            this.client = client ?? throw new System.ArgumentNullException(nameof(client));
+            this.client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         /// <inheritdoc/>
@@ -34,7 +34,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.InstitutionalFund
         {
             const string url = "cik/[cik]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "cik", cik }
             };
@@ -47,7 +47,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.InstitutionalFund
         {
             const string url = "form-thirteen/[cik]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
 
                 { "cik", cik }
@@ -64,7 +64,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.InstitutionalFund
         {
             const string url = "cusip/[cusip]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "cusip", cusip }
             };
@@ -84,7 +84,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.InstitutionalFund
         {
             const string url = "cik-search/[name]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "name", name }
             };

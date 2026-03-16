@@ -1,9 +1,9 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.StockTimeSeries;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.StockTimeSeries;
 using Xunit;
 using Xunit.Abstractions;
 

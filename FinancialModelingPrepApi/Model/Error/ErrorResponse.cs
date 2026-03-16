@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace MatthiWare.FinancialModelingPrep.Model.Error
+namespace FinancialModelingPrep.Model.Error
 {
     public class ErrorResponse
     {

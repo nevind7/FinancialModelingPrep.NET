@@ -1,12 +1,13 @@
-﻿using MatthiWare.FinancialModelingPrep.Abstractions.StockMarket;
-using MatthiWare.FinancialModelingPrep.Core.Http;
-using MatthiWare.FinancialModelingPrep.Model;
-using MatthiWare.FinancialModelingPrep.Model.StockMarket;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
+using FinancialModelingPrep.Abstractions.StockMarket;
+using FinancialModelingPrep.Core.Http;
+using FinancialModelingPrep.Model;
+using FinancialModelingPrep.Model.StockMarket;
 
-namespace MatthiWare.FinancialModelingPrep.Core.StockMarket
+namespace FinancialModelingPrep.Core.StockMarket
 {
     public sealed class StockMarketProvider : IStockMarketProvider
     {
@@ -18,7 +19,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockMarket
 
         public StockMarketProvider(FinancialModelingPrepHttpClient client)
         {
-            this.client = client ?? throw new System.ArgumentNullException(nameof(client));
+            this.client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         public Task<ApiResponse<List<StockScreenerItem>>> StockScreener(int? marketCapMoreThan = null, int? marketCapLowerThan = null, decimal? priceMoreThan = null, decimal? priceLowerThan = null,
@@ -111,7 +112,7 @@ namespace MatthiWare.FinancialModelingPrep.Core.StockMarket
         {
             const string url = "[endpoint]";
 
-            var pathParams = new NameValueCollection()
+            var pathParams = new NameValueCollection
             {
                 { "endpoint", endpoint },
             };
