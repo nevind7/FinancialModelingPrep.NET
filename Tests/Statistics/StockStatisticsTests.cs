@@ -5,46 +5,36 @@ using FinancialModelingPrep.Model;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.Statistics
+namespace Tests.Statistics;
+
+public class StockStatisticsTests : TestingBase
 {
-    public class StockStatisticsTests : TestingBase
+    private readonly IStockStatisticsProvider api;
+
+    public StockStatisticsTests(ITestOutputHelper testOutput) : base(testOutput)
     {
-        private readonly IStockStatisticsProvider api;
+        api = ServiceProvider.GetRequiredService<IStockStatisticsProvider>();
+    }
 
-        public StockStatisticsTests(ITestOutputHelper testOutput) : base(testOutput)
-        {
-            api = ServiceProvider.GetRequiredService<IStockStatisticsProvider>();
-        }
+    [Theory]
+    [InlineData("AAPL", 10)]
+    [InlineData("SHUR.BR", 10)]
+    public async Task GetAnalystEstimatesAsyncAnnualy(string ticker, int limit = 1)
+    {
+        var result = await api.GetAnalystEstimatesAsync(ticker, Period.Annual, limit: limit);
 
-        [Theory]
-        [InlineData("AAPL", 10)]
-        [InlineData("SHUR.BR", 10)]
-        public async Task GetAnalystEstimatesAsyncAnnualy(string ticker, int limit = 1)
-        {
-            var result = await api.GetAnalystEstimatesAsync(ticker, Period.Annual, limit: limit);
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
+    }
 
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
+    [Theory]
+    [InlineData("AAPL", 10)]
+    [InlineData("SHUR.BR", 10)]
+    public async Task GetAnalystEstimatesAsyncQuarterly(string ticker, int limit = 1)
+    {
+        var result = await api.GetAnalystEstimatesAsync(ticker, Period.Quarter, limit: limit);
 
-        [Theory]
-        [InlineData("AAPL", 10)]
-        [InlineData("SHUR.BR", 10)]
-        public async Task GetAnalystEstimatesAsyncQuarterly(string ticker, int limit = 1)
-        {
-            var result = await api.GetAnalystEstimatesAsync(ticker, Period.Quarter, limit: limit);
-
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
-
-        [Fact]
-        public async Task GetSocialSentimentAsync()
-        {
-            var result = await api.GetSocialSentimentAsync("AAPL");
-
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
     }
 }

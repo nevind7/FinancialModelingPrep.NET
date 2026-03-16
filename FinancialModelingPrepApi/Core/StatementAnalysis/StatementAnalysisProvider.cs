@@ -21,14 +21,10 @@ public class StatementAnalysisProvider : IStatementAnalysisProvider
     /// <inheritdoc/>
     public Task<ApiResponse<List<FinancialGrowthResponse>>> GetFinancialGrowthAsync(string symbol, Period period = Period.Annual, int? limit = 30)
     {
-        const string url = "financial-growth/[symbol]";
-
-        var pathParams = new NameValueCollection
-        {
-            { "symbol", symbol },
-        };
+        const string url = Endpoint.FinancialGrowth;
 
         var queryString = new QueryStringBuilder();
+        queryString.Add("symbol", symbol);
 
         queryString.Add("period", period.ToString().ToLower());
 
@@ -37,6 +33,6 @@ public class StatementAnalysisProvider : IStatementAnalysisProvider
             queryString.Add("limit", limit);
         }
 
-        return client.GetJsonAsync<List<FinancialGrowthResponse>>(url, pathParams, queryString);
+        return client.GetJsonAsync<List<FinancialGrowthResponse>>(url, new NameValueCollection(), queryString);
     }
 }

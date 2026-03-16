@@ -8,73 +8,72 @@ using FinancialModelingPrep.Abstractions.Http;
 using FinancialModelingPrep.Core.Http;
 using Xunit.Abstractions;
 
-namespace Tests
+namespace Tests;
+
+public abstract class TestingBase
 {
-    public abstract class TestingBase
+    protected IServiceCollection Services { get; private set; }
+    protected IServiceProvider ServiceProvider { get; private set; }
+
+    private static readonly IConfigurationRoot ConfigurationRoot;
+
+    private static readonly FinancialModelingPrepOptions testingOptions;
+    private static readonly IRequestRateLimiter sharedRateLimiter;
+
+    static TestingBase()
     {
-        protected IServiceCollection Services { get; private set; }
-        protected IServiceProvider ServiceProvider { get; private set; }
+        var config = new ConfigurationBuilder();
+        config.AddEnvironmentVariables("FMP_TESTS_");
+        ConfigurationRoot = config.Build();
 
-        private static readonly IConfigurationRoot ConfigurationRoot;
+        testingOptions = CreateTestingOptions();
+        sharedRateLimiter = new RequestRateLimiter(testingOptions);
+    }
 
-        private static readonly FinancialModelingPrepOptions testingOptions;
-        private static readonly IRequestRateLimiter sharedRateLimiter;
+    public TestingBase(ITestOutputHelper testOutput)
+    {
+        Services = new ServiceCollection();
 
-        static TestingBase()
+        Services.AddSingleton(ConfigurationRoot);
+
+        Services.AddLogging(builder =>
         {
-            var config = new ConfigurationBuilder();
-            config.AddEnvironmentVariables("FMP_TESTS_");
-            ConfigurationRoot = config.Build();
+            builder.ClearProviders();
+            builder.AddXunit(testOutput, CreateLoggingConfig());
+            builder.SetMinimumLevel(LogLevel.Debug);
+        });
 
-            testingOptions = CreateTestingOptions();
-            sharedRateLimiter = new RequestRateLimiter(testingOptions);
-        }
+        Services.AddSingleton(sharedRateLimiter);
+        Services.AddFinancialModelingPrepApiClient(testingOptions);
 
-        public TestingBase(ITestOutputHelper testOutput)
-        {
-            Services = new ServiceCollection();
+        Build();
+    }
 
-            Services.AddSingleton(ConfigurationRoot);
-
-            Services.AddLogging(builder =>
-            {
-                builder.ClearProviders();
-                builder.AddXunit(testOutput, CreateLoggingConfig());
-                builder.SetMinimumLevel(LogLevel.Debug);
-            });
-
-            Services.AddSingleton(sharedRateLimiter);
-            Services.AddFinancialModelingPrepApiClient(testingOptions);
-
-            Build();
-        }
-
-        private static FinancialModelingPrepOptions CreateTestingOptions()
-        {
-            var apiKeySection = ConfigurationRoot.GetSection("API_KEY");
+    private static FinancialModelingPrepOptions CreateTestingOptions()
+    {
+        var apiKeySection = ConfigurationRoot.GetSection("API_KEY");
 
             var apiKey = apiKeySection?.Value ?? "demo";
 
-            return new FinancialModelingPrepOptions()
-            {
-                ApiKey = apiKey,
-                MaxAPICallsPerMinute = 150, // lower the amount to avoid hitting limits on subsequent commit pushes
-                MaxRequestPerSecond = 5, // lower the amount to avoid hitting limits on subsequent commit pushes
-            };
-        }
-
-        private static LoggingConfig CreateLoggingConfig()
+        return new FinancialModelingPrepOptions()
         {
-            var config = new LoggingConfig();
+            ApiKey = apiKey,
+            MaxAPICallsPerMinute = 150, // lower the amount to avoid hitting limits on subsequent commit pushes
+            MaxRequestPerSecond = 5, // lower the amount to avoid hitting limits on subsequent commit pushes
+        };
+    }
 
-            config.SensitiveValues.Add(testingOptions.ApiKey);
+    private static LoggingConfig CreateLoggingConfig()
+    {
+        var config = new LoggingConfig();
 
-            return config;
-        }
+        config.SensitiveValues.Add(testingOptions.ApiKey);
 
-        protected void Build()
-        {
-            ServiceProvider = Services.BuildServiceProvider();
-        }
+        return config;
+    }
+
+    protected void Build()
+    {
+        ServiceProvider = Services.BuildServiceProvider();
     }
 }

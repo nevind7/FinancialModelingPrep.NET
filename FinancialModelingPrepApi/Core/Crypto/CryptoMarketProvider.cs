@@ -7,54 +7,49 @@ using FinancialModelingPrep.Core.Http;
 using FinancialModelingPrep.Model;
 using FinancialModelingPrep.Model.Crypto;
 
-namespace FinancialModelingPrep.Core.Crypto
+namespace FinancialModelingPrep.Core.Crypto;
+
+public sealed class CryptoMarketProvider : ICryptoMarketProvider
 {
-    public sealed class CryptoMarketProvider : ICryptoMarketProvider
+    private readonly FinancialModelingPrepHttpClient client;
+
+    public CryptoMarketProvider(FinancialModelingPrepHttpClient client)
     {
-        private readonly FinancialModelingPrepHttpClient client;
+        this.client = client ?? throw new ArgumentNullException(nameof(client));
+    }
 
-        public CryptoMarketProvider(FinancialModelingPrepHttpClient client)
+    public Task<ApiResponse<List<CryptoItem>>> GetAvailableCryptocurrencies()
+    {
+        const string url = Endpoint.AvailableCryptocurrencies;
+
+        return client.GetJsonAsync<List<CryptoItem>>(url);
+    }
+
+    public Task<ApiResponse<List<CryptoHistoricalPriceDailyItem>>> GetDailyPrices(string symbol)
+    {
+        const string url = Endpoint.HistoricalPriceFull;
+
+        var queryString = new QueryStringBuilder();
+        queryString.Add("symbol", symbol);
+
+        return client.GetJsonAsync<List<CryptoHistoricalPriceDailyItem>>(url, queryString: queryString);
+    }
+
+    public Task<ApiResponse<List<CryptoHistoricalPricePeriodListing>>> GetHistoricalPrices(string symbol, HistoricalPricingPeriod period)
+    {
+        const string url = Endpoint.HistoricalChart;
+
+        string pricePeriod = EnumMappings.HistoricalPrices[period];
+
+        // TODO: Fix this... probably not correct
+        var pathParams = new NameValueCollection
         {
-            this.client = client ?? throw new ArgumentNullException(nameof(client));
-        }
+            { "pricePeriod", pricePeriod }
+        };
 
-        public Task<ApiResponse<List<CryptoItem>>> GetAvilableCryptocurrencies()
-        {
+        var queryString = new QueryStringBuilder();
+        queryString.Add("symbol", symbol);
 
-            const string url = "symbol/available-cryptocurrencies";
-
-            var pathParams = new NameValueCollection();
-           
-            return client.GetJsonAsync<List<CryptoItem>>(url, pathParams, null);
-        }
-
-        public Task<ApiResponse<CryptoHistoricalPriceDailyItem>> GetDailyPrices(string symbol)
-        {
-            const string url = "historical-price-full/[symbol]";
-
-            var pathParams = new NameValueCollection
-            {
-                { "symbol", symbol }
-            };
-
-            return client.GetJsonAsync<CryptoHistoricalPriceDailyItem>(url, pathParams, null);
-        }
-
-        public Task<ApiResponse<List<CryptoHistoricalPricePeriodListing>>> GetHistoricalPrices(string symbol, HistoricalPricingPeriod period)
-        {
-            const string url = "historical-chart/[pricePeriod]/[symbol]";
-
-            string pricePeriod = EnumMappings.HistoricalPrices[period];
-
-            var pathParams = new NameValueCollection
-            {
-                { "symbol", symbol },
-                { "pricePeriod", pricePeriod }
-            };
-
-            var queryString = new QueryStringBuilder();
-
-            return client.GetJsonAsync<List<CryptoHistoricalPricePeriodListing>>(url, pathParams, queryString);
-        }
+        return client.GetJsonAsync<List<CryptoHistoricalPricePeriodListing>>(url, pathParams, queryString);
     }
 }

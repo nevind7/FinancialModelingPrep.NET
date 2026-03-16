@@ -1,56 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.StockTimeSeries
+namespace FinancialModelingPrep.Model.StockTimeSeries;
+
+public sealed record HistoricalPriceResponse
 {
-    public class HistoricalPriceResponse
-    {
-        [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; init; } = string.Empty;
 
-        [JsonPropertyName("historical")]
-        public List<HistoricalPriceItem> Historical { get; set; }
-    }
+    [JsonPropertyName("date")]
+    public DateOnly Date { get; init; }
 
-    public class HistoricalPriceItem
-    {
-        [JsonPropertyName("date")]
-        public string Date { get; set; }
+    [JsonPropertyName("open")]
+    public decimal Open { get; init; }
 
-        [JsonPropertyName("open")]
-        public double Open { get; set; }
+    [JsonPropertyName("high")]
+    public decimal High { get; init; }
 
-        [JsonPropertyName("high")]
-        public double High { get; set; }
+    [JsonPropertyName("low")]
+    public decimal Low { get; init; }
 
-        [JsonPropertyName("low")]
-        public double Low { get; set; }
+    [JsonPropertyName("close")]
+    public decimal Close { get; init; }
 
-        [JsonPropertyName("close")]
-        public double Close { get; set; }
+    [JsonPropertyName("volume")]
+    public long Volume { get; init; }
 
-        [JsonPropertyName("adjClose")]
-        public double AdjClose { get; set; }
+    [JsonPropertyName("change")]
+    public decimal Change { get; init; }
 
-        [JsonPropertyName("volume")]
-        public double Volume { get; set; }
+    [JsonPropertyName("changePercent")]
+    public decimal ChangePercent { get; init; }
 
-        [JsonPropertyName("unadjustedVolume")]
-        public double? UnadjustedVolume { get; set; }
-
-        [JsonPropertyName("change")]
-        public double Change { get; set; }
-
-        [JsonPropertyName("changePercent")]
-        public double ChangePercent { get; set; }
-
-        [JsonPropertyName("vwap")]
-        public double Vwap { get; set; }
-
-        [JsonPropertyName("label")]
-        public string Label { get; set; }
-
-        [JsonPropertyName("changeOverTime")]
-        public double ChangeOverTime { get; set; }
-    }
+    [JsonPropertyName("vwap")]
+    public decimal Vwap { get; init; }
 }

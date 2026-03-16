@@ -1,19 +1,18 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.CompanyValuation
+namespace FinancialModelingPrep.Model.CompanyValuation;
+
+public class SymbolChangeResponse
 {
-    public class SymbolChangeResponse
-    {
-        [JsonPropertyName("date")]
-        public string Date { get; set; }
+    [JsonPropertyName("date")]
+    public string Date { get; set; }
 
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
+    [JsonPropertyName("name")]
+    public string Name { get; set; }
 
-        [JsonPropertyName("oldSymbol")]
-        public string OldSymbol { get; set; }
+    [JsonPropertyName("oldSymbol")]
+    public string OldSymbol { get; set; }
 
-        [JsonPropertyName("newSymbol")]
-        public string NewSymbol { get; set; }
-    }
+    [JsonPropertyName("newSymbol")]
+    public string NewSymbol { get; set; }
 }

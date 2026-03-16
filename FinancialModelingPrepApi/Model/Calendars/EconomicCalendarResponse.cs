@@ -1,34 +1,33 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.Calendars
+namespace FinancialModelingPrep.Model.Calendars;
+
+public class EconomicCalendarResponse
 {
-    public class EconomicCalendarResponse
-    {
-        [JsonPropertyName("event")]
-        public string Event { get; set; }
+    [JsonPropertyName("event")]
+    public string Event { get; set; }
 
-        [JsonPropertyName("date")]
-        public string Date { get; set; }
+    [JsonPropertyName("date")]
+    public string Date { get; set; }
 
-        [JsonPropertyName("country")]
-        public string Country { get; set; }
+    [JsonPropertyName("country")]
+    public string Country { get; set; }
 
-        [JsonPropertyName("actual")]
-        public double? Actual { get; set; }
+    [JsonPropertyName("actual")]
+    public double? Actual { get; set; }
 
-        [JsonPropertyName("previous")]
-        public double? Previous { get; set; }
+    [JsonPropertyName("previous")]
+    public double? Previous { get; set; }
 
-        [JsonPropertyName("change")]
-        public double? Change { get; set; }
+    [JsonPropertyName("change")]
+    public double? Change { get; set; }
 
-        [JsonPropertyName("changePercentage")]
-        public double? ChangePercentage { get; set; }
+    [JsonPropertyName("changePercentage")]
+    public double? ChangePercentage { get; set; }
 
-        [JsonPropertyName("estimate")]
-        public double? Estimate { get; set; }
+    [JsonPropertyName("estimate")]
+    public double? Estimate { get; set; }
 
-        [JsonPropertyName("impact")]
-        public string Impact { get; set; }
-    }
+    [JsonPropertyName("impact")]
+    public string Impact { get; set; }
 }

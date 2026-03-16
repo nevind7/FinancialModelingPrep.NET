@@ -1,14 +1,13 @@
-﻿namespace FinancialModelingPrep.Model
+﻿namespace FinancialModelingPrep.Model;
+
+public enum Industry
 {
-    public enum Industry
-    {
-        Autos,
-        Banks,
-        BanksDiversified,
-        Software,
-        BanksREgional,
-        BeveragesAlcoholic,
-        BeveragesBrewers,
-        BeveragesNonAlcoholic
-    }
+    Autos,
+    Banks,
+    BanksDiversified,
+    Software,
+    BanksREgional,
+    BeveragesAlcoholic,
+    BeveragesBrewers,
+    BeveragesNonAlcoholic
 }

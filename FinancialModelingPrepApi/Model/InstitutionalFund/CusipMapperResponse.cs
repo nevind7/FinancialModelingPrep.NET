@@ -1,16 +1,18 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.InstitutionalFund
+namespace FinancialModelingPrep.Model.InstitutionalFund;
+
+public class CusipMapperResponse
 {
-    public class CusipMapperResponse
-    {
-        [JsonPropertyName("ticker")]
-        public string Ticker { get; set; }
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; set; }
 
-        [JsonPropertyName("cusip")]
-        public string Cusip { get; set; }
+    [JsonPropertyName("cusip")]
+    public string Cusip { get; set; }
 
-        [JsonPropertyName("company")]
-        public string Company { get; set; }
-    }
+    [JsonPropertyName("companyName")]
+    public string Company { get; set; }
+    
+    [JsonPropertyName("marketCap")]
+    public decimal MarketCap { get; set; }
 }

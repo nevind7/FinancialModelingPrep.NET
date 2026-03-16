@@ -1,36 +1,35 @@
 ﻿using System.Collections.Specialized;
 using System.Web;
 
-namespace FinancialModelingPrep.Core.Http
+namespace FinancialModelingPrep.Core.Http;
+
+public class QueryStringBuilder
 {
-    public class QueryStringBuilder
+    private readonly NameValueCollection queryParams;
+
+    public QueryStringBuilder()
     {
-        private readonly NameValueCollection queryParams;
+        queryParams = HttpUtility.ParseQueryString(string.Empty);
+    }
 
-        public QueryStringBuilder()
+    public void Add(string key, object value)
+    {
+        if (string.IsNullOrEmpty(key))
         {
-            queryParams = HttpUtility.ParseQueryString(string.Empty);
+            return;
         }
 
-        public void Add(string key, object value)
-        {
-            if (string.IsNullOrEmpty(key))
-            {
-                return;
-            }
+        var valueToAdd = value?.ToString().Trim();
+        queryParams.Add(key, valueToAdd);
+    }
 
-            var valueToAdd = value?.ToString().Trim();
-            queryParams.Add(key, valueToAdd);
+    public override string ToString()
+    {
+        if (queryParams.Count == 0)
+        {
+            return string.Empty;
         }
 
-        public override string ToString()
-        {
-            if (queryParams.Count == 0)
-            {
-                return string.Empty;
-            }
-
-            return $"?{queryParams}";
-        }
+        return $"?{queryParams}";
     }
 }

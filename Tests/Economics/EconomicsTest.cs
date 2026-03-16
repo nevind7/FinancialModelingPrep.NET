@@ -7,37 +7,35 @@ using FinancialModelingPrep.Model.Economics;
 using Xunit.Abstractions;
 using Xunit;
 
-namespace Tests.Economics
+namespace Tests.Economics;
+
+public class EconomicsTest : TestingBase
 {
-    public class EconomicsTest : TestingBase
+    private readonly IEconomicsProvider api;
+
+    public EconomicsTest(ITestOutputHelper testOutput) : base(testOutput)
     {
-        private readonly IEconomicsProvider api;
+        api = ServiceProvider.GetRequiredService<IEconomicsProvider>();
+    }
 
-        public EconomicsTest(ITestOutputHelper testOutput) : base(testOutput)
+    [Theory]
+    [MemberData(nameof(AllEconomicIndicators))]
+    public async Task GetEconomicIndicatorAsync(EconomicIndicator indicator)
+    {
+        var result = await api.GetEconomicIndicatorAsync(indicator, "2020-01-01", "2022-01-01");
+
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
+    }
+
+    public static IEnumerable<object[]> AllEconomicIndicators
+    {
+        get
         {
-            api = ServiceProvider.GetRequiredService<IEconomicsProvider>();
-        }
-
-        [Theory]
-        [MemberData(nameof(AllEconomicIndicators))]
-        public async Task GetEconomicIndicatorAsync(EconomicIndicator indicator)
-        {
-            var result = await api.GetEconomicIndicatorAsync(indicator, "2020-01-01", "2022-01-01");
-
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
-
-        public static IEnumerable<object[]> AllEconomicIndicators
-        {
-            get
+            foreach (var enumValue in Enum.GetValues<EconomicIndicator>())
             {
-                foreach (var enumValue in Enum.GetValues<EconomicIndicator>())
-                {
-                    yield return new object[] { enumValue };
-                }
+                yield return new object[] { enumValue };
             }
         }
     }
 }
-

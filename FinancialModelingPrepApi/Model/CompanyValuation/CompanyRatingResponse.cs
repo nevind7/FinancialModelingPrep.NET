@@ -1,58 +1,34 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.CompanyValuation
+namespace FinancialModelingPrep.Model.CompanyValuation;
+
+public sealed record CompanyRatingResponse
 {
-    public class CompanyRatingResponse
-    {
-        [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; init; } = string.Empty;
 
-        [JsonPropertyName("date")]
-        public string Date { get; set; }
+    [JsonPropertyName("rating")]
+    public string Rating { get; init; } = string.Empty;
 
-        [JsonPropertyName("rating")]
-        public string Rating { get; set; }
+    [JsonPropertyName("overallScore")]
+    public int OverallScore { get; init; }
 
-        [JsonPropertyName("ratingScore")]
-        public int RatingScore { get; set; }
+    [JsonPropertyName("discountedCashFlowScore")]
+    public int DiscountedCashFlowScore { get; init; }
 
-        [JsonPropertyName("ratingRecommendation")]
-        public string RatingRecommendation { get; set; }
+    [JsonPropertyName("returnOnEquityScore")]
+    public int ReturnOnEquityScore { get; init; }
 
-        [JsonPropertyName("ratingDetailsDCFScore")]
-        public int RatingDetailsDCFScore { get; set; }
+    [JsonPropertyName("returnOnAssetsScore")]
+    public int ReturnOnAssetsScore { get; init; }
 
-        [JsonPropertyName("ratingDetailsDCFRecommendation")]
-        public string RatingDetailsDCFRecommendation { get; set; }
+    [JsonPropertyName("debtToEquityScore")]
+    public int DebtToEquityScore { get; init; }
 
-        [JsonPropertyName("ratingDetailsROEScore")]
-        public int RatingDetailsROEScore { get; set; }
+    [JsonPropertyName("priceToEarningsScore")]
+    public int PriceToEarningsScore { get; init; }
 
-        [JsonPropertyName("ratingDetailsROERecommendation")]
-        public string RatingDetailsROERecommendation { get; set; }
-
-        [JsonPropertyName("ratingDetailsROAScore")]
-        public int RatingDetailsROAScore { get; set; }
-
-        [JsonPropertyName("ratingDetailsROARecommendation")]
-        public string RatingDetailsROARecommendation { get; set; }
-
-        [JsonPropertyName("ratingDetailsDEScore")]
-        public int RatingDetailsDEScore { get; set; }
-
-        [JsonPropertyName("ratingDetailsDERecommendation")]
-        public string RatingDetailsDERecommendation { get; set; }
-
-        [JsonPropertyName("ratingDetailsPEScore")]
-        public int RatingDetailsPEScore { get; set; }
-
-        [JsonPropertyName("ratingDetailsPERecommendation")]
-        public string RatingDetailsPERecommendation { get; set; }
-
-        [JsonPropertyName("ratingDetailsPBScore")]
-        public int RatingDetailsPBScore { get; set; }
-
-        [JsonPropertyName("ratingDetailsPBRecommendation")]
-        public string RatingDetailsPBRecommendation { get; set; }
-    }
+    [JsonPropertyName("priceToBookScore")]
+    public int PriceToBookScore { get; init; }
 }

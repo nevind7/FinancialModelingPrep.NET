@@ -8,151 +8,151 @@ using FinancialModelingPrep.Model;
 using FinancialModelingPrep.Model.Error;
 using Microsoft.Extensions.Logging;
 
-namespace FinancialModelingPrep.Core.Http
+namespace FinancialModelingPrep.Core.Http;
+
+public class FinancialModelingPrepHttpClient
 {
-    public class FinancialModelingPrepHttpClient
+    private readonly HttpClient client;
+    private readonly FinancialModelingPrepOptions options;
+    private readonly IRequestRateLimiter rateLimiter;
+    private readonly ILogger<FinancialModelingPrepHttpClient> logger;
+    private readonly JsonSerializerOptions jsonSerializerOptions;
+    private const string EmptyArrayResponse = "[ ]";
+    private const string EmptyArrayResponse2 = "[]";
+    private const string ErrorMessageResponse = "Error Message";
+
+    public FinancialModelingPrepHttpClient(HttpClient client, FinancialModelingPrepOptions options,
+        IRequestRateLimiter rateLimiter,
+        ILogger<FinancialModelingPrepHttpClient> logger)
     {
-        private readonly HttpClient client;
-        private readonly FinancialModelingPrepOptions options;
-        private readonly IRequestRateLimiter rateLimiter;
-        private readonly ILogger<FinancialModelingPrepHttpClient> logger;
-        private readonly JsonSerializerOptions jsonSerializerOptions;
-        private const string EmptyArrayResponse = "[ ]";
-        private const string EmptyArrayResponse2 = "[]";
-        private const string ErrorMessageResponse = "Error Message";
-
-        public FinancialModelingPrepHttpClient(HttpClient client, FinancialModelingPrepOptions options,
-                                               IRequestRateLimiter rateLimiter,
-                                               ILogger<FinancialModelingPrepHttpClient> logger)
+        this.client = client ?? throw new ArgumentNullException(nameof(client));
+        this.options = options ?? throw new ArgumentNullException(nameof(options));
+        this.rateLimiter = rateLimiter ?? throw new ArgumentNullException(nameof(rateLimiter));
+        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        jsonSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
         {
-            this.client = client ?? throw new ArgumentNullException(nameof(client));
-            this.options = options ?? throw new ArgumentNullException(nameof(options));
-            this.rateLimiter = rateLimiter ?? throw new ArgumentNullException(nameof(rateLimiter));
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            jsonSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
-            {
-                PropertyNameCaseInsensitive = true,
-            };
+            PropertyNameCaseInsensitive = true,
+        };
 
-            if (string.IsNullOrWhiteSpace(this.options.ApiKey))
+        if (string.IsNullOrWhiteSpace(this.options.ApiKey))
+        {
+            throw new ArgumentException("'ApiKey' can not be null or empty");
+        }
+    }
+
+    public async Task<ApiResponse<string>> GetStringAsync(string urlPattern, NameValueCollection pathParams, QueryStringBuilder queryString)
+    {
+        try
+        {
+            var (wasThrottled, totalDelay) = await rateLimiter.ThrottleAsync();
+
+            var response = await CallApiAsync(urlPattern, pathParams, queryString);
+
+            if (wasThrottled)
             {
-                throw new ArgumentException("'ApiKey' can not be null or empty");
+                logger.LogDebug("FMP API Call was throttled by {throttle} ms", totalDelay.TotalMilliseconds);
             }
+
+            if (response.HasError)
+            {
+                return ApiResponse.FromError<string>(response.Error);
+            }
+
+            if (response.Data.Contains(ErrorMessageResponse))
+            {
+                var errorData = JsonSerializer.Deserialize<ErrorResponse>(response.Data);
+
+                return ApiResponse.FromError<string>(errorData.ErrorMessage);
+            }
+
+            if (response.Data.Equals(EmptyArrayResponse, StringComparison.OrdinalIgnoreCase) || 
+                response.Data.Equals(EmptyArrayResponse2, StringComparison.OrdinalIgnoreCase))
+            {
+                return ApiResponse.FromError<string>("Invalid parameters");
+            }
+
+            return ApiResponse.FromSucces(response.Data);
+        }
+        finally
+        {
+            rateLimiter.ReleaseThrottle();
+        }
+    }
+
+    public async Task<ApiResponse<T>> GetJsonAsync<T>(string urlPattern, NameValueCollection? pathParams = null, QueryStringBuilder? queryString = null)
+        where T : class
+    {
+        pathParams ??= new NameValueCollection();
+        try
+        {
+            var response = await GetStringAsync(urlPattern, pathParams, queryString);
+
+            if (response.HasError)
+            {
+                return ApiResponse.FromError<T>(response.Error);
+            }
+
+            var data = JsonSerializer.Deserialize<T>(response.Data, jsonSerializerOptions);
+
+            return ApiResponse.FromSucces(data);
+        }
+        catch (JsonException ex)
+        {
+            return ApiResponse.FromError<T>(ex.ToString());
+        }
+    }
+
+    private async Task<ApiResponse<string>> CallApiAsync(string urlPattern, NameValueCollection pathParams, QueryStringBuilder queryString)
+    {
+        PreProcessUrl(ref urlPattern, ref pathParams, ref queryString);
+
+        queryString.Add("apikey", options.ApiKey);
+
+        var requestUrl = $"{urlPattern}{queryString}";
+
+        using var response = await client.GetAsync(requestUrl);
+        var content = await response.Content.ReadAsStringAsync();
+
+        if (!response.IsSuccessStatusCode)
+        {
+            return ApiResponse.FromError<string>($"{response.StatusCode} - {content}");
         }
 
-        public async Task<ApiResponse<string>> GetStringAsync(string urlPattern, NameValueCollection pathParams, QueryStringBuilder queryString)
+        return ApiResponse.FromSucces(content);
+    }
+
+    private static void PreProcessUrl(ref string url, ref NameValueCollection pathParams, ref QueryStringBuilder qsb)
+    {
+        if (string.IsNullOrEmpty(url))
         {
-            try
-            {
-                var (wasThrottled, totalDelay) = await rateLimiter.ThrottleAsync();
-
-                var response = await CallApiAsync(urlPattern, pathParams, queryString);
-
-                if (wasThrottled)
-                {
-                    logger.LogDebug("FMP API Call was throttled by {throttle} ms", totalDelay.TotalMilliseconds);
-                }
-
-                if (response.HasError)
-                {
-                    return ApiResponse.FromError<string>(response.Error);
-                }
-
-                if (response.Data.Contains(ErrorMessageResponse))
-                {
-                    var errorData = JsonSerializer.Deserialize<ErrorResponse>(response.Data);
-
-                    return ApiResponse.FromError<string>(errorData.ErrorMessage);
-                }
-
-                if (response.Data.Equals(EmptyArrayResponse, StringComparison.OrdinalIgnoreCase) || 
-                    response.Data.Equals(EmptyArrayResponse2, StringComparison.OrdinalIgnoreCase))
-                {
-                    return ApiResponse.FromError<string>("Invalid parameters");
-                }
-
-                return ApiResponse.FromSucces(response.Data);
-            }
-            finally
-            {
-                rateLimiter.ReleaseThrottle();
-            }
+            throw new ArgumentNullException(nameof(url));
         }
 
-        public async Task<ApiResponse<T>> GetJsonAsync<T>(string urlPattern, NameValueCollection pathParams, QueryStringBuilder queryString)
-            where T : class
+        if (pathParams == null)
         {
-            try
-            {
-                var response = await GetStringAsync(urlPattern, pathParams, queryString);
-
-                if (response.HasError)
-                {
-                    return ApiResponse.FromError<T>(response.Error);
-                }
-
-                var data = JsonSerializer.Deserialize<T>(response.Data, jsonSerializerOptions);
-
-                return ApiResponse.FromSucces(data);
-            }
-            catch (JsonException ex)
-            {
-                return ApiResponse.FromError<T>(ex.ToString());
-            }
+            throw new ArgumentNullException(nameof(pathParams));
         }
 
-        private async Task<ApiResponse<string>> CallApiAsync(string urlPattern, NameValueCollection pathParams, QueryStringBuilder queryString)
+        qsb ??= new QueryStringBuilder();
+
+        if (pathParams.Count == 0)
         {
-            PreProcessUrl(ref urlPattern, ref pathParams, ref queryString);
-
-            queryString.Add("apikey", options.ApiKey);
-
-            var requestUrl = $"{urlPattern}{queryString}";
-
-            using var response = await client.GetAsync(requestUrl);
-            var content = await response.Content.ReadAsStringAsync();
-
-            if (!response.IsSuccessStatusCode)
-            {
-                return ApiResponse.FromError<string>($"{response.StatusCode} - {content}");
-            }
-
-            return ApiResponse.FromSucces(content);
+            return;
         }
 
-        private static void PreProcessUrl(ref string url, ref NameValueCollection pathParams, ref QueryStringBuilder qsb)
+        foreach (string key in pathParams.Keys)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(key))
             {
-                throw new ArgumentNullException(nameof(url));
+                throw new ArgumentException("Provided path parameter was null or empty");
             }
 
-            if (pathParams == null)
+            if (string.IsNullOrWhiteSpace(pathParams[key]))
             {
-                throw new ArgumentNullException(nameof(pathParams));
+                throw new ArgumentException($"Provided path parameter value for {key} was null or empty");
             }
 
-            qsb ??= new QueryStringBuilder();
-
-            if (pathParams.Count == 0)
-            {
-                return;
-            }
-
-            foreach (string key in pathParams.Keys)
-            {
-                if (string.IsNullOrWhiteSpace(key))
-                {
-                    throw new ArgumentException("Provided path parameter was null or empty");
-                }
-
-                if (string.IsNullOrWhiteSpace(pathParams[key]))
-                {
-                    throw new ArgumentException($"Provided path parameter value for {key} was null or empty");
-                }
-
-                url = url.Replace($"[{key}]", pathParams[key]);
-            }
+            url = url.Replace($"[{key}]", pathParams[key]);
         }
     }
 }

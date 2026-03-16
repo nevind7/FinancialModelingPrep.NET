@@ -4,42 +4,41 @@ using FinancialModelingPrep.Abstractions.MarketIndexes;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.MarketIndexes
+namespace Tests.MarketIndexes;
+
+public class MarketIndexesTests : TestingBase
 {
-    public class MarketIndexesTests : TestingBase
+    private readonly IMarketIndexesProvider api;
+
+    public MarketIndexesTests(ITestOutputHelper testOutput) : base(testOutput)
     {
-        private readonly IMarketIndexesProvider api;
+        api = ServiceProvider.GetRequiredService<IMarketIndexesProvider>();
+    }
 
-        public MarketIndexesTests(ITestOutputHelper testOutput) : base(testOutput)
-        {
-            api = ServiceProvider.GetRequiredService<IMarketIndexesProvider>();
-        }
+    [Fact]
+    public async Task GetDowJonesCompaniesTests()
+    {
+        var result = await api.GetDowJonesCompaniesAsync();
 
-        [Fact]
-        public async Task GetDowJonesCompaniesTests()
-        {
-            var result = await api.GetDowJonesCompaniesAsync();
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
+    }
 
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
+    [Fact]
+    public async Task GetNasdaqCompaniesTests()
+    {
+        var result = await api.GetNasdaqCompaniesAsync();
 
-        [Fact]
-        public async Task GetNasdaqCompaniesTests()
-        {
-            var result = await api.GetNasdaqCompaniesAsync();
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
+    }
 
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
+    [Fact]
+    public async Task GetSP500CompaniesTests()
+    {
+        var result = await api.GetSP500CompaniesAsync();
 
-        [Fact]
-        public async Task GetSP500CompaniesTests()
-        {
-            var result = await api.GetSP500CompaniesAsync();
-
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
     }
 }

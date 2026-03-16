@@ -1,10 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.Error
+namespace FinancialModelingPrep.Model.Error;
+
+public class ErrorResponse
 {
-    public class ErrorResponse
-    {
-        [JsonPropertyName("Error Message")]
-        public string ErrorMessage { get; set; }
-    }
+    [JsonPropertyName("Error Message")]
+    public string ErrorMessage { get; set; }
 }

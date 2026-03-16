@@ -1,19 +1,18 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.AdvancedData
+namespace FinancialModelingPrep.Model.AdvancedData;
+
+public class SectorPEResponse
 {
-    public class SectorPEResponse
-    {
-        [JsonPropertyName("date")]
-        public string Date { get; set; }
+    [JsonPropertyName("date")]
+    public string Date { get; set; }
 
-        [JsonPropertyName("sector")]
-        public string Sector { get; set; }
+    [JsonPropertyName("sector")]
+    public string Sector { get; set; }
 
-        [JsonPropertyName("exchange")]
-        public string Exchange { get; set; }
+    [JsonPropertyName("exchange")]
+    public string Exchange { get; set; }
 
-        [JsonPropertyName("pe")]
-        public string Pe { get; set; }
-    }
+    [JsonPropertyName("pe")]
+    public string Pe { get; set; }
 }

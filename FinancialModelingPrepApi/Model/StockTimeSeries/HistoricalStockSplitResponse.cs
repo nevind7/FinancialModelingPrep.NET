@@ -1,19 +1,18 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.StockTimeSeries
+namespace FinancialModelingPrep.Model.StockTimeSeries;
+
+public class HistoricalStockSplitResponse
 {
-    public class HistoricalStockSplitResponse
-    {
-        [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; set; }
 
-        [JsonPropertyName("date")]
-        public string Date { get; set; }
+    [JsonPropertyName("date")]
+    public string Date { get; set; }
 
-        [JsonPropertyName("numerator")]
-        public double Numerator { get; set; }
+    [JsonPropertyName("numerator")]
+    public double Numerator { get; set; }
 
-        [JsonPropertyName("denominator")]
-        public double Denominator { get; set; }
-    }
+    [JsonPropertyName("denominator")]
+    public double Denominator { get; set; }
 }

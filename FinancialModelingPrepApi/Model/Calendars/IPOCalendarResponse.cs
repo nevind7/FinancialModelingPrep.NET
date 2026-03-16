@@ -1,31 +1,30 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.Calendars
+namespace FinancialModelingPrep.Model.Calendars;
+
+public class IPOCalendarResponse
 {
-    public class IPOCalendarResponse
-    {
-        [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; set; }
         
-        [JsonPropertyName("date")]
-        public string Date { get; set; }
+    [JsonPropertyName("date")]
+    public string Date { get; set; }
 
-        [JsonPropertyName("company")]
-        public string Company { get; set; }
+    [JsonPropertyName("company")]
+    public string Company { get; set; }
         
-        [JsonPropertyName("exchange")]
-        public string Exchange { get; set; }
+    [JsonPropertyName("exchange")]
+    public string Exchange { get; set; }
 
-        [JsonPropertyName("actions")]
-        public string Actions { get; set; }
+    [JsonPropertyName("actions")]
+    public string Actions { get; set; }
 
-        [JsonPropertyName("shares")]
-        public long? Shares { get; set; }
+    [JsonPropertyName("shares")]
+    public long? Shares { get; set; }
 
-        [JsonPropertyName("priceRange")]
-        public string PriceRange { get; set; }
+    [JsonPropertyName("priceRange")]
+    public string PriceRange { get; set; }
 
-        [JsonPropertyName("marketCap")]
-        public double? MarketCap { get; set; }
-    }
+    [JsonPropertyName("marketCap")]
+    public double? MarketCap { get; set; }
 }

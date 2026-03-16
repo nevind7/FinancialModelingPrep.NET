@@ -1,28 +1,30 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.CompanyValuation
+namespace FinancialModelingPrep.Model.CompanyValuation;
+
+public class StockNewsResponse
 {
-    public class StockNewsResponse
-    {
-        [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; set; }
 
-        [JsonPropertyName("publishedDate")]
-        public string PublishedDate { get; set; }
+    [JsonPropertyName("publishedDate")]
+    public string PublishedDate { get; set; }
 
-        [JsonPropertyName("title")]
-        public string Title { get; set; }
+    [JsonPropertyName("publisher")]
+    public string Publisher { get; set; }
+    
+    [JsonPropertyName("title")]
+    public string Title { get; set; }
 
-        [JsonPropertyName("image")]
-        public string Image { get; set; }
+    [JsonPropertyName("image")]
+    public string Image { get; set; }
 
-        [JsonPropertyName("site")]
-        public string Site { get; set; }
+    [JsonPropertyName("site")]
+    public string Site { get; set; }
 
-        [JsonPropertyName("text")]
-        public string Text { get; set; }
+    [JsonPropertyName("text")]
+    public string Text { get; set; }
 
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
-    }
+    [JsonPropertyName("url")]
+    public string Url { get; set; }
 }

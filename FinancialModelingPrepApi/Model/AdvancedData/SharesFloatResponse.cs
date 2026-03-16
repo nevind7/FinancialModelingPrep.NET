@@ -1,25 +1,24 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.AdvancedData
+namespace FinancialModelingPrep.Model.AdvancedData;
+
+public class SharesFloatResponse
 {
-    public class SharesFloatResponse
-    {
-        [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; set; }
 
-        [JsonPropertyName("date")]
-        public string Date { get; set; }
+    [JsonPropertyName("date")]
+    public string Date { get; set; }
 
-        [JsonPropertyName("freeFloat")]
-        public double FreeFloat { get; set; }
+    [JsonPropertyName("freeFloat")]
+    public double FreeFloat { get; set; }
 
-        [JsonPropertyName("floatShares")]
-        public double FloatShares { get; set; }
+    [JsonPropertyName("floatShares")]
+    public double FloatShares { get; set; }
 
-        [JsonPropertyName("outstandingShares")]
-        public double OutstandingShares { get; set; }
+    [JsonPropertyName("outstandingShares")]
+    public double OutstandingShares { get; set; }
 
-        [JsonPropertyName("source")]
-        public string Source { get; set; }
-    }
+    [JsonPropertyName("source")]
+    public string Source { get; set; }
 }

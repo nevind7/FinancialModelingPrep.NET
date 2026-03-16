@@ -1,8 +1,7 @@
-﻿namespace FinancialModelingPrep.Model
+﻿namespace FinancialModelingPrep.Model;
+
+public enum ApiVersion
 {
-    public enum ApiVersion
-    {
-        v3,
-        v4,
-    }
+    v3,
+    v4,
 }

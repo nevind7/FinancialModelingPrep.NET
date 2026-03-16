@@ -1,10 +1,9 @@
-﻿namespace FinancialModelingPrep.Model
+﻿namespace FinancialModelingPrep.Model;
+
+public enum Quarter
 {
-    public enum Quarter
-    {
-        Q1,
-        Q2,
-        Q3,
-        Q4,
-    }
+    Q1,
+    Q2,
+    Q3,
+    Q4,
 }

@@ -6,123 +6,122 @@ using FinancialModelingPrep.Abstractions.Calendars;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.Calendars
+namespace Tests.Calendars;
+
+public class CalendarsTests : TestingBase
 {
-    public class CalendarsTests : TestingBase
+    private readonly ICalendarsProvider api;
+
+    public CalendarsTests(ITestOutputHelper testOutput) : base(testOutput)
     {
-        private readonly ICalendarsProvider api;
+        api = ServiceProvider.GetRequiredService<ICalendarsProvider>();
+    }
 
-        public CalendarsTests(ITestOutputHelper testOutput) : base(testOutput)
-        {
-            api = ServiceProvider.GetRequiredService<ICalendarsProvider>();
-        }
+    [Theory]
+    [InlineData("2021-04-14", null)]
+    [InlineData(null, "2021-04-14")]
+    [InlineData(null, null)]
+    public async Task GetEarningsCalendarFromToAsync_With_Null_Args_Throws(string from, string to)
+    {
+        await Assert.ThrowsAsync<ArgumentException>(() => api.GetEarningsCalendarAsync(from, to));
+    }
 
-        [Theory]
-        [InlineData("2021-04-14", null)]
-        [InlineData(null, "2021-04-14")]
-        [InlineData(null, null)]
-        public async Task GetEarningsCalendarFromToAsync_With_Null_Args_Throws(string from, string to)
-        {
-            await Assert.ThrowsAsync<ArgumentException>(() => api.GetEarningsCalendarAsync(from, to));
-        }
+    [Fact]
+    public async Task GetEarningsCalendarAsync()
+    {
+        var result = await api.GetEarningsCalendarAsync();
 
-        [Fact]
-        public async Task GetEarningsCalendarAsync()
-        {
-            var result = await api.GetEarningsCalendarAsync();
+        result.AssertNoErrors();
+    }
 
-            result.AssertNoErrors();
-        }
+    [Fact]
+    public async Task GetEarningsCalendarFromToAsync()
+    {
+        var result = await api.GetEarningsCalendarAsync("2021-04-14", "2021-04-14");
 
-        [Fact]
-        public async Task GetEarningsCalendarFromToAsync()
-        {
-            var result = await api.GetEarningsCalendarAsync("2021-04-14", "2021-04-14");
+        result.AssertNoErrors();
+        Assert.All(result.Data, _ => Assert.Equal("2021-04-14", _.Date));
+    }
 
-            result.AssertNoErrors();
-            Assert.All(result.Data, _ => Assert.Equal("2021-04-14", _.Date));
-        }
+    [Fact]
+    public async Task GetHistoricalEarningsCalendarAsync()
+    {
+        var result = await api.GetHistoricalEarningsCalendarAsync("AAPL", 5);
 
-        [Fact]
-        public async Task GetHistoricalEarningsCalendarAsync()
-        {
-            var result = await api.GetHistoricalEarningsCalendarAsync("AAPL", 5);
+        result.AssertNoErrors();
+        Assert.Equal(5, result.Data.Count);
+        Assert.All(result.Data, _ => Assert.Equal("AAPL", _.Symbol));
+    }
 
-            result.AssertNoErrors();
-            Assert.Equal(5, result.Data.Count);
-            Assert.All(result.Data, _ => Assert.Equal("AAPL", _.Symbol));
-        }
+    [Theory]
+    [InlineData("2021-04-14", null)]
+    [InlineData(null, "2021-04-14")]
+    public async Task GetIPOCalendarAsync_With_Null_Args_Throws(string from, string to)
+    {
+        await Assert.ThrowsAsync<ArgumentException>(() => api.GetIPOCalendarAsync(from, to));
+    }
 
-        [Theory]
-        [InlineData("2021-04-14", null)]
-        [InlineData(null, "2021-04-14")]
-        public async Task GetIPOCalendarAsync_With_Null_Args_Throws(string from, string to)
-        {
-            await Assert.ThrowsAsync<ArgumentException>(() => api.GetIPOCalendarAsync(from, to));
-        }
+    [Fact]
+    public async Task GetIPOCalendarAsync()
+    {
+        var result = await api.GetIPOCalendarAsync("2020-04-01", "2020-04-01");
 
-        [Fact]
-        public async Task GetIPOCalendarAsync()
-        {
-            var result = await api.GetIPOCalendarAsync("2020-04-01", "2020-04-01");
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
+    }
 
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
+    [Theory]
+    [InlineData("2021-04-14", null)]
+    [InlineData(null, "2021-04-14")]
+    public async Task GetDividendCalendarAsync_With_Null_Args_Throws(string from, string to)
+    {
+        await Assert.ThrowsAsync<ArgumentException>(() => api.GetDividendCalendarAsync(from, to));
+    }
 
-        [Theory]
-        [InlineData("2021-04-14", null)]
-        [InlineData(null, "2021-04-14")]
-        public async Task GetDividendCalendarAsync_With_Null_Args_Throws(string from, string to)
-        {
-            await Assert.ThrowsAsync<ArgumentException>(() => api.GetDividendCalendarAsync(from, to));
-        }
+    [Fact]
+    public async Task GetDividendCalendarAsync()
+    {
+        var result = await api.GetDividendCalendarAsync("2020-11-03", "2020-11-03");
 
-        [Fact]
-        public async Task GetDividendCalendarAsync()
-        {
-            var result = await api.GetDividendCalendarAsync("2020-11-03", "2020-11-03");
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
+    }
 
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
+    [Theory]
+    [InlineData("2021-04-14", null)]
+    [InlineData(null, "2021-04-14")]
+    public async Task GetEconomicCalendarAsync_With_Null_Args_Throws(string from, string to)
+    {
+        await Assert.ThrowsAsync<ArgumentException>(() => api.GetEconomicCalendarAsync(from, to));
+    }
 
-        [Theory]
-        [InlineData("2021-04-14", null)]
-        [InlineData(null, "2021-04-14")]
-        public async Task GetEconomicCalendarAsync_With_Null_Args_Throws(string from, string to)
-        {
-            await Assert.ThrowsAsync<ArgumentException>(() => api.GetEconomicCalendarAsync(from, to));
-        }
+    [Fact]
+    public async Task GetEconomicCalendarAsync()
+    {
+        var result = await api.GetEconomicCalendarAsync("2020-10-19", "2020-10-20");
 
-        [Fact]
-        public async Task GetEconomicCalendarAsync()
-        {
-            var result = await api.GetEconomicCalendarAsync("2020-10-19", "2020-10-20");
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
+    }
 
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
+    [Theory]
+    [InlineData("2021-04-14", null)]
+    [InlineData(null, "2021-04-14")]
+    public async Task GetStockSplitCalendarAsync_With_Null_Args_Throws(string from, string to)
+    {
+        await Assert.ThrowsAsync<ArgumentException>(() => api.GetStockSplitCalendarAsync(from, to));
+    }
 
-        [Theory]
-        [InlineData("2021-04-14", null)]
-        [InlineData(null, "2021-04-14")]
-        public async Task GetStockSplitCalendarAsync_With_Null_Args_Throws(string from, string to)
-        {
-            await Assert.ThrowsAsync<ArgumentException>(() => api.GetStockSplitCalendarAsync(from, to));
-        }
+    [Fact]
+    public async Task GetStockSplitCalendarAsync()
+    {
+        var result = await api.GetStockSplitCalendarAsync("2020-08-31", "2020-08-31");
 
-        [Fact]
-        public async Task GetStockSplitCalendarAsync()
-        {
-            var result = await api.GetStockSplitCalendarAsync("2020-08-31", "2020-08-31");
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
+        var firstResult = result.Data.First(_ => _.Symbol == "AAPL");
 
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-            var firstResult = result.Data.First(_ => _.Symbol == "AAPL");
-
-            Assert.Equal(4, firstResult.Numerator);
-            Assert.Equal(1, firstResult.Denominator);
-        }
+        Assert.Equal(4, firstResult.Numerator);
+        Assert.Equal(1, firstResult.Denominator);
     }
 }

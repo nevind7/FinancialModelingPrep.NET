@@ -1,115 +1,115 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.CompanyValuation
+namespace FinancialModelingPrep.Model.CompanyValuation;
+
+public sealed record CompanyProfileResponse
 {
-    public class CompanyProfileResponse
-    {
-        [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; init; } = string.Empty;
 
-        [JsonPropertyName("price")]
-        public double? Price { get; set; }
+    [JsonPropertyName("price")]
+    public decimal Price { get; init; }
 
-        [JsonPropertyName("beta")]
-        public double Beta { get; set; }
+    [JsonPropertyName("marketCap")]
+    public long MarketCap { get; init; }
 
-        [JsonPropertyName("volAvg")]
-        public double VolAvg { get; set; }
+    [JsonPropertyName("beta")]
+    public decimal Beta { get; init; }
 
-        [JsonPropertyName("mktCap")]
-        public long MktCap { get; set; }
+    [JsonPropertyName("lastDividend")]
+    public decimal LastDividend { get; init; }
 
-        [JsonPropertyName("lastDiv")]
-        public double LastDiv { get; set; }
+    [JsonPropertyName("range")]
+    public string Range { get; init; } = string.Empty;
 
-        [JsonPropertyName("range")]
-        public string Range { get; set; }
+    [JsonPropertyName("change")]
+    public decimal Change { get; init; }
 
-        [JsonPropertyName("changes")]
-        public double? Changes { get; set; }
+    [JsonPropertyName("changePercentage")]
+    public decimal ChangePercentage { get; init; }
 
-        [JsonPropertyName("companyName")]
-        public string CompanyName { get; set; }
+    [JsonPropertyName("volume")]
+    public long Volume { get; init; }
 
-        [JsonPropertyName("currency")]
-        public string Currency { get; set; }
+    [JsonPropertyName("averageVolume")]
+    public long AverageVolume { get; init; }
 
-        [JsonPropertyName("cik")]
-        public string Cik { get; set; }
+    [JsonPropertyName("companyName")]
+    public string CompanyName { get; init; } = string.Empty;
 
-        [JsonPropertyName("isin")]
-        public string Isin { get; set; }
+    [JsonPropertyName("currency")]
+    public string Currency { get; init; } = string.Empty;
 
-        [JsonPropertyName("cusip")]
-        public string Cusip { get; set; }
+    [JsonPropertyName("cik")]
+    public string Cik { get; init; } = string.Empty;
 
-        [JsonPropertyName("exchange")]
-        public string Exchange { get; set; }
+    [JsonPropertyName("isin")]
+    public string Isin { get; init; } = string.Empty;
 
-        [JsonPropertyName("exchangeShortName")]
-        public string ExchangeShortName { get; set; }
+    [JsonPropertyName("cusip")]
+    public string Cusip { get; init; } = string.Empty;
 
-        [JsonPropertyName("industry")]
-        public string Industry { get; set; }
+    [JsonPropertyName("exchangeFullName")]
+    public string ExchangeFullName { get; init; } = string.Empty;
 
-        [JsonPropertyName("website")]
-        public string Website { get; set; }
+    [JsonPropertyName("exchange")]
+    public string Exchange { get; init; } = string.Empty;
 
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
+    [JsonPropertyName("industry")]
+    public string Industry { get; init; } = string.Empty;
 
-        [JsonPropertyName("ceo")]
-        public string Ceo { get; set; }
+    [JsonPropertyName("website")]
+    public string Website { get; init; } = string.Empty;
 
-        [JsonPropertyName("sector")]
-        public string Sector { get; set; }
+    [JsonPropertyName("description")]
+    public string Description { get; init; } = string.Empty;
 
-        [JsonPropertyName("country")]
-        public string Country { get; set; }
+    [JsonPropertyName("ceo")]
+    public string Ceo { get; init; } = string.Empty;
 
-        [JsonPropertyName("fullTimeEmployees")]
-        public string FullTimeEmployees { get; set; }
+    [JsonPropertyName("sector")]
+    public string Sector { get; init; } = string.Empty;
 
-        [JsonPropertyName("phone")]
-        public string Phone { get; set; }
+    [JsonPropertyName("country")]
+    public string Country { get; init; } = string.Empty;
 
-        [JsonPropertyName("address")]
-        public string Address { get; set; }
+    [JsonPropertyName("fullTimeEmployees")]
+    public string FullTimeEmployees { get; init; } = string.Empty;
 
-        [JsonPropertyName("city")]
-        public string City { get; set; }
+    [JsonPropertyName("phone")]
+    public string Phone { get; init; } = string.Empty;
 
-        [JsonPropertyName("state")]
-        public string State { get; set; }
+    [JsonPropertyName("address")]
+    public string Address { get; init; } = string.Empty;
 
-        [JsonPropertyName("zip")]
-        public string Zip { get; set; }
+    [JsonPropertyName("city")]
+    public string City { get; init; } = string.Empty;
 
-        [JsonPropertyName("dcfDiff")]
-        public double? DcfDiff { get; set; }
+    [JsonPropertyName("state")]
+    public string State { get; init; } = string.Empty;
 
-        [JsonPropertyName("dcf")]
-        public double? Dcf { get; set; }
+    [JsonPropertyName("zip")]
+    public string Zip { get; init; } = string.Empty;
 
-        [JsonPropertyName("image")]
-        public string Image { get; set; }
+    [JsonPropertyName("image")]
+    public string Image { get; init; } = string.Empty;
 
-        [JsonPropertyName("ipoDate")]
-        public string IpoDate { get; set; }
+    [JsonPropertyName("ipoDate")]
+    public DateOnly IpoDate { get; init; }
 
-        [JsonPropertyName("defaultImage")]
-        public bool DefaultImage { get; set; }
+    [JsonPropertyName("defaultImage")]
+    public bool DefaultImage { get; init; }
 
-        [JsonPropertyName("isEtf")]
-        public bool IsEtf { get; set; }
+    [JsonPropertyName("isEtf")]
+    public bool IsEtf { get; init; }
 
-        [JsonPropertyName("isActivelyTrading")]
-        public bool IsActivelyTrading { get; set; }
+    [JsonPropertyName("isActivelyTrading")]
+    public bool IsActivelyTrading { get; init; }
 
-        [JsonPropertyName("isAdr")]
-        public bool IsAdr { get; set; }
+    [JsonPropertyName("isAdr")]
+    public bool IsAdr { get; init; }
 
-        [JsonPropertyName("isFund")]
-        public bool IsFund { get; set; }
-    }
+    [JsonPropertyName("isFund")]
+    public bool IsFund { get; init; }
 }

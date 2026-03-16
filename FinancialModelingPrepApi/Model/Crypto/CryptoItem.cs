@@ -1,23 +1,25 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.Crypto
+namespace FinancialModelingPrep.Model.Crypto;
+
+public sealed record CryptoItem
 {
-    public class CryptoItem
-    {
-        [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; init; } = string.Empty;
 
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
+    [JsonPropertyName("name")]
+    public string Name { get; init; } = string.Empty;
 
-        [JsonPropertyName("currency")]
-        public string Currency { get; set; }
+    [JsonPropertyName("exchange")]
+    public string Exchange { get; init; } = string.Empty;
 
-        [JsonPropertyName("stockExchange")]
-        public string StockExchange { get; set; }
+    [JsonPropertyName("icoDate")]
+    public DateOnly? IcoDate { get; init; }
 
-        [JsonPropertyName("exchangeShortName")]
-        public string ExchangeShortName { get; set; }
+    [JsonPropertyName("circulatingSupply")]
+    public decimal? CirculatingSupply { get; init; }
 
-    }
+    [JsonPropertyName("totalSupply")]
+    public decimal? TotalSupply { get; init; }
 }

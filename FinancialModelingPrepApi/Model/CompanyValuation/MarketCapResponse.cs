@@ -1,16 +1,15 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.CompanyValuation
+namespace FinancialModelingPrep.Model.CompanyValuation;
+
+public class MarketCapResponse
 {
-    public class MarketCapResponse
-    {
-        [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; set; }
 
-        [JsonPropertyName("date")]
-        public string Date { get; set; }
+    [JsonPropertyName("date")]
+    public string Date { get; set; }
 
-        [JsonPropertyName("marketCap")]
-        public double MarketCap { get; set; }
-    }
+    [JsonPropertyName("marketCap")]
+    public double MarketCap { get; set; }
 }

@@ -4,28 +4,27 @@ using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.Fund
+namespace Tests.Fund;
+
+public class FundTests : TestingBase
 {
-    public class FundTests : TestingBase
+    private readonly IFundProvider api;
+
+    public FundTests(ITestOutputHelper testOutput) : base(testOutput)
     {
-        private readonly IFundProvider api;
+        api = ServiceProvider.GetRequiredService<IFundProvider>();
+    }
 
-        public FundTests(ITestOutputHelper testOutput) : base(testOutput)
-        {
-            api = ServiceProvider.GetRequiredService<IFundProvider>();
-        }
+    [Theory]
+    [InlineData("AAPL")]
+    [InlineData("AGS.BR")]
+    [InlineData("O")]
+    [InlineData("LGEN.L")]
+    public async Task GetETFStockExposureAsyncTest(string symbol)
+    {
+        var result = await api.GetETFStockExposureAsync(symbol);
 
-        [Theory]
-        [InlineData("AAPL")]
-        [InlineData("AGS.BR")]
-        [InlineData("O")]
-        [InlineData("LGEN.L")]
-        public async Task GetETFStockExposureAsyncTest(string symbol)
-        {
-            var result = await api.GetETFStockExposureAsync(symbol);
-
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
     }
 }

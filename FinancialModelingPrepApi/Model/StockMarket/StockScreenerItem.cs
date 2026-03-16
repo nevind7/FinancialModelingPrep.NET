@@ -1,37 +1,51 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.StockMarket
-{ 
-    public class StockScreenerItem
-    {
-        [JsonPropertyName("symbol")]
-        public string Ticker { get; set; }
+namespace FinancialModelingPrep.Model.StockMarket;
 
-        [JsonPropertyName("companyName")]
-        public string CompanyName { get; set; }
+public sealed record StockScreenerItem
+{
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; init; } = string.Empty;
 
-        [JsonPropertyName("marketCap")]
-        public decimal MarketCap { get; set; }
+    [JsonPropertyName("companyName")]
+    public string CompanyName { get; init; } = string.Empty;
 
-        [JsonPropertyName("sector")]
-        public string Sector { get; set; }
+    [JsonPropertyName("marketCap")]
+    public long MarketCap { get; init; }
 
-        [JsonPropertyName("beta")]
-        public decimal Beta { get; set; }
+    [JsonPropertyName("sector")]
+    public string Sector { get; init; } = string.Empty;
 
-        [JsonPropertyName("price")]
-        public decimal Price { get; set; }
+    [JsonPropertyName("industry")]
+    public string Industry { get; init; } = string.Empty;
 
-        [JsonPropertyName("lastAnnualDividend")]
-        public decimal LastAnnualDividend { get; set; }
+    [JsonPropertyName("beta")]
+    public decimal Beta { get; init; }
 
-        [JsonPropertyName("volume")]
-        public int Volume { get; set; }
+    [JsonPropertyName("price")]
+    public decimal Price { get; init; }
 
-        [JsonPropertyName("exchange")]
-        public string Exchange { get; set; }
+    [JsonPropertyName("lastAnnualDividend")]
+    public decimal LastAnnualDividend { get; init; }
 
-        [JsonPropertyName("exchangeShortName")]
-        public string ExchangeShortName { get; set; }
-    }
+    [JsonPropertyName("volume")]
+    public long Volume { get; init; }
+
+    [JsonPropertyName("exchange")]
+    public string Exchange { get; init; } = string.Empty;
+
+    [JsonPropertyName("exchangeShortName")]
+    public string ExchangeShortName { get; init; } = string.Empty;
+
+    [JsonPropertyName("country")]
+    public string Country { get; init; } = string.Empty;
+
+    [JsonPropertyName("isEtf")]
+    public bool IsEtf { get; init; }
+
+    [JsonPropertyName("isFund")]
+    public bool IsFund { get; init; }
+
+    [JsonPropertyName("isActivelyTrading")]
+    public bool IsActivelyTrading { get; init; }
 }

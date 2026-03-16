@@ -5,42 +5,41 @@ using FinancialModelingPrep.Model;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.Crypto
+namespace Tests.Crypto;
+
+public class CryptoMarketTests : TestingBase
 {
-    public class CryptoMarketTests : TestingBase
+    private readonly ICryptoMarketProvider api;
+
+    public CryptoMarketTests(ITestOutputHelper testOutput) : base(testOutput)
     {
-        private readonly ICryptoMarketProvider api;
+        api = ServiceProvider.GetRequiredService<ICryptoMarketProvider>();
+    }
 
-        public CryptoMarketTests(ITestOutputHelper testOutput) : base(testOutput)
-        {
-            api = ServiceProvider.GetRequiredService<ICryptoMarketProvider>();
-        }
+    [Fact]
+    public async Task GetAvailableCryptocurrencies()
+    {
+        var result = await api.GetAvailableCryptocurrencies();
 
-        [Fact]
-        public async Task GetAvailableCryptocurrencies()
-        {
-            var result = await api.GetAvilableCryptocurrencies();
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
+    }
 
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
+    [Fact]
+    public async Task GetDailyPrice()
+    {
+        var result = await api.GetDailyPrices("BTCUSD");
 
-        [Fact]
-        public async Task GetDailyPrice()
-        {
-            var result = await api.GetDailyPrices("BTCUSD");
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
+    }
 
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data.HistoricalPrices);
-        }
+    [Fact]
+    public async Task GetPeriodPriceData()
+    {
+        var result = await api.GetHistoricalPrices("BTCUSD", HistoricalPricingPeriod.OneHour);
 
-        [Fact]
-        public async Task GetPeriodPriceData()
-        {
-            var result = await api.GetHistoricalPrices("BTCUSD", HistoricalPricingPeriod.OneHour);
-
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
     }
 }

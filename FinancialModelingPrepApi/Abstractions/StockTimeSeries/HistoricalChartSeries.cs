@@ -1,12 +1,11 @@
-﻿namespace FinancialModelingPrep.Abstractions.StockTimeSeries
+﻿namespace FinancialModelingPrep.Abstractions.StockTimeSeries;
+
+public enum HistoricalChartSeries
 {
-    public enum HistoricalChartSeries
-    {
-        OneMinute,
-        FiveMinutes,
-        FifteenMinutes,
-        ThirtyMinutes,
-        Hourly,
-        FourHours
-    }
+    OneMinute,
+    FiveMinutes,
+    FifteenMinutes,
+    ThirtyMinutes,
+    Hourly,
+    FourHours
 }

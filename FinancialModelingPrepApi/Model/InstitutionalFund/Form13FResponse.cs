@@ -1,43 +1,49 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.InstitutionalFund
+namespace FinancialModelingPrep.Model.InstitutionalFund;
+
+public sealed record Form13FResponse
 {
-    public class Form13FResponse
-    {
-        [JsonPropertyName("date")]
-        public string Date { get; set; }
+    [JsonPropertyName("date")]
+    public DateOnly Date { get; init; }
 
-        [JsonPropertyName("fillingDate")]
-        public string FillingDate { get; set; }
+    [JsonPropertyName("filingDate")]
+    public DateOnly FilingDate { get; init; }
 
-        [JsonPropertyName("acceptedDate")]
-        public string AcceptedDate { get; set; }
+    [JsonPropertyName("acceptedDate")]
+    public DateOnly AcceptedDate { get; init; }
 
-        [JsonPropertyName("cik")]
-        public string Cik { get; set; }
+    [JsonPropertyName("cik")]
+    public string Cik { get; init; } = string.Empty;
 
-        [JsonPropertyName("cusip")]
-        public string Cusip { get; set; }
+    [JsonPropertyName("securityCusip")]
+    public string SecurityCusip { get; init; } = string.Empty;
 
-        [JsonPropertyName("tickercusip")]
-        public string Tickercusip { get; set; }
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; init; } = string.Empty;
 
-        [JsonPropertyName("nameOfIssuer")]
-        public string NameOfIssuer { get; set; }
+    [JsonPropertyName("nameOfIssuer")]
+    public string NameOfIssuer { get; init; } = string.Empty;
 
-        [JsonPropertyName("shares")]
-        public int Shares { get; set; }
+    [JsonPropertyName("shares")]
+    public long Shares { get; init; }
 
-        [JsonPropertyName("titleOfClass")]
-        public string TitleOfClass { get; set; }
+    [JsonPropertyName("titleOfClass")]
+    public string TitleOfClass { get; init; } = string.Empty;
 
-        [JsonPropertyName("value")]
-        public long Value { get; set; }
+    [JsonPropertyName("sharesType")]
+    public string SharesType { get; init; } = string.Empty;
 
-        [JsonPropertyName("link")]
-        public string Link { get; set; }
+    [JsonPropertyName("putCallShare")]
+    public string PutCallShare { get; init; } = string.Empty;
 
-        [JsonPropertyName("finalLink")]
-        public string FinalLink { get; set; }
-    }
+    [JsonPropertyName("value")]
+    public long Value { get; init; }
+
+    [JsonPropertyName("link")]
+    public string Link { get; init; } = string.Empty;
+
+    [JsonPropertyName("finalLink")]
+    public string FinalLink { get; init; } = string.Empty;
 }

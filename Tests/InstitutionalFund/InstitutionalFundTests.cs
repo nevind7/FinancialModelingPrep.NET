@@ -5,62 +5,61 @@ using FinancialModelingPrep.Abstractions.InstitutionalFund;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.InstitutionalFund
+namespace Tests.InstitutionalFund;
+
+public class InstitutionalFundTests : TestingBase
 {
-    public class InstitutionalFundTests : TestingBase
+    private readonly IInstitutionalFundProvider api;
+
+    public InstitutionalFundTests(ITestOutputHelper testOutput) : base(testOutput)
     {
-        private readonly IInstitutionalFundProvider api;
+        api = ServiceProvider.GetRequiredService<IInstitutionalFundProvider>();
+    }
 
-        public InstitutionalFundTests(ITestOutputHelper testOutput) : base(testOutput)
-        {
-            api = ServiceProvider.GetRequiredService<IInstitutionalFundProvider>();
-        }
+    [Fact]
+    public async Task Get13FListAsync()
+    {
+        var result = await api.Get13FListAsync();
 
-        [Fact]
-        public async Task Get13FListAsync()
-        {
-            var result = await api.Get13FListAsync();
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
+    }
 
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
+    [Fact]
+    public async Task SearchCIKByName()
+    {
+        var result = await api.SearchCikByName("Berkshire");
 
-        [Fact]
-        public async Task SearchCIKByName()
-        {
-            var result = await api.SearchCikByName("Berkshire");
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
+    }
 
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
+    [Fact]
+    public async Task GetCompanyNameByCIK()
+    {
+        var result = await api.GetCompanyNameByCik("0001067983");
 
-        [Fact]
-        public async Task GetCompanyNameByCIK()
-        {
-            var result = await api.GetCompanyNameByCik("0001067983");
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
 
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
+        Assert.All(result.Data, _ => Assert.Equal("0001067983", _.Cik));
+    }
 
-            Assert.All(result.Data, _ => Assert.Equal("0001067983", _.Cik));
-        }
+    [Fact]
+    public async Task MapCusipAsync()
+    {
+        var result = await api.MapCusipAsync("000360206");
 
-        [Fact]
-        public async Task MapCusipAsync()
-        {
-            var result = await api.MapCusipAsync("000360206");
+        result.AssertNoErrors();
+        Assert.Equal("AAON", result.Data.Symbol);
+    }
 
-            result.AssertNoErrors();
-            Assert.Equal("AAON", result.Data.Ticker);
-        }
+    [Fact]
+    public async Task GetForm13FAsync()
+    {
+        var result = await api.GetForm13FAsync("0001067983", "2020", "3");
 
-        [Fact]
-        public async Task GetForm13FAsync()
-        {
-            var result = await api.GetForm13FAsync("0001067983", "2020-06-30");
-
-            result.AssertNoErrors();
-            Assert.NotEmpty(result.Data);
-        }
+        result.AssertNoErrors();
+        Assert.NotEmpty(result.Data);
     }
 }

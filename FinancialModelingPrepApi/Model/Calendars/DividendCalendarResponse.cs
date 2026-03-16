@@ -1,34 +1,34 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.Calendars
+namespace FinancialModelingPrep.Model.Calendars;
+
+public class DividendCalendarResponse
 {
-    public class DividendCalendarResponse
-    {
-        [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
+    [JsonPropertyName("symbol")]
+    public required string Symbol { get; init; }
         
-        [JsonPropertyName("date")]
-        public string Date { get; set; }
+    [JsonPropertyName("date")]
+    public DateOnly Date { get; init; }
 
-        [JsonPropertyName("adjDividend")]
-        public decimal AdjDividend { get; set; }
+    [JsonPropertyName("adjDividend")]
+    public decimal AdjDividend { get; set; }
         
-        [JsonPropertyName("dividend")]
-        public decimal? Dividend { get; set; }
+    [JsonPropertyName("dividend")]
+    public decimal? Dividend { get; set; }
 
-        [JsonPropertyName("recordDate")]
-        public string RecordDate { get; set; }
+    [JsonPropertyName("recordDate")]
+    public string RecordDate { get; init; } = string.Empty;
 
-        [JsonPropertyName("paymentDate")]
-        public string PaymentDate { get; set; }
+    [JsonPropertyName("paymentDate")]
+    public string PaymentDate { get; init; } = string.Empty;
 
-        [JsonPropertyName("declarationDate")]
-        public string DeclarationDate { get; set; }
+    [JsonPropertyName("declarationDate")]
+    public string DeclarationDate { get; init; } = string.Empty;
         
-        [JsonPropertyName("frequency")]
-        public string Frequency { get; set; }
+    [JsonPropertyName("frequency")]
+    public string? Frequency { get; set; }
         
-        [JsonPropertyName("yield")]
-        public decimal Yield { get; set; }
-    }
+    [JsonPropertyName("yield")]
+    public decimal Yield { get; set; }
 }

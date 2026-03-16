@@ -30,39 +30,38 @@ using FinancialModelingPrep.Core.StockTimeSeries;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace FinancialModelingPrep
+namespace FinancialModelingPrep;
+
+public static class DependencyInjectionExtensions
 {
-    public static class DependencyInjectionExtensions
+    /// <summary>
+    /// Adds the <see cref="IFinancialModelingPrepApiClient"/> to the services.
+    /// This package does not override any existing registrations. 
+    /// </summary>
+    /// <param name="services">DI Service Collection</param>
+    /// <param name="options">FMP Options <see cref="FinancialModelingPrepOptions"/> if left as null it will use the default options and default API Key</param>
+    public static void AddFinancialModelingPrepApiClient(this IServiceCollection services, FinancialModelingPrepOptions? options = null)
     {
-        /// <summary>
-        /// Adds the <see cref="IFinancialModelingPrepApiClient"/> to the services.
-        /// This package does not override any existing registrations. 
-        /// </summary>
-        /// <param name="services">DI Service Collection</param>
-        /// <param name="options">FMP Options <see cref="FinancialModelingPrepOptions"/> if left as null it will use the default options and default API Key</param>
-        public static void AddFinancialModelingPrepApiClient(this IServiceCollection services, FinancialModelingPrepOptions options = null)
-        {
-            services.TryAddSingleton(options ?? new FinancialModelingPrepOptions());
+        services.TryAddSingleton(options ?? new FinancialModelingPrepOptions());
 
-            services.AddLogging();
+        services.AddLogging();
 
-            services.AddHttpClient<FinancialModelingPrepHttpClient>(client 
-                => client.BaseAddress = new Uri("https://financialmodelingprep.com/stable/"));
+        services.AddHttpClient<FinancialModelingPrepHttpClient>(client 
+            => client.BaseAddress = new Uri("https://financialmodelingprep.com/stable/"));
 
-            services.TryAddSingleton<IFinancialModelingPrepApiClient, FinancialModelingPrepApiClient>();
-            services.TryAddSingleton<IRequestRateLimiter, RequestRateLimiter>();
-            services.TryAddTransient<ICompanyValuationProvider, CompanyValuationProvider>();
-            services.TryAddTransient<IMarketIndexesProvider, MarketIndexesProvider>();
-            services.TryAddTransient<IAdvancedDataProvider, AdvancedDataProvider>();
-            services.TryAddTransient<ICalendarsProvider, CalendarsProvider>();
-            services.TryAddTransient<IInstitutionalFundProvider, InstitutionalFundProvider>();
-            services.TryAddTransient<IStockTimeSeriesProvider, StockTimeSeriesProvider>();
-            services.TryAddTransient<IStockMarketProvider, StockMarketProvider>();
-            services.TryAddTransient<ICryptoMarketProvider, CryptoMarketProvider>();
-            services.TryAddTransient<IStockStatisticsProvider, StockStatisticsProvider>();
-            services.TryAddTransient<IFundProvider, FundProvider>();
-            services.TryAddTransient<IEconomicsProvider, EconomicsProvider>();
-            services.TryAddTransient<IStatementAnalysisProvider, StatementAnalysisProvider>();
-        }
+        services.TryAddSingleton<IFinancialModelingPrepApiClient, FinancialModelingPrepApiClient>();
+        services.TryAddSingleton<IRequestRateLimiter, RequestRateLimiter>();
+        services.TryAddTransient<ICompanyValuationProvider, CompanyValuationProvider>();
+        services.TryAddTransient<IMarketIndexesProvider, MarketIndexesProvider>();
+        services.TryAddTransient<IAdvancedDataProvider, AdvancedDataProvider>();
+        services.TryAddTransient<ICalendarsProvider, CalendarsProvider>();
+        services.TryAddTransient<IInstitutionalFundProvider, InstitutionalFundProvider>();
+        services.TryAddTransient<IStockTimeSeriesProvider, StockTimeSeriesProvider>();
+        services.TryAddTransient<IStockMarketProvider, StockMarketProvider>();
+        services.TryAddTransient<ICryptoMarketProvider, CryptoMarketProvider>();
+        services.TryAddTransient<IStockStatisticsProvider, StockStatisticsProvider>();
+        services.TryAddTransient<IFundProvider, FundProvider>();
+        services.TryAddTransient<IEconomicsProvider, EconomicsProvider>();
+        services.TryAddTransient<IStatementAnalysisProvider, StatementAnalysisProvider>();
     }
 }

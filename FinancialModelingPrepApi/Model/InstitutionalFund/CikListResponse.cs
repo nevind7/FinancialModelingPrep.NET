@@ -1,13 +1,12 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FinancialModelingPrep.Model.InstitutionalFund
-{
-    public class CikListResponse
-    {
-        [JsonPropertyName("cik")]
-        public string Cik { get; set; }
+namespace FinancialModelingPrep.Model.InstitutionalFund;
 
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-    }
+public class CikListResponse
+{
+    [JsonPropertyName("cik")]
+    public string Cik { get; set; }
+
+    [JsonPropertyName("name")]
+    public string Name { get; set; }
 }

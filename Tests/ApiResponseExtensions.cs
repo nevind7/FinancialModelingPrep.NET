@@ -1,15 +1,14 @@
 ﻿using FinancialModelingPrep.Model;
 using Xunit;
 
-namespace Tests
+namespace Tests;
+
+public static class ApiResponseExtensions
 {
-    public static class ApiResponseExtensions
+    public static void AssertNoErrors<T>(this ApiResponse<T> response)
+        where T : class
     {
-        public static void AssertNoErrors<T>(this ApiResponse<T> response)
-            where T : class
-        {
-            Assert.NotNull(response);
-            Assert.False(response.HasError, response.Error);
-        }
+        Assert.NotNull(response);
+        Assert.False(response.HasError, response.Error);
     }
 }
