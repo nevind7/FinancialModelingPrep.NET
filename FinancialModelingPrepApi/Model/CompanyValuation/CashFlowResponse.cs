@@ -21,7 +21,7 @@ public record CashFlowResponse
     public DateOnly FilingDate { get; init; }
 
     [JsonPropertyName("acceptedDate")]
-    public DateTime AcceptedDate { get; init; }
+    public string AcceptedDate { get; init; }
 
     [JsonPropertyName("fiscalYear")]
     public string FiscalYear { get; init; } = string.Empty;

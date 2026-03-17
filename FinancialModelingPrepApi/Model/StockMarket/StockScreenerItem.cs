@@ -11,7 +11,7 @@ public sealed record StockScreenerItem
     public string CompanyName { get; init; } = string.Empty;
 
     [JsonPropertyName("marketCap")]
-    public long MarketCap { get; init; }
+    public long? MarketCap { get; init; }
 
     [JsonPropertyName("sector")]
     public string Sector { get; init; } = string.Empty;
@@ -20,16 +20,16 @@ public sealed record StockScreenerItem
     public string Industry { get; init; } = string.Empty;
 
     [JsonPropertyName("beta")]
-    public decimal Beta { get; init; }
+    public decimal? Beta { get; init; }
 
     [JsonPropertyName("price")]
-    public decimal Price { get; init; }
+    public decimal? Price { get; init; }
 
     [JsonPropertyName("lastAnnualDividend")]
-    public decimal LastAnnualDividend { get; init; }
+    public decimal? LastAnnualDividend { get; init; }
 
     [JsonPropertyName("volume")]
-    public long Volume { get; init; }
+    public decimal? Volume { get; init; }
 
     [JsonPropertyName("exchange")]
     public string Exchange { get; init; } = string.Empty;
@@ -44,8 +44,8 @@ public sealed record StockScreenerItem
     public bool IsEtf { get; init; }
 
     [JsonPropertyName("isFund")]
-    public bool IsFund { get; init; }
+    public bool? IsFund { get; init; }
 
     [JsonPropertyName("isActivelyTrading")]
-    public bool IsActivelyTrading { get; init; }
+    public bool? IsActivelyTrading { get; init; }
 }

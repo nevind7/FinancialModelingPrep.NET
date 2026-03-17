@@ -18,10 +18,10 @@ public sealed record IncomeStatementResponse
     public string Cik { get; init; } = string.Empty;
 
     [JsonPropertyName("filingDate")]
-    public DateOnly FilingDate { get; init; }
+    public DateOnly? FilingDate { get; init; }
 
     [JsonPropertyName("acceptedDate")]
-    public DateTime AcceptedDate { get; init; }
+    public string? AcceptedDate { get; init; }
 
     [JsonPropertyName("fiscalYear")]
     public string FiscalYear { get; init; } = string.Empty;
