@@ -6,7 +6,7 @@
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Company>MatthiWare</Company>
-		<PackageId>MatthiWare.FinancialModelingPrep</PackageId>
+		<PackageId>FinancialModelingPrep</PackageId>
 		<Description>FinancialModelingPrep API Client written in .NET 8</Description>
 		<Copyright>Copyright Matthias Beerens 2021</Copyright>
 		<Product>FinancialModelingPrep API Client</Product>
