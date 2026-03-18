@@ -13,32 +13,43 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
-    - uses: actions/checkout@v3
-      with: 
+    - uses: actions/checkout@v4
+      with:
         fetch-depth: 0
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.x
+        dotnet-version: 10.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      env: 
+      env:
         FMP_TESTS_API_KEY: ${{ secrets.FMP_TESTS_API_KEY }}
       run: dotnet test --no-build --verbosity normal
-    - name: Build Release
-      run: dotnet build --configuration Release --no-restore
-    - name: Upload Nuget Package Build Artifact
+    - name: Pack
+      run: |
+        dotnet pack FinancialModelingPrepApi/FinancialModelingPrepApi.csproj \
+          --configuration Release \
+          --no-restore \
+          -p:Version=1.0.0 \
+          -p:MinVerSkip=true \
+          --output ./nupkgs
+    - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: Nuget
-        path: /home/runner/work/FinancialModelingPrep.NET/FinancialModelingPrep.NET/FinancialModelingPrepApi/bin/Release/*.nupkg
-    - name: Upload Release Build Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: Release Build
-        path: /home/runner/work/FinancialModelingPrep.NET/FinancialModelingPrep.NET/FinancialModelingPrepApi/bin/Release/**/*
+        name: nuget-package
+        path: ./nupkgs/*.nupkg
+    - name: Publish to GitHub Packages
+      if: github.event_name != 'pull_request'
+      run: |
+        dotnet nuget push ./nupkgs/*.nupkg \
+          --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
+          --api-key ${{ secrets.GITHUB_TOKEN }} \
+          --skip-duplicate
