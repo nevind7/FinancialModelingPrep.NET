@@ -68,7 +68,7 @@ public class AdvancedDataProvider : IAdvancedDataProvider
             return ApiResponse.FromError<StandardIndustrialClassificationResponse>(result.Error);
         }
 
-        return ApiResponse.FromSucces(result.Data.First());
+        return ApiResponse.FromSuccess(result.Data.First());
     }
 
     public async Task<ApiResponse<List<CompanyPeersResponse>>> GetStockPeersAsync(string symbol)
@@ -85,7 +85,7 @@ public class AdvancedDataProvider : IAdvancedDataProvider
             return ApiResponse.FromError<List<CompanyPeersResponse>>(result.Error);
         }
 
-        return ApiResponse.FromSucces(result.Data);
+        return ApiResponse.FromSuccess(result.Data);
     }
 
     public Task<ApiResponse<List<SectorPEResponse>>> GetSectorsPriceEarningsRatioAsync(string date, string exchange)
@@ -132,7 +132,7 @@ public class AdvancedDataProvider : IAdvancedDataProvider
             return ApiResponse.FromError<SharesFloatResponse>(result.Error);
         }
 
-        return ApiResponse.FromSucces(result.Data.First());
+        return ApiResponse.FromSuccess(result.Data.First());
     }
 
     public Task<ApiResponse<List<ESGScoreResponse>>> GetESGScoreAsync(string symbol)
@@ -159,6 +159,6 @@ public class AdvancedDataProvider : IAdvancedDataProvider
             return ApiResponse.FromError<FinancialScoreResponse>(result.Error);
         }
 
-        return ApiResponse.FromSucces(result.Data.First());
+        return ApiResponse.FromSuccess(result.Data.First());
     }
 }

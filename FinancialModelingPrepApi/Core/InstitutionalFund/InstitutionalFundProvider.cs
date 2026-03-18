@@ -71,7 +71,7 @@ public class InstitutionalFundProvider : IInstitutionalFundProvider
             return ApiResponse.FromError<CusipMapperResponse>(result.Error);
         }
 
-        return ApiResponse.FromSucces(result.Data.First());
+        return ApiResponse.FromSuccess(result.Data.First());
     }
 
     /// <inheritdoc/>

@@ -13,7 +13,7 @@ public class QuoteResponse
     [JsonPropertyName("price")]
     public double? Price { get; set; }
 
-    [JsonPropertyName("changesPercentage")]
+    [JsonPropertyName("changePercentage")]
     public double? ChangesPercentage { get; set; }
 
     [JsonPropertyName("change")]

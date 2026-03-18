@@ -13,26 +13,26 @@ public sealed record HistoricalPriceResponse
     public DateOnly Date { get; init; }
 
     [JsonPropertyName("open")]
-    public decimal Open { get; init; }
+    public decimal? Open { get; init; }
 
     [JsonPropertyName("high")]
-    public decimal High { get; init; }
+    public decimal? High { get; init; }
 
     [JsonPropertyName("low")]
-    public decimal Low { get; init; }
+    public decimal? Low { get; init; }
 
     [JsonPropertyName("close")]
-    public decimal Close { get; init; }
+    public decimal? Close { get; init; }
 
     [JsonPropertyName("volume")]
-    public long Volume { get; init; }
+    public long? Volume { get; init; }
 
     [JsonPropertyName("change")]
-    public decimal Change { get; init; }
+    public decimal? Change { get; init; }
 
     [JsonPropertyName("changePercent")]
-    public decimal ChangePercent { get; init; }
+    public decimal? ChangePercent { get; init; }
 
     [JsonPropertyName("vwap")]
-    public decimal Vwap { get; init; }
+    public decimal? Vwap { get; init; }
 }

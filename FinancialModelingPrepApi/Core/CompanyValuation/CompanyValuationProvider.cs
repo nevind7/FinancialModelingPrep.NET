@@ -33,7 +33,7 @@ public class CompanyValuationProvider : ICompanyValuationProvider
             return ApiResponse.FromError<CompanyProfileResponse>(result.Error);
         }
 
-        return ApiResponse.FromSucces(result.Data.First());
+        return ApiResponse.FromSuccess(result.Data.First());
     }
 
     public Task<ApiResponse<List<SymbolResponse>>> GetETFListAsync()
@@ -221,7 +221,7 @@ public class CompanyValuationProvider : ICompanyValuationProvider
             return ApiResponse.FromError<CompanyRatingResponse>(result.Error);
         }
 
-        return ApiResponse.FromSucces(result.Data.First());
+        return ApiResponse.FromSuccess(result.Data.First());
     }
 
     public Task<ApiResponse<List<CompanyRatingResponse>>> GetHistoricalCompanyRatingAsync(string symbol, int? limit = 140)
@@ -253,7 +253,7 @@ public class CompanyValuationProvider : ICompanyValuationProvider
             return ApiResponse.FromError<DCFResponse>(result.Error);
         }
 
-        return ApiResponse.FromSucces(result.Data.First());
+        return ApiResponse.FromSuccess(result.Data.First());
     }
 
     public async Task<ApiResponse<RatiosTTMResponse>> GetRatiosTTMAsync(string symbol)
@@ -270,7 +270,7 @@ public class CompanyValuationProvider : ICompanyValuationProvider
             return ApiResponse.FromError<RatiosTTMResponse>(result.Error);
         }
 
-        return ApiResponse.FromSucces(result.Data.First());
+        return ApiResponse.FromSuccess(result.Data.First());
     }
 
     public async Task<ApiResponse<KeyMetricsTTMResponse>> GetCompanyKeyMetricsTTMAsync(string symbol)
@@ -287,7 +287,7 @@ public class CompanyValuationProvider : ICompanyValuationProvider
             return ApiResponse.FromError<KeyMetricsTTMResponse>(result.Error);
         }
 
-        return ApiResponse.FromSucces(result.Data.First());
+        return ApiResponse.FromSuccess(result.Data.First());
     }
 
     public Task<ApiResponse<List<KeyMetricsResponse>>> GetCompanyKeyMetricsAsync(string symbol, Period period = Period.Annual, int? limit = 130)
@@ -324,7 +324,7 @@ public class CompanyValuationProvider : ICompanyValuationProvider
             return ApiResponse.FromError<QuoteResponse>(result.Error);
         }
 
-        return ApiResponse.FromSucces(result.Data.First());
+        return ApiResponse.FromSuccess(result.Data.First());
     }
 
     public Task<ApiResponse<List<QuoteResponse>>> GetQuotesAsync(IEnumerable<string> symbols)
@@ -368,7 +368,7 @@ public class CompanyValuationProvider : ICompanyValuationProvider
             return ApiResponse.FromError<MarketCapResponse>(result.Error);
         }
 
-        return ApiResponse.FromSucces(result.Data.First());
+        return ApiResponse.FromSuccess(result.Data.First());
     }
 
     public Task<ApiResponse<List<MarketCapResponse>>> GetHistoricalMarketCapitalizationAsync(string symbol, string? from = null, string? to = null, int? limit = 100)
@@ -454,7 +454,7 @@ public class CompanyValuationProvider : ICompanyValuationProvider
             return ApiResponse.FromError<PriceTargetConsensusResponse>(result.Error);
         }
 
-        return ApiResponse.FromSucces(result.Data.First());
+        return ApiResponse.FromSuccess(result.Data.First());
     }
 
     public async Task<ApiResponse<UpgradeDowngradeConsensusResponse>> GetUpgradeDowngradeConsensusAsync(string symbol)
@@ -471,7 +471,7 @@ public class CompanyValuationProvider : ICompanyValuationProvider
             return ApiResponse.FromError<UpgradeDowngradeConsensusResponse>(result.Error);
         }
 
-        return ApiResponse.FromSucces(result.Data.First());
+        return ApiResponse.FromSuccess(result.Data.First());
     }
 
     public Task<ApiResponse<List<InsiderTradingResponse>>> GetInsiderTradingAsync(string symbol, int? limit = 10)

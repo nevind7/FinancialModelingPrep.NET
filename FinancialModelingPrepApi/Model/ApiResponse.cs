@@ -8,7 +8,7 @@ public static class ApiResponse
             Error = error
         };
 
-    public static ApiResponse<TReturn> FromSucces<TReturn>(TReturn data) where TReturn : class
+    public static ApiResponse<TReturn> FromSuccess<TReturn>(TReturn data) where TReturn : class
         => new()
         {
             Data = data
