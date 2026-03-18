@@ -34,22 +34,22 @@ jobs:
       env:
         FMP_TESTS_API_KEY: ${{ secrets.FMP_TESTS_API_KEY }}
       run: dotnet test --no-build --verbosity normal
-    - name: Pack
+    - name: Build Release (generates .nupkg via GeneratePackageOnBuild)
       run: |
-        dotnet pack FinancialModelingPrepApi/FinancialModelingPrepApi.csproj \
+        dotnet build FinancialModelingPrepApi/FinancialModelingPrepApi.csproj \
           --configuration Release \
+          --no-restore \
           -p:Version=1.0.0 \
-          -p:MinVerSkip=true \
-          --output ./nupkgs
+          -p:MinVerSkip=true
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: nuget-package
-        path: ./nupkgs/*.nupkg
+        path: FinancialModelingPrepApi/bin/Release/*.nupkg
     - name: Publish to GitHub Packages
       if: github.event_name != 'pull_request'
       run: |
-        dotnet nuget push ./nupkgs/*.nupkg \
+        dotnet nuget push FinancialModelingPrepApi/bin/Release/*.nupkg \
           --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
           --api-key ${{ secrets.GITHUB_TOKEN }} \
           --skip-duplicate
