@@ -49,4 +49,8 @@ public interface ICompanyValuationProvider
     public Task<ApiResponse<List<CompanyRatingResponse>>> GetHistoricalCompanyRatingAsync(string symbol, int? limit = 140);
 
     public Task<ApiResponse<List<PressReleasesResponse>>> GetPressReleasesAsync(string symbol, int? page = null);
+
+    public Task<ApiResponse<PriceTargetConsensusResponse>> GetPriceTargetConsensusAsync(string symbol);
+    public Task<ApiResponse<UpgradeDowngradeConsensusResponse>> GetUpgradeDowngradeConsensusAsync(string symbol);
+    public Task<ApiResponse<List<InsiderTradingResponse>>> GetInsiderTradingAsync(string symbol, int? limit = 10);
 }

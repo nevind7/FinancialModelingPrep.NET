@@ -27,4 +27,7 @@ public class Endpoint
     public const string TickerSearch = "search-symbol";
     public const string PressReleases = "press-releases";
     public const string SymbolChange = "symbol-change";
+    public const string PriceTargetConsensus = "price-target-consensus";
+    public const string UpgradeDowngradeConsensus = "upgrades-downgrades-consensus";
+    public const string InsiderTrading = "insider-trading";
 }

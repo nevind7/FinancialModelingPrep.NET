@@ -2,26 +2,26 @@
 
 namespace FinancialModelingPrep.Model.Calendars;
 
-public class EarningsCalendarResponse
+public sealed record EarningsCalendarResponse
 {
     [JsonPropertyName("symbol")]
-    public string Symbol { get; set; }
+    public string Symbol { get; init; } = string.Empty;
 
     [JsonPropertyName("date")]
-    public string Date { get; set; }
+    public DateOnly? Date { get; init; }
 
     [JsonPropertyName("epsActual")]
-    public double? Eps { get; set; }
+    public decimal? EpsActual { get; init; }
 
     [JsonPropertyName("epsEstimated")]
-    public double? EpsEstimated { get; set; }
+    public decimal? EpsEstimated { get; init; }
 
     [JsonPropertyName("revenueActual")]
-    public double? Revenue { get; set; }
+    public decimal? RevenueActual { get; init; }
 
     [JsonPropertyName("revenueEstimated")]
-    public double? RevenueEstimated { get; set; }
+    public decimal? RevenueEstimated { get; init; }
 
     [JsonPropertyName("lastUpdated")]
-    public string LastUpdated { get; set; }
+    public DateOnly? LastUpdated { get; init; }
 }

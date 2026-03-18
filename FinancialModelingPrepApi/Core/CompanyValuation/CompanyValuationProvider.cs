@@ -438,6 +438,54 @@ public class CompanyValuationProvider : ICompanyValuationProvider
         const string url = Endpoint.SymbolChange;
 
         return client.GetJsonAsync<List<SymbolChangeResponse>>(url);
+    }
 
+    public async Task<ApiResponse<PriceTargetConsensusResponse>> GetPriceTargetConsensusAsync(string symbol)
+    {
+        const string url = Endpoint.PriceTargetConsensus;
+
+        var queryString = new QueryStringBuilder();
+        queryString.Add("symbol", symbol);
+
+        var result = await client.GetJsonAsync<List<PriceTargetConsensusResponse>>(url, queryString: queryString);
+
+        if (result.HasError)
+        {
+            return ApiResponse.FromError<PriceTargetConsensusResponse>(result.Error);
+        }
+
+        return ApiResponse.FromSucces(result.Data.First());
+    }
+
+    public async Task<ApiResponse<UpgradeDowngradeConsensusResponse>> GetUpgradeDowngradeConsensusAsync(string symbol)
+    {
+        const string url = Endpoint.UpgradeDowngradeConsensus;
+
+        var queryString = new QueryStringBuilder();
+        queryString.Add("symbol", symbol);
+
+        var result = await client.GetJsonAsync<List<UpgradeDowngradeConsensusResponse>>(url, queryString: queryString);
+
+        if (result.HasError)
+        {
+            return ApiResponse.FromError<UpgradeDowngradeConsensusResponse>(result.Error);
+        }
+
+        return ApiResponse.FromSucces(result.Data.First());
+    }
+
+    public Task<ApiResponse<List<InsiderTradingResponse>>> GetInsiderTradingAsync(string symbol, int? limit = 10)
+    {
+        const string url = Endpoint.InsiderTrading;
+
+        var queryString = new QueryStringBuilder();
+        queryString.Add("symbol", symbol);
+
+        if (limit != null)
+        {
+            queryString.Add("limit", limit);
+        }
+
+        return client.GetJsonAsync<List<InsiderTradingResponse>>(url, queryString: queryString);
     }
 }

@@ -2,185 +2,134 @@
 
 namespace FinancialModelingPrep.Model.CompanyValuation;
 
-public class KeyMetricsTTMResponse
+public record KeyMetricsTTMResponse
 {
-    [JsonPropertyName("revenuePerShareTTM")]
-    public double? RevenuePerShareTTM { get; set; }
+    [JsonPropertyName("symbol")]
+    public string Symbol { get; init; } = string.Empty;
 
-    [JsonPropertyName("netIncomePerShareTTM")]
-    public double? NetIncomePerShareTTM { get; set; }
-
-    [JsonPropertyName("operatingCashFlowPerShareTTM")]
-    public double? OperatingCashFlowPerShareTTM { get; set; }
-
-    [JsonPropertyName("freeCashFlowPerShareTTM")]
-    public double? FreeCashFlowPerShareTTM { get; set; }
-
-    [JsonPropertyName("cashPerShareTTM")]
-    public double? CashPerShareTTM { get; set; }
-
-    [JsonPropertyName("bookValuePerShareTTM")]
-    public double? BookValuePerShareTTM { get; set; }
-
-    [JsonPropertyName("tangibleBookValuePerShareTTM")]
-    public double? TangibleBookValuePerShareTTM { get; set; }
-
-    [JsonPropertyName("shareholdersEquityPerShareTTM")]
-    public double? ShareholdersEquityPerShareTTM { get; set; }
-
-    [JsonPropertyName("interestDebtPerShareTTM")]
-    public double? InterestDebtPerShareTTM { get; set; }
-
-    [JsonPropertyName("marketCapTTM")]
-    public double? MarketCapTTM { get; set; }
+    [JsonPropertyName("marketCap")]
+    public decimal MarketCap { get; init; }
 
     [JsonPropertyName("enterpriseValueTTM")]
-    public double? EnterpriseValueTTM { get; set; }
-
-    [JsonPropertyName("peRatioTTM")]
-    public double? PeRatioTTM { get; set; }
-
-    [JsonPropertyName("priceToSalesRatioTTM")]
-    public double? PriceToSalesRatioTTM { get; set; }
-
-    [JsonPropertyName("pocfratioTTM")]
-    public double? PocfratioTTM { get; set; }
-
-    [JsonPropertyName("pfcfRatioTTM")]
-    public double? PfcfRatioTTM { get; set; }
-
-    [JsonPropertyName("pbRatioTTM")]
-    public double? PbRatioTTM { get; set; }
-
-    [JsonPropertyName("ptbRatioTTM")]
-    public double? PtbRatioTTM { get; set; }
+    public long EnterpriseValueTTM { get; init; }
 
     [JsonPropertyName("evToSalesTTM")]
-    public double? EvToSalesTTM { get; set; }
-
-    [JsonPropertyName("enterpriseValueOverEBITDATTM")]
-    public double? EnterpriseValueOverEBITDATTM { get; set; }
+    public double EvToSalesTTM { get; init; }
 
     [JsonPropertyName("evToOperatingCashFlowTTM")]
-    public double? EvToOperatingCashFlowTTM { get; set; }
+    public double EvToOperatingCashFlowTTM { get; init; }
 
     [JsonPropertyName("evToFreeCashFlowTTM")]
-    public double? EvToFreeCashFlowTTM { get; set; }
+    public double EvToFreeCashFlowTTM { get; init; }
 
-    [JsonPropertyName("earningsYieldTTM")]
-    public double? EarningsYieldTTM { get; set; }
-
-    [JsonPropertyName("freeCashFlowYieldTTM")]
-    public double? FreeCashFlowYieldTTM { get; set; }
-
-    [JsonPropertyName("debtToEquityTTM")]
-    public double? DebtToEquityTTM { get; set; }
-
-    [JsonPropertyName("debtToAssetsTTM")]
-    public double? DebtToAssetsTTM { get; set; }
-
-    [JsonPropertyName("debtToMarketCapTTM")]
-    public double? DebtToMarketCapTTM { get; set; }
+    [JsonPropertyName("evToEBITDATTM")]
+    public double EvToEBITDATTM { get; init; }
 
     [JsonPropertyName("netDebtToEBITDATTM")]
-    public double? NetDebtToEBITDATTM { get; set; }
+    public double NetDebtToEBITDATTM { get; init; }
 
     [JsonPropertyName("currentRatioTTM")]
-    public double? CurrentRatioTTM { get; set; }
-
-    [JsonPropertyName("interestCoverageTTM")]
-    public double? InterestCoverageTTM { get; set; }
+    public double CurrentRatioTTM { get; init; }
 
     [JsonPropertyName("incomeQualityTTM")]
-    public double? IncomeQualityTTM { get; set; }
-
-    [JsonPropertyName("dividendYieldTTM")]
-    public double? DividendYieldTTM { get; set; }
-
-    [JsonPropertyName("dividendYieldPercentageTTM")]
-    public double? DividendYieldPercentageTTM { get; set; }
-
-    [JsonPropertyName("payoutRatioTTM")]
-    public double? PayoutRatioTTM { get; set; }
-
-    [JsonPropertyName("salesGeneralAndAdministrativeToRevenueTTM")]
-    public double? SalesGeneralAndAdministrativeToRevenueTTM { get; set; }
-
-    [JsonPropertyName("researchAndDevelopementToRevenueTTM")]
-    public double? ResearchAndDevelopementToRevenueTTM { get; set; }
-
-    [JsonPropertyName("intangiblesToTotalAssetsTTM")]
-    public double? IntangiblesToTotalAssetsTTM { get; set; }
-
-    [JsonPropertyName("capexToOperatingCashFlowTTM")]
-    public double? CapexToOperatingCashFlowTTM { get; set; }
-
-    [JsonPropertyName("capexToRevenueTTM")]
-    public double? CapexToRevenueTTM { get; set; }
-
-    [JsonPropertyName("capexToDepreciationTTM")]
-    public double? CapexToDepreciationTTM { get; set; }
-
-    [JsonPropertyName("stockBasedCompensationToRevenueTTM")]
-    public double? StockBasedCompensationToRevenueTTM { get; set; }
+    public double IncomeQualityTTM { get; init; }
 
     [JsonPropertyName("grahamNumberTTM")]
-    public double? GrahamNumberTTM { get; set; }
-
-    [JsonPropertyName("roicTTM")]
-    public double? RoicTTM { get; set; }
-
-    [JsonPropertyName("returnOnTangibleAssetsTTM")]
-    public double? ReturnOnTangibleAssetsTTM { get; set; }
+    public double GrahamNumberTTM { get; init; }
 
     [JsonPropertyName("grahamNetNetTTM")]
-    public double? GrahamNetNetTTM { get; set; }
+    public double GrahamNetNetTTM { get; init; }
+
+    [JsonPropertyName("taxBurdenTTM")]
+    public double TaxBurdenTTM { get; init; }
+
+    [JsonPropertyName("interestBurdenTTM")]
+    public double InterestBurdenTTM { get; init; }
 
     [JsonPropertyName("workingCapitalTTM")]
-    public long? WorkingCapitalTTM { get; set; }
-
-    [JsonPropertyName("tangibleAssetValueTTM")]
-    public long? TangibleAssetValueTTM { get; set; }
-
-    [JsonPropertyName("netCurrentAssetValueTTM")]
-    public double? NetCurrentAssetValueTTM { get; set; }
+    public long WorkingCapitalTTM { get; init; }
 
     [JsonPropertyName("investedCapitalTTM")]
-    public double? InvestedCapitalTTM { get; set; }
+    public long InvestedCapitalTTM { get; init; }
+
+    [JsonPropertyName("returnOnAssetsTTM")]
+    public double ReturnOnAssetsTTM { get; init; }
+
+    [JsonPropertyName("operatingReturnOnAssetsTTM")]
+    public double OperatingReturnOnAssetsTTM { get; init; }
+
+    [JsonPropertyName("returnOnTangibleAssetsTTM")]
+    public double ReturnOnTangibleAssetsTTM { get; init; }
+
+    [JsonPropertyName("returnOnEquityTTM")]
+    public double ReturnOnEquityTTM { get; init; }
+
+    [JsonPropertyName("returnOnInvestedCapitalTTM")]
+    public double ReturnOnInvestedCapitalTTM { get; init; }
+
+    [JsonPropertyName("returnOnCapitalEmployedTTM")]
+    public double ReturnOnCapitalEmployedTTM { get; init; }
+
+    [JsonPropertyName("earningsYieldTTM")]
+    public double EarningsYieldTTM { get; init; }
+
+    [JsonPropertyName("freeCashFlowYieldTTM")]
+    public double FreeCashFlowYieldTTM { get; init; }
+
+    [JsonPropertyName("capexToOperatingCashFlowTTM")]
+    public double CapexToOperatingCashFlowTTM { get; init; }
+
+    [JsonPropertyName("capexToDepreciationTTM")]
+    public double CapexToDepreciationTTM { get; init; }
+
+    [JsonPropertyName("capexToRevenueTTM")]
+    public double CapexToRevenueTTM { get; init; }
+
+    [JsonPropertyName("salesGeneralAndAdministrativeToRevenueTTM")]
+    public double SalesGeneralAndAdministrativeToRevenueTTM { get; init; }
+
+    [JsonPropertyName("researchAndDevelopementToRevenueTTM")]
+    public double ResearchAndDevelopementToRevenueTTM { get; init; }
+
+    [JsonPropertyName("stockBasedCompensationToRevenueTTM")]
+    public double StockBasedCompensationToRevenueTTM { get; init; }
+
+    [JsonPropertyName("intangiblesToTotalAssetsTTM")]
+    public double IntangiblesToTotalAssetsTTM { get; init; }
 
     [JsonPropertyName("averageReceivablesTTM")]
-    public long? AverageReceivablesTTM { get; set; }
+    public long AverageReceivablesTTM { get; init; }
 
     [JsonPropertyName("averagePayablesTTM")]
-    public long? AveragePayablesTTM { get; set; }
+    public long AveragePayablesTTM { get; init; }
 
     [JsonPropertyName("averageInventoryTTM")]
-    public double? AverageInventoryTTM { get; set; }
+    public long AverageInventoryTTM { get; init; }
 
-    [JsonPropertyName("daysSalesOutstandingTTM")]
-    public double? DaysSalesOutstandingTTM { get; set; }
+    [JsonPropertyName("daysOfSalesOutstandingTTM")]
+    public double DaysOfSalesOutstandingTTM { get; init; }
 
-    [JsonPropertyName("daysPayablesOutstandingTTM")]
-    public double? DaysPayablesOutstandingTTM { get; set; }
+    [JsonPropertyName("daysOfPayablesOutstandingTTM")]
+    public double DaysOfPayablesOutstandingTTM { get; init; }
 
-    [JsonPropertyName("daysOfInventoryOnHandTTM")]
-    public double? DaysOfInventoryOnHandTTM { get; set; }
+    [JsonPropertyName("daysOfInventoryOutstandingTTM")]
+    public double DaysOfInventoryOutstandingTTM { get; init; }
 
-    [JsonPropertyName("receivablesTurnoverTTM")]
-    public double? ReceivablesTurnoverTTM { get; set; }
+    [JsonPropertyName("operatingCycleTTM")]
+    public double OperatingCycleTTM { get; init; }
 
-    [JsonPropertyName("payablesTurnoverTTM")]
-    public double? PayablesTurnoverTTM { get; set; }
+    [JsonPropertyName("cashConversionCycleTTM")]
+    public double CashConversionCycleTTM { get; init; }
 
-    [JsonPropertyName("inventoryTurnoverTTM")]
-    public double? InventoryTurnoverTTM { get; set; }
+    [JsonPropertyName("freeCashFlowToEquityTTM")]
+    public long FreeCashFlowToEquityTTM { get; init; }
 
-    [JsonPropertyName("roeTTM")]
-    public double? RoeTTM { get; set; }
+    [JsonPropertyName("freeCashFlowToFirmTTM")]
+    public double FreeCashFlowToFirmTTM { get; init; }
 
-    [JsonPropertyName("capexPerShareTTM")]
-    public double? CapexPerShareTTM { get; set; }
+    [JsonPropertyName("tangibleAssetValueTTM")]
+    public long TangibleAssetValueTTM { get; init; }
 
-    [JsonPropertyName("dividendPerShareTTM")]
-    public double? DividendPerShareTTM { get; set; }
+    [JsonPropertyName("netCurrentAssetValueTTM")]
+    public long NetCurrentAssetValueTTM { get; init; }
 }
