@@ -40,7 +40,7 @@ public class CalendarsTests : TestingBase
         var result = await api.GetEarningsCalendarAsync("2021-04-14", "2021-04-14");
 
         result.AssertNoErrors();
-        Assert.All(result.Data, _ => Assert.Equal("2021-04-14", _.Date));
+        Assert.All(result.Data, x => Assert.Equal(DateOnly.Parse("2021-04-14"), x.Date));
     }
 
     [Fact]

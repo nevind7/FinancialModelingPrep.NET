@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using FinancialModelingPrep.Abstractions.TechnicalIndicators;
 using FinancialModelingPrep.Core.Http;
 using FinancialModelingPrep.Model;

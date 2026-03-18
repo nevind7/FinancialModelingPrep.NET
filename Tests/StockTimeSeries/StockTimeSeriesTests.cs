@@ -40,10 +40,10 @@ public class StockTimeSeriesTests : TestingBase
 
         var split = result.Data.First(data => data.Date == DateOnly.Parse("2021-06-04"));
 
-        Assert.Equal((decimal)125.89, split.Close, 2);
-        Assert.Equal((decimal)124.07d, split.Open, 2);
-        Assert.Equal((decimal)126.16, split.High, 2);
-        Assert.Equal((decimal)123.85, split.Low, 2);
+        Assert.Equal((decimal)125.89, split.Close.GetValueOrDefault(), 2);
+        Assert.Equal((decimal)124.07d, split.Open.GetValueOrDefault(), 2);
+        Assert.Equal((decimal)126.16, split.High.GetValueOrDefault(), 2);
+        Assert.Equal((decimal)123.85, split.Low.GetValueOrDefault(), 2);
     }
 
     [Theory]
@@ -72,10 +72,10 @@ public class StockTimeSeriesTests : TestingBase
 
         var split = result.Data.First(data => data.Date == DateOnly.Parse("2021-06-04"));
 
-        Assert.Equal((decimal)125.89, split.Close, 2);
-        Assert.Equal((decimal)124.07, split.Open, 2);
-        Assert.Equal((decimal)126.16, split.High, 2);
-        Assert.Equal((decimal)123.85, split.Low, 2);
+        Assert.Equal((decimal)125.89, split.Close.GetValueOrDefault(), 2);
+        Assert.Equal((decimal)124.07, split.Open.GetValueOrDefault(), 2);
+        Assert.Equal((decimal)126.16, split.High.GetValueOrDefault(), 2);
+        Assert.Equal((decimal)123.85, split.Low.GetValueOrDefault(), 2);
     }
 
     [Theory]
