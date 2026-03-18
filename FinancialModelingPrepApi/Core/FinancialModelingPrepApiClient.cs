@@ -11,6 +11,7 @@ using FinancialModelingPrep.Abstractions.StatementAnalysis;
 using FinancialModelingPrep.Abstractions.Statistics;
 using FinancialModelingPrep.Abstractions.StockMarket;
 using FinancialModelingPrep.Abstractions.StockTimeSeries;
+using FinancialModelingPrep.Abstractions.TechnicalIndicators;
 
 namespace FinancialModelingPrep.Core;
 
@@ -53,6 +54,9 @@ public class FinancialModelingPrepApiClient : IFinancialModelingPrepApiClient
     public IStatementAnalysisProvider StatementAnalysis { get; }
 
     /// <inheritdoc/>
+    public ITechnicalIndicatorsProvider TechnicalIndicators { get; }
+
+    /// <inheritdoc/>
     public FinancialModelingPrepApiClient(ICompanyValuationProvider companyValuation,
         IMarketIndexesProvider marketIndexes,
         IAdvancedDataProvider advancedData,
@@ -64,7 +68,8 @@ public class FinancialModelingPrepApiClient : IFinancialModelingPrepApiClient
         ICryptoMarketProvider cryptoMarket,
         IFundProvider fund,
         IEconomicsProvider economics,
-        IStatementAnalysisProvider statementAnalysis)
+        IStatementAnalysisProvider statementAnalysis,
+        ITechnicalIndicatorsProvider technicalIndicators)
     {
         CompanyValuation = companyValuation;
         MarketIndexes = marketIndexes;
@@ -78,5 +83,6 @@ public class FinancialModelingPrepApiClient : IFinancialModelingPrepApiClient
         Fund = fund;
         Economics = economics;
         StatementAnalysis = statementAnalysis;
+        TechnicalIndicators = technicalIndicators;
     }
 }

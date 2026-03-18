@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using FinancialModelingPrep.Model;
+﻿using FinancialModelingPrep.Model;
 using FinancialModelingPrep.Model.Economics;
 
 namespace FinancialModelingPrep.Abstractions.Economics;

@@ -26,7 +26,9 @@ using FinancialModelingPrep.Core.MarketIndexes;
 using FinancialModelingPrep.Core.StatementAnalysis;
 using FinancialModelingPrep.Core.Statistics;
 using FinancialModelingPrep.Core.StockMarket;
+using FinancialModelingPrep.Abstractions.TechnicalIndicators;
 using FinancialModelingPrep.Core.StockTimeSeries;
+using FinancialModelingPrep.Core.TechnicalIndicators;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -63,5 +65,6 @@ public static class DependencyInjectionExtensions
         services.TryAddTransient<IFundProvider, FundProvider>();
         services.TryAddTransient<IEconomicsProvider, EconomicsProvider>();
         services.TryAddTransient<IStatementAnalysisProvider, StatementAnalysisProvider>();
+        services.TryAddTransient<ITechnicalIndicatorsProvider, TechnicalIndicatorsProvider>();
     }
 }

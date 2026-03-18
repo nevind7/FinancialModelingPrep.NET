@@ -1,12 +1,12 @@
 > [!WARNING]  
-> This contains the API bindings for the legacy version of FMP. This does not work for newer accounts, see https://github.com/MatthiWare/FinancialModelingPrep.NET/issues/145.
+> This contains the API bindings for the stable version of FMP.
 
 # FinancialModelingPrep.NET
 
 [![.NET](https://github.com/MatthiWare/FinancialModelingPrep.NET/actions/workflows/dotnet.yml/badge.svg)](https://github.com/MatthiWare/FinancialModelingPrep.NET/actions/workflows/dotnet.yml)
 [![Nuget](https://buildstats.info/nuget/MatthiWare.FinancialModelingPrep)](https://www.nuget.org/packages/MatthiWare.FinancialModelingPrep/)
 
-.NET 8 API Client For https://financialmodelingprep.com/ API written in C#
+.NET 10 API Client For https://financialmodelingprep.com/ API written in C#
 
 ## Installation
 

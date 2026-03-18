@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Threading.Tasks;
 using FinancialModelingPrep.Abstractions.StatementAnalysis;
 using FinancialModelingPrep.Core.Http;
 using FinancialModelingPrep.Model;
@@ -19,7 +16,8 @@ public class StatementAnalysisProvider : IStatementAnalysisProvider
     }
 
     /// <inheritdoc/>
-    public Task<ApiResponse<List<FinancialGrowthResponse>>> GetFinancialGrowthAsync(string symbol, Period period = Period.Annual, int? limit = 30)
+    public Task<ApiResponse<List<FinancialGrowthResponse>>> GetFinancialGrowthAsync(string symbol,
+        Period period = Period.Annual, int? limit = 30)
     {
         const string url = Endpoint.FinancialGrowth;
 
@@ -34,5 +32,19 @@ public class StatementAnalysisProvider : IStatementAnalysisProvider
         }
 
         return client.GetJsonAsync<List<FinancialGrowthResponse>>(url, new NameValueCollection(), queryString);
+    }
+
+    /// <inheritdoc/>
+    public Task<ApiResponse<List<RevenueSegmentationItem>>> GetRevenueProductSegmentationAsync(
+        string symbol, Period period = Period.Annual, RevenueSegmentationStructure? structure = null)
+    {
+        const string url = Endpoint.RevenueProductSegmentation;
+
+        var queryString = new QueryStringBuilder();
+        queryString.Add("symbol", symbol);
+        queryString.Add("period", period.ToString().ToLower());
+        if (structure != null) queryString.Add("structure", structure.ToString().ToLower());
+
+        return client.GetJsonAsync<List<RevenueSegmentationItem>>(url, queryString: queryString);
     }
 }

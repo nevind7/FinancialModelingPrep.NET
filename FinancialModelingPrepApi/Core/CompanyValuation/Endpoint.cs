@@ -30,4 +30,5 @@ public class Endpoint
     public const string PriceTargetConsensus = "price-target-consensus";
     public const string UpgradeDowngradeConsensus = "upgrades-downgrades-consensus";
     public const string InsiderTrading = "insider-trading";
+    public const string InsiderTradingStatistic = "insider-trading/statistic";
 }

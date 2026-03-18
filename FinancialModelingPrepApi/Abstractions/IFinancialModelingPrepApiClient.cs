@@ -10,6 +10,7 @@ using FinancialModelingPrep.Abstractions.StatementAnalysis;
 using FinancialModelingPrep.Abstractions.Statistics;
 using FinancialModelingPrep.Abstractions.StockMarket;
 using FinancialModelingPrep.Abstractions.StockTimeSeries;
+using FinancialModelingPrep.Abstractions.TechnicalIndicators;
 
 namespace FinancialModelingPrep.Abstractions;
 
@@ -83,4 +84,9 @@ public interface IFinancialModelingPrepApiClient
     /// - Financial Growth
     /// </summary>
     public IStatementAnalysisProvider StatementAnalysis { get; }
+
+    /// <summary>
+    /// Technical indicator endpoints (SMA, EMA, WMA, DEMA, TEMA, RSI, Standard Deviation, Williams %R, ADX).
+    /// </summary>
+    public ITechnicalIndicatorsProvider TechnicalIndicators { get; }
 }

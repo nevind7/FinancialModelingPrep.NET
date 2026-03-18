@@ -53,4 +53,5 @@ public interface ICompanyValuationProvider
     public Task<ApiResponse<PriceTargetConsensusResponse>> GetPriceTargetConsensusAsync(string symbol);
     public Task<ApiResponse<UpgradeDowngradeConsensusResponse>> GetUpgradeDowngradeConsensusAsync(string symbol);
     public Task<ApiResponse<List<InsiderTradingResponse>>> GetInsiderTradingAsync(string symbol, int? limit = 10);
+    public Task<ApiResponse<List<InsiderTradingStatisticItem>>> GetInsiderTradingStatisticsAsync(string symbol);
 }

@@ -488,4 +488,14 @@ public class CompanyValuationProvider : ICompanyValuationProvider
 
         return client.GetJsonAsync<List<InsiderTradingResponse>>(url, queryString: queryString);
     }
+
+    public Task<ApiResponse<List<InsiderTradingStatisticItem>>> GetInsiderTradingStatisticsAsync(string symbol)
+    {
+        const string url = Endpoint.InsiderTradingStatistic;
+
+        var queryString = new QueryStringBuilder();
+        queryString.Add("symbol", symbol);
+
+        return client.GetJsonAsync<List<InsiderTradingStatisticItem>>(url, queryString: queryString);
+    }
 }
