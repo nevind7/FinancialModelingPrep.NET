@@ -498,4 +498,14 @@ public class CompanyValuationProvider : ICompanyValuationProvider
 
         return client.GetJsonAsync<List<InsiderTradingStatisticItem>>(url, queryString: queryString);
     }
+
+    public Task<ApiResponse<List<EarningsSurpriseItem>>> GetEarningsSurprisesBulkAsync(int year)
+    {
+        const string url = Endpoint.EarningsSurprisesBulk;
+
+        var queryString = new QueryStringBuilder();
+        queryString.Add("year", year);
+
+        return client.GetJsonAsync<List<EarningsSurpriseItem>>(url, queryString: queryString);
+    }
 }
