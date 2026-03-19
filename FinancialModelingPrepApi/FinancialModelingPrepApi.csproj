@@ -7,22 +7,21 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Company>MatthiWare</Company>
 		<PackageId>FinancialModelingPrep</PackageId>
-		<Description>FinancialModelingPrep API Client written in .NET 8</Description>
+		<Description>FinancialModelingPrep API Client written in .NET 10</Description>
 		<Copyright>Copyright Matthias Beerens 2021</Copyright>
 		<Product>FinancialModelingPrep API Client</Product>
 		<Authors>Matthias Beerens</Authors>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<RepositoryUrl>https://github.com/MatthiWare/FinancialModelingPrep.NET</RepositoryUrl>
+		<RepositoryUrl>https://github.com/nevind7/FinancialModelingPrep.NET</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>FinancialModelingPrep stock quote finance-api fmp</PackageTags>
-		<PackageProjectUrl>https://github.com/MatthiWare/FinancialModelingPrep.NET</PackageProjectUrl>
-		<PackageReleaseNotes>
-			- Add calendar year to key metrics response
-		</PackageReleaseNotes>
+		<PackageProjectUrl>https://github.com/nevind7/FinancialModelingPrep.NET</PackageProjectUrl>
+		<PackageReleaseNotes>Use stable API</PackageReleaseNotes>
 		<AssemblyName>FinancialModelingPrep</AssemblyName>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<Nullable>enable</Nullable>
 		<ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+		<Version>1.1.0</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -30,11 +29,12 @@
 		<PackageReference Include="Microsoft.Extensions.Http" Version="10.0.5" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.5" />
 
-    <PackageReference Include="Bert.RateLimiters" Version="1.0.15" />
     <PackageReference Include="MinVer" Version="7.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+
+    <PackageReference Include="System.Threading.RateLimiting" Version="10.0.5" />
 	</ItemGroup>
 
 	

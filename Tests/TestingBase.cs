@@ -4,8 +4,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using System;
 using FinancialModelingPrep;
-using FinancialModelingPrep.Abstractions.Http;
-using FinancialModelingPrep.Core.Http;
 using Xunit.Abstractions;
 
 namespace Tests;
@@ -18,7 +16,6 @@ public abstract class TestingBase
     private static readonly IConfigurationRoot ConfigurationRoot;
 
     private static readonly FinancialModelingPrepOptions testingOptions;
-    private static readonly IRequestRateLimiter sharedRateLimiter;
 
     static TestingBase()
     {
@@ -27,7 +24,6 @@ public abstract class TestingBase
         ConfigurationRoot = config.Build();
 
         testingOptions = CreateTestingOptions();
-        sharedRateLimiter = new RequestRateLimiter(testingOptions);
     }
 
     public TestingBase(ITestOutputHelper testOutput)
@@ -43,7 +39,6 @@ public abstract class TestingBase
             builder.SetMinimumLevel(LogLevel.Debug);
         });
 
-        Services.AddSingleton(sharedRateLimiter);
         Services.AddFinancialModelingPrepApiClient(testingOptions);
 
         Build();
@@ -53,13 +48,13 @@ public abstract class TestingBase
     {
         var apiKeySection = ConfigurationRoot.GetSection("API_KEY");
 
-            var apiKey = apiKeySection?.Value ?? "demo";
+            var apiKey = apiKeySection.Value ?? "demo";
 
-        return new FinancialModelingPrepOptions()
+        return new FinancialModelingPrepOptions
         {
             ApiKey = apiKey,
-            MaxAPICallsPerMinute = 150, // lower the amount to avoid hitting limits on subsequent commit pushes
-            MaxRequestPerSecond = 5, // lower the amount to avoid hitting limits on subsequent commit pushes
+            MaxAPICallsPerMinute = 150,
+            MaxRequestPerSecond = 5,
         };
     }
 

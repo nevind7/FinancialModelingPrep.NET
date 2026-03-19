@@ -1,4 +1,6 @@
-﻿namespace FinancialModelingPrep;
+﻿using System;
+
+namespace FinancialModelingPrep;
 
 /// <summary>
 /// FMP Options
@@ -21,9 +23,16 @@ public class FinancialModelingPrepOptions
 
     /// <summary>
     /// Gets or sets the maximum allowed API Calls per second.
-    /// You can find the defaults on the pricing documentation. 
+    /// You can find the defaults on the pricing documentation.
     /// By default we use the 300 "starter" limit.
     /// https://financialmodelingprep.com/developer/docs/pricing
     /// </summary>
     public int MaxAPICallsPerMinute { get; set; } = 300;
+
+    /// <summary>
+    /// Gets or sets the maximum random jitter added after rate limit permits are acquired.
+    /// Spreading out requests prevents queued calls from firing simultaneously when permits replenish.
+    /// Set to <see cref="TimeSpan.Zero"/> to disable. Defaults to 100ms.
+    /// </summary>
+    public TimeSpan MaxJitter { get; set; } = TimeSpan.FromMilliseconds(100);
 }

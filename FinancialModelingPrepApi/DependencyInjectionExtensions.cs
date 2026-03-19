@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.RateLimiting;
 using FinancialModelingPrep.Abstractions;
 using FinancialModelingPrep.Abstractions.AdvancedData;
 using FinancialModelingPrep.Abstractions.Calendars;
@@ -6,7 +7,6 @@ using FinancialModelingPrep.Abstractions.CompanyValuation;
 using FinancialModelingPrep.Abstractions.Crypto;
 using FinancialModelingPrep.Abstractions.Economics;
 using FinancialModelingPrep.Abstractions.Fund;
-using FinancialModelingPrep.Abstractions.Http;
 using FinancialModelingPrep.Abstractions.InstitutionalFund;
 using FinancialModelingPrep.Abstractions.MarketIndexes;
 using FinancialModelingPrep.Abstractions.StatementAnalysis;
@@ -48,11 +48,36 @@ public static class DependencyInjectionExtensions
 
         services.AddLogging();
 
-        services.AddHttpClient<FinancialModelingPrepHttpClient>(client 
-            => client.BaseAddress = new Uri("https://financialmodelingprep.com/stable/"));
+        services.AddHttpClient<FinancialModelingPrepHttpClient>(client
+                => client.BaseAddress = new Uri("https://financialmodelingprep.com/stable/"))
+            .AddHttpMessageHandler(sp =>
+            {
+                var opt = sp.GetRequiredService<FinancialModelingPrepOptions>();
+                return new RateLimitedHandler(new SlidingWindowRateLimiter(new SlidingWindowRateLimiterOptions
+                {
+                    PermitLimit = opt.MaxRequestPerSecond,
+                    Window = TimeSpan.FromSeconds(1),
+                    SegmentsPerWindow = 5,
+                    QueueLimit = int.MaxValue,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    AutoReplenishment = true
+                }));
+            })
+            .AddHttpMessageHandler(sp =>
+            {
+                var opt = sp.GetRequiredService<FinancialModelingPrepOptions>();
+                return new RateLimitedHandler(new SlidingWindowRateLimiter(new SlidingWindowRateLimiterOptions
+                {
+                    PermitLimit = opt.MaxAPICallsPerMinute,
+                    Window = TimeSpan.FromMinutes(1),
+                    SegmentsPerWindow = 12,
+                    QueueLimit = int.MaxValue,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    AutoReplenishment = true
+                }), opt.MaxJitter);
+            });
 
         services.TryAddSingleton<IFinancialModelingPrepApiClient, FinancialModelingPrepApiClient>();
-        services.TryAddSingleton<IRequestRateLimiter, RequestRateLimiter>();
         services.TryAddTransient<ICompanyValuationProvider, CompanyValuationProvider>();
         services.TryAddTransient<IMarketIndexesProvider, MarketIndexesProvider>();
         services.TryAddTransient<IAdvancedDataProvider, AdvancedDataProvider>();

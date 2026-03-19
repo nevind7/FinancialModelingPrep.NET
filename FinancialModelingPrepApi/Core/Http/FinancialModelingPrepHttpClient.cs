@@ -3,10 +3,8 @@ using System.Collections.Specialized;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using FinancialModelingPrep.Abstractions.Http;
 using FinancialModelingPrep.Model;
 using FinancialModelingPrep.Model.Error;
-using Microsoft.Extensions.Logging;
 
 namespace FinancialModelingPrep.Core.Http;
 
@@ -14,21 +12,15 @@ public class FinancialModelingPrepHttpClient
 {
     private readonly HttpClient client;
     private readonly FinancialModelingPrepOptions options;
-    private readonly IRequestRateLimiter rateLimiter;
-    private readonly ILogger<FinancialModelingPrepHttpClient> logger;
     private readonly JsonSerializerOptions jsonSerializerOptions;
     private const string EmptyArrayResponse = "[ ]";
     private const string EmptyArrayResponse2 = "[]";
     private const string ErrorMessageResponse = "Error Message";
 
-    public FinancialModelingPrepHttpClient(HttpClient client, FinancialModelingPrepOptions options,
-        IRequestRateLimiter rateLimiter,
-        ILogger<FinancialModelingPrepHttpClient> logger)
+    public FinancialModelingPrepHttpClient(HttpClient client, FinancialModelingPrepOptions options)
     {
         this.client = client ?? throw new ArgumentNullException(nameof(client));
         this.options = options ?? throw new ArgumentNullException(nameof(options));
-        this.rateLimiter = rateLimiter ?? throw new ArgumentNullException(nameof(rateLimiter));
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         jsonSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
         {
             PropertyNameCaseInsensitive = true,
@@ -42,41 +34,27 @@ public class FinancialModelingPrepHttpClient
 
     public async Task<ApiResponse<string>> GetStringAsync(string urlPattern, NameValueCollection pathParams, QueryStringBuilder queryString)
     {
-        try
+        var response = await CallApiAsync(urlPattern, pathParams, queryString);
+
+        if (response.HasError)
         {
-            var (wasThrottled, totalDelay) = await rateLimiter.ThrottleAsync();
-
-            var response = await CallApiAsync(urlPattern, pathParams, queryString);
-
-            if (wasThrottled)
-            {
-                logger.LogDebug("FMP API Call was throttled by {throttle} ms", totalDelay.TotalMilliseconds);
-            }
-
-            if (response.HasError)
-            {
-                return ApiResponse.FromError<string>(response.Error);
-            }
-
-            if (response.Data.Contains(ErrorMessageResponse))
-            {
-                var errorData = JsonSerializer.Deserialize<ErrorResponse>(response.Data);
-
-                return ApiResponse.FromError<string>(errorData.ErrorMessage);
-            }
-
-            if (response.Data.Equals(EmptyArrayResponse, StringComparison.OrdinalIgnoreCase) || 
-                response.Data.Equals(EmptyArrayResponse2, StringComparison.OrdinalIgnoreCase))
-            {
-                return ApiResponse.FromError<string>("Invalid parameters");
-            }
-
-            return ApiResponse.FromSuccess(response.Data);
+            return ApiResponse.FromError<string>(response.Error);
         }
-        finally
+
+        if (response.Data.Contains(ErrorMessageResponse))
         {
-            rateLimiter.ReleaseThrottle();
+            var errorData = JsonSerializer.Deserialize<ErrorResponse>(response.Data);
+
+            return ApiResponse.FromError<string>(errorData.ErrorMessage);
         }
+
+        if (response.Data.Equals(EmptyArrayResponse, StringComparison.OrdinalIgnoreCase) ||
+            response.Data.Equals(EmptyArrayResponse2, StringComparison.OrdinalIgnoreCase))
+        {
+            return ApiResponse.FromError<string>("Invalid parameters");
+        }
+
+        return ApiResponse.FromSuccess(response.Data);
     }
 
     public async Task<ApiResponse<T>> GetJsonAsync<T>(string urlPattern, NameValueCollection? pathParams = null, QueryStringBuilder? queryString = null)
