@@ -38,9 +38,7 @@ jobs:
       run: |
         dotnet build FinancialModelingPrepApi/FinancialModelingPrepApi.csproj \
           --configuration Release \
-          --no-restore \
-          -p:Version=1.0.0 \
-          -p:MinVerSkip=true
+          --no-restore
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
