@@ -30,6 +30,7 @@ public class Endpoint
     public const string PressReleases = "press-releases";
     public const string SymbolChange = "symbol-change";
     public const string PriceTargetConsensus = "price-target-consensus";
+    public const string PriceTargetSummary = "price-target-summary";
     public const string Grades = "grades";
     public const string UpgradeDowngradeConsensus = "grades-consensus";
     public const string InsiderTrading = "insider-trading";

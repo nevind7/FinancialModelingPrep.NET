@@ -48,15 +48,16 @@ public interface ICompanyValuationProvider
     Task<ApiResponse<List<StockNewsResponse>>> GetStockNewsAsync(string symbol, string? from = null, string? to = null, int? page = 0, int? limit = 50);
     Task<ApiResponse<List<StockNewsResponse>>> GetStockNewsAsync(IEnumerable<string> symbols, string? from = null, string? to = null, int? page = 0, int? limit = 50);
 
-    public Task<ApiResponse<CompanyRatingResponse>> GetCompanyRatingAsync(string symbol);
-    public Task<ApiResponse<List<CompanyRatingResponse>>> GetHistoricalCompanyRatingAsync(string symbol, int? limit = 140);
+    Task<ApiResponse<CompanyRatingResponse>> GetCompanyRatingAsync(string symbol);
+    Task<ApiResponse<List<CompanyRatingResponse>>> GetHistoricalCompanyRatingAsync(string symbol, int? limit = 140);
 
-    public Task<ApiResponse<List<PressReleasesResponse>>> GetPressReleasesAsync(string symbol, int? page = null);
+    Task<ApiResponse<List<PressReleasesResponse>>> GetPressReleasesAsync(string symbol, int? page = null);
 
-    public Task<ApiResponse<PriceTargetConsensusResponse>> GetPriceTargetConsensusAsync(string symbol);
-    public Task<ApiResponse<UpgradeDowngradeConsensusResponse>> GetUpgradeDowngradeConsensusAsync(string symbol);
-    public Task<ApiResponse<List<GradeResponse>>> GetGradesAsync(string symbol);
+    Task<ApiResponse<PriceTargetConsensusResponse>> GetPriceTargetConsensusAsync(string symbol);
+    Task<ApiResponse<PriceTargetSummaryResponse>> GetPriceTargetSummaryAsync(string symbol);
+    Task<ApiResponse<UpgradeDowngradeConsensusResponse>> GetUpgradeDowngradeConsensusAsync(string symbol);
+    Task<ApiResponse<List<GradeResponse>>> GetGradesAsync(string symbol);
     public Task<ApiResponse<List<InsiderTradingResponse>>> GetInsiderTradingAsync(string symbol, int? limit = 10);
-    public Task<ApiResponse<List<InsiderTradingStatisticItem>>> GetInsiderTradingStatisticsAsync(string symbol);
-    public Task<ApiResponse<List<EarningsSurpriseItem>>> GetEarningsSurprisesBulkAsync(int year);
+    Task<ApiResponse<List<InsiderTradingStatisticItem>>> GetInsiderTradingStatisticsAsync(string symbol);
+    Task<ApiResponse<List<EarningsSurpriseItem>>> GetEarningsSurprisesBulkAsync(int year);
 }

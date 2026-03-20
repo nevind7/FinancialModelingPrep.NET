@@ -491,6 +491,23 @@ public class CompanyValuationProvider : ICompanyValuationProvider
 
         return ApiResponse.FromSuccess(result.Data.First());
     }
+    
+    public async Task<ApiResponse<PriceTargetSummaryResponse>> GetPriceTargetSummaryAsync(string symbol)
+    {
+        const string url = Endpoint.PriceTargetSummary;
+
+        var queryString = new QueryStringBuilder();
+        queryString.Add("symbol", symbol);
+
+        var result = await client.GetJsonAsync<List<PriceTargetSummaryResponse>>(url, queryString: queryString);
+
+        if (result.HasError)
+        {
+            return ApiResponse.FromError<PriceTargetSummaryResponse>(result.Error);
+        }
+
+        return ApiResponse.FromSuccess(result.Data.First());
+    }
 
     public async Task<ApiResponse<UpgradeDowngradeConsensusResponse>> GetUpgradeDowngradeConsensusAsync(string symbol)
     {
