@@ -326,6 +326,23 @@ public class CompanyValuationProvider : ICompanyValuationProvider
 
         return ApiResponse.FromSuccess(result.Data.First());
     }
+    
+    public async Task<ApiResponse<QuoteShortResponse>> GetQuoteShortAsync(string symbol)
+    {
+        const string url = Endpoint.QuoteShort;
+
+        var queryString = new QueryStringBuilder();
+        queryString.Add("symbol", symbol);
+
+        var result = await client.GetJsonAsync<List<QuoteShortResponse>>(url, queryString: queryString);
+
+        if (result.HasError)
+        {
+            return ApiResponse.FromError<QuoteShortResponse>(result.Error);
+        }
+
+        return ApiResponse.FromSuccess(result.Data.First());
+    }
 
     public Task<ApiResponse<List<QuoteResponse>>> GetQuotesAsync(IEnumerable<string> symbols)
     {
@@ -370,6 +387,24 @@ public class CompanyValuationProvider : ICompanyValuationProvider
 
         return ApiResponse.FromSuccess(result.Data.First());
     }
+    
+    public async Task<ApiResponse<StockPriceChangeResponse>> GetStockPriceChangeAsync(string symbol)
+    {
+        const string url = Endpoint.StockPriceChange;
+
+        var queryString = new QueryStringBuilder();
+        queryString.Add("symbol", symbol);
+
+        var result = await client.GetJsonAsync<List<StockPriceChangeResponse>>(url, queryString: queryString);
+
+        if (result.HasError)
+        {
+            return ApiResponse.FromError<StockPriceChangeResponse>(result.Error);
+        }
+
+        return ApiResponse.FromSuccess(result.Data.First());
+    }
+
 
     public Task<ApiResponse<List<MarketCapResponse>>> GetHistoricalMarketCapitalizationAsync(string symbol, string? from = null, string? to = null, int? limit = 100)
     {
@@ -487,6 +522,16 @@ public class CompanyValuationProvider : ICompanyValuationProvider
         }
 
         return client.GetJsonAsync<List<InsiderTradingResponse>>(url, queryString: queryString);
+    }
+
+    public Task<ApiResponse<List<GradeResponse>>> GetGradesAsync(string symbol)
+    {
+        const string url = Endpoint.Grades;
+
+        var queryString = new QueryStringBuilder();
+        queryString.Add("symbol", symbol);
+        
+        return client.GetJsonAsync<List<GradeResponse>>(url, queryString: queryString);
     }
 
     public Task<ApiResponse<List<InsiderTradingStatisticItem>>> GetInsiderTradingStatisticsAsync(string symbol)
