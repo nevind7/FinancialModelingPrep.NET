@@ -423,6 +423,17 @@ public class CompanyValuationTests : TestingBase
         result.AssertNoErrors();
         Assert.Equal(tickerOrFx, result.Data.Symbol);
     }
+    
+    [Theory]
+    [InlineData("AAPL")]
+    [InlineData("EURUSD")]
+    public async Task GetShortQuoteAsync(string tickerOrFx)
+    {
+        var result = await api.GetQuoteShortAsync(tickerOrFx);
+
+        result.AssertNoErrors();
+        Assert.Equal(tickerOrFx, result.Data.Symbol);
+    }
 
     [Fact]
     public async Task GetQuotesAsync()

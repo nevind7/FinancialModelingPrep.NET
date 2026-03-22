@@ -18,6 +18,7 @@ public interface ICompanyValuationProvider
     Task<ApiResponse<QuoteShortResponse>> GetQuoteShortAsync(string symbol);
     Task<ApiResponse<List<QuoteResponse>>> GetQuotesAsync(IEnumerable<string> symbols);
     Task<ApiResponse<List<QuoteResponse>>> GetQuotesAsync(Exchange exchange);
+    Task<ApiResponse<AftermarketQuote>> GetAftermarketQuoteAsync(string symbol);
 
     Task<ApiResponse<StockPriceChangeResponse>> GetStockPriceChangeAsync(string symbol);
 

@@ -23,6 +23,7 @@ public class Endpoint
     public const string QuoteShort = "quote-short";
     public const string BulkQuote = "batch-quote";
     public const string ExchangeQuote = "batch-exchange-quote";
+    public const string AftermarketQuote = "aftermarket-quote";
     public const string StockPriceChange = "stock-price-change";
     public const string MarketCapitalization = "market-capitalization";
     public const string HistoricalMarketCapitalization = "historical-market-capitalization";

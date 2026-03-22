@@ -370,6 +370,23 @@ public class CompanyValuationProvider : ICompanyValuationProvider
 
         return client.GetJsonAsync<List<QuoteResponse>>(url, queryString: queryString);
     }
+    
+    public async Task<ApiResponse<AftermarketQuote>> GetAftermarketQuoteAsync(string symbol)
+    {
+        const string url = Endpoint.AftermarketQuote;
+
+        var queryString = new QueryStringBuilder();
+        queryString.Add("symbol", symbol);
+
+        var result = await client.GetJsonAsync<List<AftermarketQuote>>(url, queryString: queryString);
+
+        if (result.HasError)
+        {
+            return ApiResponse.FromError<AftermarketQuote>(result.Error);
+        }
+
+        return ApiResponse.FromSuccess(result.Data.First());
+    }
 
     public async Task<ApiResponse<MarketCapResponse>> GetMarketCapitalizationAsync(string symbol)
     {
